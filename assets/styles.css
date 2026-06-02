@@ -912,7 +912,8 @@ pre.prompt {
   transition: opacity 420ms var(--ease-soft);
 }
 
-.lightbox.is-open {
+.lightbox.is-open,
+.lightbox.is-loading {
   opacity: 1;
   pointer-events: auto;
 }

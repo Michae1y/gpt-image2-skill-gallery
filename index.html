@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260603-touch-lightbox">
+<link rel="stylesheet" href="assets/styles.css?v=20260603-lightbox-preload-state">
 </head>
 <body id="top">
 <button class="mobile-nav-toggle" type="button" aria-controls="category-nav" aria-expanded="false">
@@ -3760,8 +3760,10 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   let currentActiveId = null;
   let lightboxState = 'closed';
   let lightboxOpenedAt = 0;
+  let lightboxRequestId = 0;
   let lastImageGestureAt = 0;
   const promptTimers = new WeakMap();
+  const fullImagePreloads = new Map();
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const lightboxCloseMs = 420;
   const layoutEase = 'cubic-bezier(0.2, 0.7, 0.18, 1)';
@@ -3944,8 +3946,12 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     scrollWindowTo(0, reduceMotion.matches ? 'instant' : 'smooth');
   });
 
-  const closeLightbox = () => {
-    if (lightboxState !== 'open') {
+  const closeLightbox = (options = {}) => {
+    const { force = false } = options;
+    if (!force && lightboxState !== 'ready') {
+      return;
+    }
+    if (lightboxState === 'closed' || lightboxState === 'closing') {
       return;
     }
     lightboxState = 'closing';
@@ -3954,6 +3960,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     lightbox.classList.remove('is-loading');
     lightboxImage.classList.remove('is-loaded');
     window.clearTimeout(lightboxTimer);
+    lightboxRequestId += 1;
     lightboxTimer = window.setTimeout(() => {
       lightboxState = 'closed';
       lightbox.classList.remove('is-closing');
@@ -3969,14 +3976,23 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   const closeLightboxFromBackdrop = (event) => {
     event?.preventDefault();
     event?.stopPropagation();
-    if (performance.now() - lightboxOpenedAt < 700) {
+    if (lightboxState !== 'ready' || performance.now() - lightboxOpenedAt < 900) {
       return;
     }
     closeLightbox();
   };
 
+  const markLightboxReady = (requestId) => {
+    if (requestId !== lightboxRequestId || lightboxState === 'closed' || lightboxState === 'closing') {
+      return;
+    }
+    lightboxState = 'ready';
+    lightbox.classList.remove('is-loading');
+    lightboxImage.classList.add('is-loaded');
+  };
+
   const openLightbox = (img) => {
-    if (!img || lightboxState === 'opening') {
+    if (!img || lightboxState === 'opening' || lightboxState === 'loading') {
       return;
     }
     scrollWindowTo(window.scrollY, 'instant');
@@ -3991,6 +4007,8 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     lastLightboxTrigger = img;
     lightboxState = 'opening';
     lightboxOpenedAt = performance.now();
+    lightboxRequestId += 1;
+    const requestId = lightboxRequestId;
     window.clearTimeout(lightboxTimer);
     setMobileNavOpen(false);
     lightbox.classList.remove('is-closing', 'is-open');
@@ -4001,13 +4019,14 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     lightboxSubtitle.textContent = subtitle;
     lightbox.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
-    lightboxImage.src = img.dataset.full || img.currentSrc || img.src;
+    lightboxImage.removeAttribute('src');
     window.requestAnimationFrame(() => {
       lightbox.classList.add('is-open');
-      lightboxState = 'open';
+      lightboxState = 'loading';
+      lightboxImage.dataset.requestId = String(requestId);
+      lightboxImage.src = fullImageSrc(img);
       if (lightboxImage.complete && lightboxImage.naturalWidth > 0) {
-        lightbox.classList.remove('is-loading');
-        lightboxImage.classList.add('is-loaded');
+        markLightboxReady(requestId);
       }
       if (!mobileNavQuery.matches) {
         lightboxClose.focus({ preventScroll: true });
@@ -4015,14 +4034,25 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     });
   };
 
+  const fullImageSrc = (img) => img?.dataset.full || img?.currentSrc || img?.src || '';
+
+  const preloadFullImage = (img) => {
+    const src = fullImageSrc(img);
+    if (!src || fullImagePreloads.has(src)) {
+      return;
+    }
+    const preload = new Image();
+    preload.decoding = 'async';
+    preload.src = src;
+    fullImagePreloads.set(src, preload);
+  };
+
   lightboxImage.addEventListener('load', () => {
-    lightbox.classList.remove('is-loading');
-    lightboxImage.classList.add('is-loaded');
+    markLightboxReady(Number(lightboxImage.dataset.requestId));
   });
 
   lightboxImage.addEventListener('error', () => {
-    lightbox.classList.remove('is-loading');
-    lightboxImage.classList.add('is-loaded');
+    markLightboxReady(Number(lightboxImage.dataset.requestId));
   });
 
   const openImageFromEvent = (img, event) => {
@@ -4041,6 +4071,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       if (event.button !== 0) {
         return;
       }
+      preloadFullImage(img);
       tapStart = {
         id: event.pointerId,
         x: event.clientX,
@@ -4067,6 +4098,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       let touchStart = null;
       img.addEventListener('touchstart', (event) => {
         const touch = event.changedTouches[0];
+        preloadFullImage(img);
         touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
       }, { passive: true });
       img.addEventListener('touchend', (event) => {
@@ -4087,8 +4119,12 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       if (performance.now() - lastImageGestureAt < 700) {
         return;
       }
+      preloadFullImage(img);
       openLightbox(img);
     }, { passive: false });
+    img.addEventListener('mouseenter', () => {
+      preloadFullImage(img);
+    });
     img.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') {
         return;
@@ -4099,7 +4135,11 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     });
   });
 
-  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxClose.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    closeLightbox({ force: true });
+  });
   lightboxBackdrop.addEventListener('click', closeLightboxFromBackdrop);
   lightboxBackdrop.addEventListener('pointerup', closeLightboxFromBackdrop);
   lightboxImage.addEventListener('click', (event) => {
@@ -4286,7 +4326,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
         setMobileNavOpen(false);
         return;
       }
-      closeLightbox();
+      closeLightbox({ force: true });
     }
   });
 
