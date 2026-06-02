@@ -1115,6 +1115,10 @@ pre.prompt {
 }
 
 @media (max-width: 780px) {
+  html {
+    scroll-behavior: auto;
+  }
+
   :root {
     --content-left: 0px;
   }
