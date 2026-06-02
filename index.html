@@ -3723,13 +3723,22 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     .map((link) => document.getElementById(link.getAttribute('href').slice(1)))
     .filter(Boolean);
   const sectionTargets = targets.filter((target) => target.classList.contains('category'));
+  const waveClasses = ['is-wave-1', 'is-wave-2', 'is-wave-3', 'is-wave-4'];
   let activeScrollTimer = null;
   let railDrag = null;
 
   const setActive = (id) => {
+    const activeIndex = links.findIndex((link) => link.getAttribute('href') === `#${id}`);
     links.forEach((link) => {
       const isActive = link.getAttribute('href') === `#${id}`;
+      link.classList.remove(...waveClasses);
       link.classList.toggle('is-active', isActive);
+      if (!isActive && activeIndex >= 0) {
+        const distance = Math.abs(links.indexOf(link) - activeIndex);
+        if (distance >= 1 && distance <= waveClasses.length) {
+          link.classList.add(waveClasses[distance - 1]);
+        }
+      }
       if (isActive) {
         link.setAttribute('aria-current', 'location');
       } else {
@@ -3750,22 +3759,12 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
 
   const scrollToTarget = (target) => {
     const offset = window.matchMedia('(max-width: 980px)').matches ? 12 : 24;
-    const currentHash = target === document.body ? '#top' : `#${target.id}`;
     const align = (behavior = 'auto') => {
       const top = target === document.body ? 0 : target.getBoundingClientRect().top + window.scrollY - offset;
       window.scrollTo({ top: Math.max(0, Math.round(top)), behavior });
     };
     window.clearInterval(activeScrollTimer);
     align('smooth');
-    let attempts = 0;
-    activeScrollTimer = window.setInterval(() => {
-      if ((window.location.hash && window.location.hash !== currentHash) || attempts >= 28) {
-        window.clearInterval(activeScrollTimer);
-        return;
-      }
-      align();
-      attempts += 1;
-    }, 220);
   };
 
   const maxScroll = () => Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
@@ -3821,6 +3820,12 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     }
   }, { passive: true });
   window.addEventListener('resize', updateActiveFromScroll);
+
+  nav.addEventListener('wheel', (event) => {
+    event.preventDefault();
+    window.scrollBy({ top: event.deltaY, left: 0, behavior: 'auto' });
+    updateActiveFromScroll();
+  }, { passive: false });
 
   nav.addEventListener('pointerdown', (event) => {
     if (event.button !== 0) {
