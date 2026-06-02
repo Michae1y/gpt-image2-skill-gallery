@@ -61,6 +61,54 @@ body.lightbox-open main {
   display: none;
 }
 
+.back-to-top {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 150;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  color: var(--ink);
+  background: rgba(247, 247, 245, 0.9);
+  border: 1px solid rgba(38, 38, 38, 0.16);
+  border-radius: 999px;
+  box-shadow: 0 12px 34px rgba(38, 38, 38, 0.14);
+  backdrop-filter: blur(14px);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+  transition: opacity 280ms var(--ease-soft), transform 280ms var(--ease-soft),
+    color 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.back-to-top.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.back-to-top:hover,
+.back-to-top:focus-visible {
+  color: var(--accent);
+  background: #fff;
+  box-shadow: 0 16px 42px rgba(38, 38, 38, 0.18);
+  outline: 0;
+}
+
+body.lightbox-open .back-to-top,
+body.mobile-nav-open .back-to-top {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
 a {
   color: var(--ink);
   text-decoration-color: rgba(38, 38, 38, 0.42);
@@ -909,6 +957,36 @@ pre.prompt {
   will-change: transform, opacity, filter;
 }
 
+.lightbox-card::before {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 0;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0 -15px;
+  border: 2px solid rgba(38, 38, 38, 0.12);
+  border-top-color: var(--accent);
+  border-radius: 999px;
+  content: "";
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 180ms ease, transform 220ms var(--ease-soft);
+  animation: lightbox-spin 900ms linear infinite;
+  pointer-events: none;
+}
+
+.lightbox.is-loading .lightbox-card::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@keyframes lightbox-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .lightbox.is-open .lightbox-card {
   opacity: 1;
   filter: blur(0);
@@ -925,13 +1003,15 @@ pre.prompt {
 
 .lightbox-image {
   display: block;
+  position: relative;
+  z-index: 1;
   width: 100%;
   max-height: calc(92vh - 96px);
   object-fit: contain;
   opacity: 0;
   background: #fff;
   border-radius: 5px;
-  cursor: zoom-out;
+  cursor: default;
   transform: scale(0.985);
   transition: opacity 360ms ease 100ms, transform 420ms var(--ease-soft) 80ms;
 }
@@ -1133,6 +1213,15 @@ pre.prompt {
     transform: translateY(8px);
   }
 
+  .back-to-top {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 54px);
+    z-index: 188;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
   .side-nav {
     top: 0;
     bottom: 0;
@@ -1322,6 +1411,11 @@ pre.prompt {
   .mobile-nav-toggle {
     right: 10px;
     bottom: max(10px, env(safe-area-inset-bottom));
+  }
+
+  .back-to-top {
+    right: 10px;
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 52px);
   }
 }
 
