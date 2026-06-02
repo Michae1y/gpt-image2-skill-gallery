@@ -1,0 +1,1636 @@
+{
+  "source_author": "Wuyoscar",
+  "source_repo": "https://github.com/wuyoscar/GPT-Image2-Skill",
+  "source_repo_name": "wuyoscar/GPT-Image2-Skill",
+  "commit": "46c47d2542126d1a50a80639cccd0fcbc8a922c8",
+  "commit_date": "2026-05-23",
+  "category_count": 31,
+  "entry_count": 162,
+  "entry_image_reference_count": 164,
+  "asset_image_count": 164,
+  "all_docs_image_count": 164,
+  "extra_image_count": 2,
+  "standard_site": true,
+  "entries": [
+    {
+      "num": 1,
+      "title": "MAPPA-style anime action still (Jujutsu-Kaisen aesthetic)",
+      "title_zh": "MAPPA 风格动漫动作剧照（咒术回战美学）",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "6f7e5fcfad2baa02b2ad6a1e795d73dd2f634b51748a3690ff958e94f5bd5c17",
+      "prompt_length": 938
+    },
+    {
+      "num": 2,
+      "title": "Shōnen battle key-visual (Naruto-Shippuden aesthetic)",
+      "title_zh": "少年热血战斗主视觉（火影疾风传美学）",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "ff2ef805739a85d60cf4ff280444b964dd6e38eab6fb5219fb0b11761c97ba3d",
+      "prompt_length": 1059
+    },
+    {
+      "num": 3,
+      "title": "Shōnen manga two-page spread (basketball slam dunk)",
+      "title_zh": "少年漫画双页跨页（篮球扣篮）",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "bacde6abafea1502c1539f359c0ad46a2ca9ea2804c7ca4731b142ded6440a05",
+      "prompt_length": 1251
+    },
+    {
+      "num": 4,
+      "title": "Manga relationship map — *A Tale of Two Cities*",
+      "title_zh": "漫画人物关系图（《双城记》）",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "43683fb5294a676761f83ec5976d8a07e00606537d559406762ab62ad7f8c3d3",
+      "prompt_length": 864
+    },
+    {
+      "num": 5,
+      "title": "16-panel anime expression grid",
+      "title_zh": "16 格动漫表情网格",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "0361cd60590b72a99ecdc9d8d920e7135b61bf1046946564f2e24162079af720",
+      "prompt_length": 359
+    },
+    {
+      "num": 6,
+      "title": "Elegant cafe anime fashion portrait",
+      "title_zh": "优雅咖啡馆动漫时尚人像",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "7f06cb8087378593fe5cf431d0ed6618e20a192a05abb0681db4113e0696df24",
+      "prompt_length": 810
+    },
+    {
+      "num": 7,
+      "title": "Neon arcade anime fashion portrait",
+      "title_zh": "霓虹街机动漫时尚人像",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "8294d18eb21fa2f7ffb37d0a743a3b4d95a3f537c72d75277f5348c76a4bceef",
+      "prompt_length": 843
+    },
+    {
+      "num": 8,
+      "title": "Spring cafe anime ensemble",
+      "title_zh": "春日咖啡馆动漫群像",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "160df4fe7a50ef7e56ccc5a1ac226934554bdaa7f2d80f0b49a8142ce82a5e36",
+      "prompt_length": 1142
+    },
+    {
+      "num": 9,
+      "title": "Ten-panel anime character grid",
+      "title_zh": "动漫与漫画：动漫 / 漫画 / 角色 / 设定表",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "71977bfe58a0cfea057d95f98ae135fddc20170eddb6e10918ab71a19ce7db0b",
+      "prompt_length": 929
+    },
+    {
+      "num": 10,
+      "title": "Tide Brothers 19-page manga proof sheet",
+      "title_zh": "动漫与漫画：动漫 / 漫画 / 设定表 / 封面",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "ca4202a96c23f4f7579011222b76895e392a4eec11a6c19d8483f139ff7d5a77",
+      "prompt_length": 1524
+    },
+    {
+      "num": 11,
+      "title": "Roadside mirror anime fashion selfie",
+      "title_zh": "动漫与漫画：动漫 / 漫画 / 插画 / 时尚",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "f386634c13665348da111443d67a30ab36b5f1730d5d09576f400f11a769a876",
+      "prompt_length": 966
+    },
+    {
+      "num": 12,
+      "title": "Rainy bus-stop mirror anime portrait",
+      "title_zh": "动漫与漫画：动漫 / 漫画 / 竖幅 / 竖图 1024x1536",
+      "category": "🎌 Anime & Manga",
+      "category_zh": "动漫与漫画",
+      "image_count": 1,
+      "prompt_sha256": "5c4f8ff5a2818a79097478105ee31c71a423038c09df2992a40a992068e7abae",
+      "prompt_length": 882
+    },
+    {
+      "num": 13,
+      "title": "Hitman gameplay — OpenAI HQ",
+      "title_zh": "游戏与 HUD：横幅 / 横图 1536x1024 / 社区来源",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "43441179dfa6dd9e02042a93446231f1ea5b447acc6adfe158ac396e7993ce29",
+      "prompt_length": 103
+    },
+    {
+      "num": 14,
+      "title": "GTA 6 gameplay — Vice City beach",
+      "title_zh": "游戏与 HUD：游戏 / 角色 / 横幅 / 宽幅",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "02c7c216ccbe018ce0acfdec08714a5e482e5291d47d47080d19152cea695e7e",
+      "prompt_length": 284
+    },
+    {
+      "num": 15,
+      "title": "Dark-fantasy swamp boss hunt",
+      "title_zh": "游戏与 HUD：游戏 / HUD / RPG / 电影感",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "d603959887e51f5e9528bcddf7125301e30e7cc17b67df76a4dc9543866b790e",
+      "prompt_length": 507
+    },
+    {
+      "num": 16,
+      "title": "Epic fellowship bridge approach",
+      "title_zh": "游戏与 HUD：HUD / RPG / 电影感 / 横幅",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "ed95f63165c7236152f199130a9bb20a8d8be40ab4e5290ecc31601a46ad618d",
+      "prompt_length": 513
+    },
+    {
+      "num": 17,
+      "title": "Retro Japanese town pixel RPG",
+      "title_zh": "复古日式小镇像素 RPG",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "210bee3ff632f9a62afdb89c17186757f18ad7b593bb7952ba6ab3c52c7ed178",
+      "prompt_length": 445
+    },
+    {
+      "num": 18,
+      "title": "Cyberpunk Europe action HUD",
+      "title_zh": "赛博朋克欧洲动作 HUD",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "9d409e77e3eb06cdfb523bd65fbeaf714cb1805bcf5f04ebd7037832c80e2b33",
+      "prompt_length": 446
+    },
+    {
+      "num": 19,
+      "title": "Anime open-world adventure HUD",
+      "title_zh": "动漫风开放世界冒险 HUD",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "ed79f6aa94531a67354059eaa352fc5f2a073c7ae7f4fda43163da8a0e8f9e15",
+      "prompt_length": 521
+    },
+    {
+      "num": 20,
+      "title": "Mobile MOBA arena HUD",
+      "title_zh": "手机 MOBA 竞技场 HUD",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "616bc6630413dfd99996a6d55ece54b334fa84a49e20897177e64876e851232c",
+      "prompt_length": 1119
+    },
+    {
+      "num": 21,
+      "title": "Low-poly samurai strategy village",
+      "title_zh": "低多边形武士策略村庄",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "76681337d17ef35a7263135e7ddb19cd2bd58669c71fa8984f0750f641590541",
+      "prompt_length": 396
+    },
+    {
+      "num": 22,
+      "title": "Nine-panel dark-fantasy worldbuilding set",
+      "title_zh": "游戏与 HUD：电影感 / 剪影 / 地图 / 架构/建筑",
+      "category": "🎮 Gaming",
+      "category_zh": "游戏与 HUD",
+      "image_count": 1,
+      "prompt_sha256": "e68fb071ecfc9d9a4875d4bf227957b6cd6e393d84bbfb924d6d87f8698dde3b",
+      "prompt_length": 786
+    },
+    {
+      "num": 23,
+      "title": "Cyberpunk mecha girl over sea fortress",
+      "title_zh": "复古与赛博朋克：HUD / 复古 / 赛博朋克 / 机甲",
+      "category": "🤖 Retro & Cyberpunk",
+      "category_zh": "复古与赛博朋克",
+      "image_count": 1,
+      "prompt_sha256": "4e325e4725d4e3df41ae0beb3e0a9451b13711d565a4a85648f32a33ae323cc6",
+      "prompt_length": 2196
+    },
+    {
+      "num": 24,
+      "title": "Neon Orchid District design board",
+      "title_zh": "复古与赛博朋克：复古 / 赛博朋克 / 霓虹 / 电影感",
+      "category": "🤖 Retro & Cyberpunk",
+      "category_zh": "复古与赛博朋克",
+      "image_count": 1,
+      "prompt_sha256": "a42392ac4b0dd81a6d4eeafb71316fd94c88bb54daf711c21088c68a465574d4",
+      "prompt_length": 795
+    },
+    {
+      "num": 25,
+      "title": "Synth Moon Crew alien nightlife grid",
+      "title_zh": "复古与赛博朋克：动漫 / 复古 / 赛博朋克 / 霓虹",
+      "category": "🤖 Retro & Cyberpunk",
+      "category_zh": "复古与赛博朋克",
+      "image_count": 1,
+      "prompt_sha256": "05f89c647b6485b610f24712b818eb47276002a4afa43ac46297650473e3cc60",
+      "prompt_length": 699
+    },
+    {
+      "num": 26,
+      "title": "Pixar-style 3D animation still (kitten)",
+      "title_zh": "电影感与动画：电影感 / 动画 / 皮克斯 3D / 角色",
+      "category": "🎬 Cinematic & Animation",
+      "category_zh": "电影感与动画",
+      "image_count": 1,
+      "prompt_sha256": "56148afc04d2a2d74d3241f456af33f22fa6dde83d56d4c213dcfdca4f7f24bb",
+      "prompt_length": 965
+    },
+    {
+      "num": 27,
+      "title": "1940s film-noir still",
+      "title_zh": "电影感与动画：霓虹 / 电影感 / 动画 / 黑色电影",
+      "category": "🎬 Cinematic & Animation",
+      "category_zh": "电影感与动画",
+      "image_count": 1,
+      "prompt_sha256": "58f3cdf4797f7730bdd035ffedf3c815cb089655c61af0fdf026073ee35bcd7d",
+      "prompt_length": 768
+    },
+    {
+      "num": 28,
+      "title": "Professional 6-panel film storyboard",
+      "title_zh": "电影感与动画：霓虹 / 电影感 / 动画 / 分镜",
+      "category": "🎬 Cinematic & Animation",
+      "category_zh": "电影感与动画",
+      "image_count": 1,
+      "prompt_sha256": "b7fd97816eb2f7a42f66b1d2b6913543e1ead8823373ba77e26bb0616e80f6dd",
+      "prompt_length": 1305
+    },
+    {
+      "num": 29,
+      "title": "Studio-Ghibli-style animation still",
+      "title_zh": "电影感与动画：电影感 / 动画 / 吉卜力氛围 / 水彩",
+      "category": "🎬 Cinematic & Animation",
+      "category_zh": "电影感与动画",
+      "image_count": 1,
+      "prompt_sha256": "ba0f590e9a6a2d094ff593a62ab126fa981f5a06768522960102d2cd0c66cdc6",
+      "prompt_length": 714
+    },
+    {
+      "num": 30,
+      "title": "VHS grocery-store chaos still",
+      "title_zh": "电影感与动画：VHS / 电影感 / 动画 / 海报",
+      "category": "🎬 Cinematic & Animation",
+      "category_zh": "电影感与动画",
+      "image_count": 1,
+      "prompt_sha256": "80a9f115862039d57c4603465518bc69e5ba9066f6625aecdcefd07adf4f30eb",
+      "prompt_length": 492
+    },
+    {
+      "num": 31,
+      "title": "Official character reference sheet",
+      "title_zh": "角色设计：角色 / 设定表 / 插画 / 横幅",
+      "category": "👤 Character Design",
+      "category_zh": "角色设计",
+      "image_count": 1,
+      "prompt_sha256": "6f37c195a575408916f2ee219ca90dd2eb7e8043155577bd9ee919cf9df0058f",
+      "prompt_length": 465
+    },
+    {
+      "num": 32,
+      "title": "Elven archer sketchbook concept sheet",
+      "title_zh": "角色设计：角色 / 设定表 / 水彩 / 水墨",
+      "category": "👤 Character Design",
+      "category_zh": "角色设计",
+      "image_count": 1,
+      "prompt_sha256": "33cbcacab62e4442aedcf5c1f74e7b1cf0263420d790126ce26c8ff120048e87",
+      "prompt_length": 578
+    },
+    {
+      "num": 33,
+      "title": "Chinese tea launch poster",
+      "title_zh": "字体与海报：字体排版 / 海报 / 茶主题 / 中文",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "4962785a81f0004eb246ed94eab2afeeb526680ee4a3422525ee40442b7c7669",
+      "prompt_length": 950
+    },
+    {
+      "num": 34,
+      "title": "1980s propaganda poster",
+      "title_zh": "字体与海报：字体排版 / 海报 / 竖幅 / 竖图 1024x1536",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "7f4c7c18b3d985a1f2fc2f94968cf6bd5fa940e4d872a0478cccb7c9807843c2",
+      "prompt_length": 163
+    },
+    {
+      "num": 35,
+      "title": "Saul-Bass-style thriller movie poster",
+      "title_zh": "字体与海报：字体排版 / 海报 / 剪影 / 水墨",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "7f4d9b9b29a9e0f68c485568c56597c3221c9ce3f661ba45bcb7aa145ffaf6af",
+      "prompt_length": 991
+    },
+    {
+      "num": 36,
+      "title": "Vogue-style fashion magazine cover",
+      "title_zh": "字体与海报：字体排版 / 封面 / 论文 / 极简",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "d78760f810f20ee888ecbb591ddef272aca3ae458b5b81b1faf60173136380a9",
+      "prompt_length": 1225
+    },
+    {
+      "num": 37,
+      "title": "1950s Astounding Stories pulp cover",
+      "title_zh": "字体与海报：复古 / 字体排版 / 封面 / 插画",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "2c9f91de21b508dd1814a59fdddc8a81392d6c0e2e4959e5ff8641659a395bfd",
+      "prompt_length": 1148
+    },
+    {
+      "num": 38,
+      "title": "Boston Spring 2026 city poster",
+      "title_zh": "字体与海报：字体排版 / 海报 / 全景 / 竖幅",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "ff2860262e8c6b01e2abe9febe9d4263d100991b551d0c2a7fa57f5ea8bb12c6",
+      "prompt_length": 1169
+    },
+    {
+      "num": 39,
+      "title": "Epic silhouette worldbuilding poster",
+      "title_zh": "字体与海报：电影感 / 字体排版 / 海报 / 剪影",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "ca68fed837dbad43fd9903eb648e732371063d59d3f9bb72b77927ecb5112f7e",
+      "prompt_length": 673
+    },
+    {
+      "num": 40,
+      "title": "Dual-exposure narrative poster",
+      "title_zh": "字体与海报：动漫 / 字体排版 / 海报 / 剪影",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "d6ba75914e99793926de7d045f69762b50c5f82ef7c158a0699d57527da23ae6",
+      "prompt_length": 684
+    },
+    {
+      "num": 41,
+      "title": "Journey to the West silhouette epic poster",
+      "title_zh": "字体与海报：电影感 / 字体排版 / 海报 / 剪影",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "9f7f809035baa4a59a461a5781c6466d3201261e83182cc4b46dd4f8fe65f5fa",
+      "prompt_length": 673
+    },
+    {
+      "num": 42,
+      "title": "Japanese pachinko rainbow flyer",
+      "title_zh": "字体与海报：字体排版 / 传单 / 竖幅 / 竖图 1024x1536",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "6017735b25606c7bf70a620095a694243ed60e0a70549a23ef10ff8ff0ff05fc",
+      "prompt_length": 157
+    },
+    {
+      "num": 43,
+      "title": "Spanish fantasy film mobile poster",
+      "title_zh": "字体与海报：字体排版 / 海报 / 电影 / 竖幅",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "9ed8b36afea79c59961ffbb5d1656f3fe6d268459021f35e3c74558b9ec272f7",
+      "prompt_length": 471
+    },
+    {
+      "num": 44,
+      "title": "Chongqing rainy-night city promo poster",
+      "title_zh": "字体与海报：字体排版 / 海报 / 竖幅 / 竖图 1024x1536",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "536b47b120c25b010d6e8923b4348edcb8dc1475798a1848c38bfc83602b1f54",
+      "prompt_length": 220
+    },
+    {
+      "num": 45,
+      "title": "Athlete journey poster: Aya Navarro",
+      "title_zh": "字体与海报：电影感 / 字体排版 / 海报 / 杂志大片",
+      "category": "📝 Typography & Posters",
+      "category_zh": "字体与海报",
+      "image_count": 1,
+      "prompt_sha256": "23982ddb21a4d861369dff133a82a44c578df8e289624412b6da62223e19eb2e",
+      "prompt_length": 319
+    },
+    {
+      "num": 46,
+      "title": "Vintage Amalfi Coast travel poster",
+      "title_zh": "插画：复古 / 电影感 / 海报 / 旅行",
+      "category": "🎨 Illustration",
+      "category_zh": "插画",
+      "image_count": 1,
+      "prompt_sha256": "09fe0688be40b6d333cc81c3e348c1c596c54a6a37431ef25064ae618dc0209f",
+      "prompt_length": 737
+    },
+    {
+      "num": 47,
+      "title": "Paper-cut forest night market",
+      "title_zh": "插画：剪影 / 茶主题 / 水墨 / 论文",
+      "category": "🎨 Illustration",
+      "category_zh": "插画",
+      "image_count": 1,
+      "prompt_sha256": "21c7a33c72ace42b25c8609b1bae82445cd3a324b3b537f02fabc2b5ca2f7449",
+      "prompt_length": 775
+    },
+    {
+      "num": 48,
+      "title": "Dreamy watercolor — young woman at lily pond",
+      "title_zh": "水彩：插画 / 论文 / 极简 / 杂志大片",
+      "category": "💧 Watercolor",
+      "category_zh": "水彩",
+      "image_count": 1,
+      "prompt_sha256": "c9e05c1aa877a231e834385fafd33794b74e9c4903739ab8258a9372e850b33a",
+      "prompt_length": 771
+    },
+    {
+      "num": 49,
+      "title": "Rainy botanical greenhouse watercolor",
+      "title_zh": "水彩：插画 / 论文 / 横幅 / 横图 1536x1024",
+      "category": "💧 Watercolor",
+      "category_zh": "水彩",
+      "image_count": 1,
+      "prompt_sha256": "9c0402d2d7ed4cd72453feb0e546b3754a44826a84da4356ad9c1ca18f02c4f1",
+      "prompt_length": 674
+    },
+    {
+      "num": 50,
+      "title": "Chinese ink-wash mountain landscape",
+      "title_zh": "水墨与中文风格：水墨 / 中文 / 论文 / 图表",
+      "category": "🖌️ Ink & Chinese",
+      "category_zh": "水墨与中文风格",
+      "image_count": 1,
+      "prompt_sha256": "4847f7486801202e1cc5c0b0ecaa8ed9c5098ac700d1fdfe884d4829ef62d509",
+      "prompt_length": 968
+    },
+    {
+      "num": 51,
+      "title": "Song dynasty night-market handscroll",
+      "title_zh": "水墨与中文风格：动漫 / 水墨 / 中文 / 论文",
+      "category": "🖌️ Ink & Chinese",
+      "category_zh": "水墨与中文风格",
+      "image_count": 1,
+      "prompt_sha256": "0d97744cad2af47f50bfec0886bb6f01021a9a806534349ac5b37aed710c5e58",
+      "prompt_length": 731
+    },
+    {
+      "num": 52,
+      "title": "Pixel art car sprite sheet",
+      "title_zh": "像素艺术：游戏 / 像素风 / 复古 / 设定表",
+      "category": "🕹️ Pixel Art",
+      "category_zh": "像素艺术",
+      "image_count": 1,
+      "prompt_sha256": "98c3060a3890d9c9bac95de65d3b99dce1e39a242278577e53323a601eda3144",
+      "prompt_length": 573
+    },
+    {
+      "num": 53,
+      "title": "Pixel art breakfast still life",
+      "title_zh": "像素艺术：像素风 / 食物 / 方图 / 长竖图",
+      "category": "🕹️ Pixel Art",
+      "category_zh": "像素艺术",
+      "image_count": 1,
+      "prompt_sha256": "8791fb99943f99229581ceadb6bbb8f7dd57e7f56254326fcf471d21fe5d71e4",
+      "prompt_length": 422
+    },
+    {
+      "num": 54,
+      "title": "Isometric miniature cafe district",
+      "title_zh": "等距视角：食物 / 方图 / 方图 1024x1024 / 社区来源",
+      "category": "📐 Isometric",
+      "category_zh": "等距视角",
+      "image_count": 1,
+      "prompt_sha256": "0cdce33ed7b2bb67ce9efe9cbc0b7b6be7e75a2fd8a894d382ed14a4aaf76402",
+      "prompt_length": 959
+    },
+    {
+      "num": 55,
+      "title": "Isometric fantasy village map",
+      "title_zh": "等距视角：游戏 / 策略 / 地图 / 方图",
+      "category": "📐 Isometric",
+      "category_zh": "等距视角",
+      "image_count": 1,
+      "prompt_sha256": "3895a35a76734d2f20067fedce902b774e65b9402e3f03ec313de1eb398bca92",
+      "prompt_length": 574
+    },
+    {
+      "num": 56,
+      "title": "3D product box from dieline",
+      "title_zh": "产品与食物：产品 / 食物 / 包装刀模 / 杂志大片",
+      "category": "📦 Product & Food",
+      "category_zh": "产品与食物",
+      "image_count": 1,
+      "prompt_sha256": "79226079a01491d26a7f43bc4207672f7996dfda4229e2f8f239e1dfaea77569",
+      "prompt_length": 571
+    },
+    {
+      "num": 57,
+      "title": "Chocolate wafer product render (JSON-style)",
+      "title_zh": "产品与食物：电影感 / 产品 / 食物 / 室内",
+      "category": "📦 Product & Food",
+      "category_zh": "产品与食物",
+      "image_count": 1,
+      "prompt_sha256": "d46404bf88fe5d1b990598ae658bab7e68a6ed83881b06cb5519feca8882e4c1",
+      "prompt_length": 1269
+    },
+    {
+      "num": 58,
+      "title": "Salad-explosion food photography (JSON-style)",
+      "title_zh": "产品与食物：电影感 / 产品 / 食物 / 棚拍",
+      "category": "📦 Product & Food",
+      "category_zh": "产品与食物",
+      "image_count": 1,
+      "prompt_sha256": "ea02a9eb9c1fd3bcc720b3fb83542ad055be030fdbb034e02c049911a81833e8",
+      "prompt_length": 1409
+    },
+    {
+      "num": 59,
+      "title": "Universal commercial poster template",
+      "title_zh": "产品与食物：电影感 / 字体排版 / 海报 / 茶主题",
+      "category": "📦 Product & Food",
+      "category_zh": "产品与食物",
+      "image_count": 1,
+      "prompt_sha256": "4f55c7acd53a02d66c91f54e58403dbf829c6bddb05b8a801bce4211ed1367d6",
+      "prompt_length": 474
+    },
+    {
+      "num": 60,
+      "title": "Moss Radio brand identity showcase board",
+      "title_zh": "品牌系统与视觉识别：字体排版 / 产品 / 品牌 / 视觉识别",
+      "category": "🧩 Brand Systems & Identity",
+      "category_zh": "品牌系统与视觉识别",
+      "image_count": 1,
+      "prompt_sha256": "61fccb4952f52dfffaeeda0a00ab6e3c01b988aa7b954924cbc6589db5d7197b",
+      "prompt_length": 974
+    },
+    {
+      "num": 61,
+      "title": "PS1 nostalgia reboot brand kit",
+      "title_zh": "品牌系统与视觉识别：VHS / 字体排版 / 品牌 / 视觉识别",
+      "category": "🧩 Brand Systems & Identity",
+      "category_zh": "品牌系统与视觉识别",
+      "image_count": 1,
+      "prompt_sha256": "d076845d84bd9eb75375822ff78f1e421692c8a6fabcd437b09a5511f7321861",
+      "prompt_length": 664
+    },
+    {
+      "num": 62,
+      "title": "Playful brand kit: Mochi Metro",
+      "title_zh": "品牌系统与视觉识别：字体排版 / 品牌 / 视觉识别 / 标识",
+      "category": "🧩 Brand Systems & Identity",
+      "category_zh": "品牌系统与视觉识别",
+      "image_count": 1,
+      "prompt_sha256": "b5e013200e07ac9913e96840394cf7592bec10240d7ebc65608847c2072dbb90",
+      "prompt_length": 297
+    },
+    {
+      "num": 63,
+      "title": "RAW iPhone — 42nd Street subway",
+      "title_zh": "摄影：地铁 / 横幅 / 横图 1536x1024 / 社区来源",
+      "category": "📷 Photography",
+      "category_zh": "摄影",
+      "image_count": 1,
+      "prompt_sha256": "3366bd4716ad66c88bcce7f25ee5c6ce9fdc74aebf7486a71f9400677a19e532",
+      "prompt_length": 220
+    },
+    {
+      "num": 64,
+      "title": "Handwritten notebook flatlay",
+      "title_zh": "摄影：横幅 / 横图 1536x1024 / 社区来源",
+      "category": "📷 Photography",
+      "category_zh": "摄影",
+      "image_count": 1,
+      "prompt_sha256": "a4ec47f6786dfbdab9d37564a1be98f65f06be95b253422ac978fc7f64d9ebb1",
+      "prompt_length": 333
+    },
+    {
+      "num": 65,
+      "title": "Chess board mid-tournament game",
+      "title_zh": "摄影：游戏 / 剪影 / 国际象棋 / 横幅",
+      "category": "📷 Photography",
+      "category_zh": "摄影",
+      "image_count": 1,
+      "prompt_sha256": "0ba44b80edfe4ab47f39e51834004c4d8c8cef71e0dbad65d17ae74d503175fb",
+      "prompt_length": 820
+    },
+    {
+      "num": 66,
+      "title": "360° equirectangular jungle panorama",
+      "title_zh": "摄影：电影感 / 全景 / 宽幅 / 宽图 2048x1152",
+      "category": "📷 Photography",
+      "category_zh": "摄影",
+      "image_count": 1,
+      "prompt_sha256": "85bf1f5a37d4f6dac64f8bdc038cf3fb87e42cab008a88df9c85d762bbb278f4",
+      "prompt_length": 826
+    },
+    {
+      "num": 67,
+      "title": "Song Dynasty social-media feed",
+      "title_zh": "信息图与图鉴：旅行 / 绘画 / 竖幅 / 竖图 1024x1536",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "0ba72248c28efe4621c6bb544312cac765dbc557eb63a2320cbd8659f0cfc1a4",
+      "prompt_length": 976
+    },
+    {
+      "num": 68,
+      "title": "Museum catalog disassembly infographic (唐代襦裙)",
+      "title_zh": "信息图与图鉴：中文 / 信息图 / 博物馆 / 竖幅",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "48f6ec0c8fca64e90193ccd7298f20cf83c2c096c3db642b05cf093774be1a6a",
+      "prompt_length": 2089
+    },
+    {
+      "num": 69,
+      "title": "Encyclopedia field guide (Giant Panda)",
+      "title_zh": "信息图与图鉴：海报 / 插画 / 信息图 / 图鉴",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "026aaf1013c77bd84cf60d3f33842c698725170d436aa05971687730aca4cdbe",
+      "prompt_length": 1489
+    },
+    {
+      "num": 70,
+      "title": "Weekend Seoul travel guide poster",
+      "title_zh": "信息图与图鉴：海报 / 中文 / 信息图 / 旅行",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "dbc56fbf7e65058c007ad372473b1cb78eb31de9f96ef6fe0017ef6e9ce5a76c",
+      "prompt_length": 594
+    },
+    {
+      "num": 71,
+      "title": "Modular encyclopedia infographic card",
+      "title_zh": "信息图与图鉴：海报 / 插画 / 信息图 / 百科卡",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "c0ff764ee04c7a63b5c29e2809230ad79b486a080b4074a0c82137b41f25495e",
+      "prompt_length": 716
+    },
+    {
+      "num": 72,
+      "title": "Xiaohongshu cooking tutorial card",
+      "title_zh": "信息图与图鉴：中文 / 食物 / 电影 / 生活方式",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "698b022f006cba486fa41f76030a25569b12a1c1d8217872e159c997e4e50ec3",
+      "prompt_length": 473
+    },
+    {
+      "num": 73,
+      "title": "Camera styles reference board for iPhone photographers",
+      "title_zh": "信息图与图鉴：电影 / 横幅 / 竖幅 / 横图 1536x1024",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "94f165c1d2fc91c77609b6acf5c15c39a18d8eea467eac72399d57c1b371431b",
+      "prompt_length": 617
+    },
+    {
+      "num": 74,
+      "title": "Chinese endangered-animal infographic",
+      "title_zh": "信息图与图鉴：插画 / 中文 / 信息图 / 科研",
+      "category": "📊 Infographics & Field Guides",
+      "category_zh": "信息图与图鉴",
+      "image_count": 1,
+      "prompt_sha256": "7de5c10a76fd10149d7a10e7d8bd2bb2a9c3ac516ed1d79036cafbd436cbc483",
+      "prompt_length": 595
+    },
+    {
+      "num": 75,
+      "title": "Patient cohort and multimodal biomarker workflow",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 时间线",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "4c338dcb1fe43f329ef306568ae812856c6b127aa1f08f97f66902cb37c07018",
+      "prompt_length": 1366
+    },
+    {
+      "num": 76,
+      "title": "Single-cell immune atlas reveals treatment-response states",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "3f54629c6c69b506bd09677ae0b37118ab7dbdb51b6f067d41000ab72bd1fcee",
+      "prompt_length": 1114
+    },
+    {
+      "num": 77,
+      "title": "Multimodal medical-AI method figure",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 流程管线",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "c5f31a859ff1e20d16c71f296d727f2344536933a24497928eed643bdac283b9",
+      "prompt_length": 1276
+    },
+    {
+      "num": 78,
+      "title": "Therapeutic response bar and forest plot",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "8cf902024e4114635cfa277742beda676110f7b7c44c88c0e0f8d307cf56e249",
+      "prompt_length": 1257
+    },
+    {
+      "num": 79,
+      "title": "Transformer encoder–decoder architecture",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 架构/建筑",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "a2f2883893c872b626e37e5f4cc841d44ef397c99568a5135bc575ed5dcf46b0",
+      "prompt_length": 980
+    },
+    {
+      "num": 80,
+      "title": "Retrieval-Augmented Generation pipeline",
+      "title_zh": "论文配图：剪影 / 科研 / 论文 / 流程管线",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "38ef27ac03b31c93fed4d2fedb3b432d90c3305cef38ca05f5ac91d6c0edb23e",
+      "prompt_length": 916
+    },
+    {
+      "num": 81,
+      "title": "Multi-agent LLM system architecture",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 架构/建筑",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "bacd1d652ded60ea395f39718fa239ead9729fe38c7bd43d60208d393bf90d18",
+      "prompt_length": 1548
+    },
+    {
+      "num": 82,
+      "title": "Denoising diffusion forward/reverse chain",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "4aff3bc8d30d42a98729d7b29513cf5952f950d797cb6797a3ef5cd5e77a56a1",
+      "prompt_length": 776
+    },
+    {
+      "num": 83,
+      "title": "Empirical scaling laws plot",
+      "title_zh": "论文配图：科研 / 论文 / 横幅 / 横图 1536x1024",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "868d12b7e0813e490fe9201f4bacc38e6ad941c5ba915c497bd84cb57ceeaf68",
+      "prompt_length": 755
+    },
+    {
+      "num": 84,
+      "title": "Benchmark comparison heatmap",
+      "title_zh": "论文配图：科研 / 论文 / 热力图 / 评测",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "19f257c261570efa681fc89bfa1602a0ab6671bb266bba9201e9938832d165a4",
+      "prompt_length": 759
+    },
+    {
+      "num": 85,
+      "title": "Ablation bar chart with error bars",
+      "title_zh": "论文配图：科研 / 论文 / 评测 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "889e7cef4760d4e1937a7439cc244a69786868b593891c1541d8b7d44baba9ad",
+      "prompt_length": 698
+    },
+    {
+      "num": 86,
+      "title": "LLM pretraining data-mixture sankey",
+      "title_zh": "论文配图：科研 / 论文 / 桑基图 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "8b6d780ce03b1e1e2f9032120755121a7b47fe643e86c708da80d2d8abf7a87a",
+      "prompt_length": 1031
+    },
+    {
+      "num": 87,
+      "title": "Multi-head attention heatmaps",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "1a05b7160ac4a6f61c9fffed8745e889dfc96931e2c7419ae1ca3573b271df63",
+      "prompt_length": 1007
+    },
+    {
+      "num": 88,
+      "title": "Frontier LLM family tree (2018–2026)",
+      "title_zh": "论文配图：科研 / 论文 / 时间线 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "1a29d8ffa85fcf4e2954e5ca5f260baf5bf6d05c16ecfbb2f97d05e02daf0e61",
+      "prompt_length": 1078
+    },
+    {
+      "num": 89,
+      "title": "ReAct reasoning trace",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "451d82b021ad741ac3ca16994d5d279b3de90d40f40c42eaa52b70fcd39ce426",
+      "prompt_length": 1257
+    },
+    {
+      "num": 90,
+      "title": "Memory Router for Multimodal Agents",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 流程管线",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "d48fa515cb2362068b09bd2a20087c560234351192a68e1d5dc130ec00f17f73",
+      "prompt_length": 598
+    },
+    {
+      "num": 91,
+      "title": "Frontier Safety Eval Loop",
+      "title_zh": "论文配图：字体排版 / 科研 / 论文 / 图表",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "b887c4908a26c7ac06c61a26492821a6f03cbeb3cceff50c7585ba0bb3707b96",
+      "prompt_length": 526
+    },
+    {
+      "num": 92,
+      "title": "ICLR-style method figure",
+      "title_zh": "论文配图：科研 / 论文 / 图表 / 横幅",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "7194a7e39432a6221cea6cd509351074be5deaf5de74a291a0ecbc5485db4149",
+      "prompt_length": 1026
+    },
+    {
+      "num": 93,
+      "title": "LLM Persona Atlas",
+      "title_zh": "论文配图：水墨 / 科研 / 论文 / 图表",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "503ec5057953f034a8ecc4cc6f2987a40528e290a24ae6fa380ff8813db979e7",
+      "prompt_length": 1475
+    },
+    {
+      "num": 94,
+      "title": "Multimodal agent experiment workflow figure",
+      "title_zh": "论文配图：字体排版 / 海报 / 科研 / 论文",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "35d132eb2477f62146bef7829d0b304004ee67b9885fe80ad6dce4710fa995b7",
+      "prompt_length": 503
+    },
+    {
+      "num": 95,
+      "title": "Indirect prompt-injection attack flow",
+      "title_zh": "论文配图：剪影 / 科研 / 论文 / 图表",
+      "category": "📚 Research Paper Figures",
+      "category_zh": "论文配图",
+      "image_count": 1,
+      "prompt_sha256": "78c39d28437d73901e86cb743769d4caadbef7d4b83f1fdd69065f47cd8ff8e1",
+      "prompt_length": 1344
+    },
+    {
+      "num": 96,
+      "title": "Automatic coffee machine infographic",
+      "title_zh": "OpenAI Cookbook 官方示例：信息图 / 官方示例 / 竖幅 / 竖图 1024x1536",
+      "category": "🏢 Official OpenAI Cookbook Examples",
+      "category_zh": "OpenAI Cookbook 官方示例",
+      "image_count": 1,
+      "prompt_sha256": "be39e80883184dd600332be7e65fce082b9ad43341b3a1d6782a1aae03827ec3",
+      "prompt_length": 225
+    },
+    {
+      "num": 97,
+      "title": "Photorealistic elderly sailor",
+      "title_zh": "OpenAI Cookbook 官方示例：官方示例 / 电影 / 竖幅 / 竖图 1024x1536",
+      "category": "🏢 Official OpenAI Cookbook Examples",
+      "category_zh": "OpenAI Cookbook 官方示例",
+      "image_count": 1,
+      "prompt_sha256": "a14ae3dd46d3fd791d924d5942aab33bfffb15940f777d7633fc6a800c871073",
+      "prompt_length": 603
+    },
+    {
+      "num": 98,
+      "title": "Minimalist bakery logo — Field & Flour",
+      "title_zh": "OpenAI Cookbook 官方示例：剪影 / 标识 / 官方示例 / 极简",
+      "category": "🏢 Official OpenAI Cookbook Examples",
+      "category_zh": "OpenAI Cookbook 官方示例",
+      "image_count": 1,
+      "prompt_sha256": "72b8d53ad8a665ef4c9795045d840df4e52c85b262609a4ea623b58cfd25b94d",
+      "prompt_length": 443
+    },
+    {
+      "num": 99,
+      "title": "4-panel pet comic strip",
+      "title_zh": "OpenAI Cookbook 官方示例：官方示例 / 竖幅 / 宽幅 / 竖图 1024x1536",
+      "category": "🏢 Official OpenAI Cookbook Examples",
+      "category_zh": "OpenAI Cookbook 官方示例",
+      "image_count": 1,
+      "prompt_sha256": "3326168985b367191124e51cf3a761c1453d7f388b49ef6cb477f15eb756215e",
+      "prompt_length": 651
+    },
+    {
+      "num": 100,
+      "title": "Chess board → winter evening (edit via `/v1/images/edits`) 🆕",
+      "title_zh": "棋盘变冬夜场景（编辑接口示例）",
+      "category": "✨ Edit Endpoint Showcase",
+      "category_zh": "图片编辑接口示例",
+      "image_count": 2,
+      "prompt_sha256": "37fb1a9fedae121ca094f1a4a4777d3d2f18a8d0fbeae5d623f16b33bde51a19",
+      "prompt_length": 301
+    },
+    {
+      "num": 101,
+      "title": "Tea poster → metro lightbox mockup",
+      "title_zh": "茶海报变地铁灯箱样机",
+      "category": "✨ Edit Endpoint Showcase",
+      "category_zh": "图片编辑接口示例",
+      "image_count": 2,
+      "prompt_sha256": "f3fab8c1edf002b7051ede6123cdc8f82204539fa8804a5bcb64a4d4b8cbc69e",
+      "prompt_length": 547
+    },
+    {
+      "num": 102,
+      "title": "Mobile Budgeting App Mockup",
+      "title_zh": "UI/UX 界面样机：字体排版 / 样机 / UI / UX",
+      "category": "📱 UI/UX Mockups",
+      "category_zh": "UI/UX 界面样机",
+      "image_count": 1,
+      "prompt_sha256": "3c5a3ea6f6a6aac5aed5a75ebece410072788f3a187abb4903c2419a298fc29b",
+      "prompt_length": 917
+    },
+    {
+      "num": 103,
+      "title": "Desktop Operations Dashboard",
+      "title_zh": "UI/UX 界面样机：字体排版 / 样机 / UI / UX",
+      "category": "📱 UI/UX Mockups",
+      "category_zh": "UI/UX 界面样机",
+      "image_count": 1,
+      "prompt_sha256": "48d91b0b83f7bd86122424c2a15cf222fa80404aed9bfaf3b4f68c13c8307038",
+      "prompt_length": 944
+    },
+    {
+      "num": 104,
+      "title": "Design System Card Set",
+      "title_zh": "UI/UX 界面样机：字体排版 / 产品 / UI / UX",
+      "category": "📱 UI/UX Mockups",
+      "category_zh": "UI/UX 界面样机",
+      "image_count": 1,
+      "prompt_sha256": "d13bafffe4abe6ea668d0e356b6b3f7efb01b8767bf13c6af00753cfe500a864",
+      "prompt_length": 976
+    },
+    {
+      "num": 105,
+      "title": "Web3 Wallet Interface Concept",
+      "title_zh": "UI/UX 界面样机：字体排版 / 样机 / UI / UX",
+      "category": "📱 UI/UX Mockups",
+      "category_zh": "UI/UX 界面样机",
+      "image_count": 1,
+      "prompt_sha256": "7659001cbb419ccde642106cd3cb6d0e2796a43a7ecf9a491179ed394a6113ec",
+      "prompt_length": 938
+    },
+    {
+      "num": 106,
+      "title": "Health Tracker App Mockup",
+      "title_zh": "UI/UX 界面样机：产品 / 样机 / UI / UX",
+      "category": "📱 UI/UX Mockups",
+      "category_zh": "UI/UX 界面样机",
+      "image_count": 1,
+      "prompt_sha256": "966dc7e0dd6300fa5b01ac315461a58c2cb353a35a1739da3302dd1855cb304f",
+      "prompt_length": 918
+    },
+    {
+      "num": 107,
+      "title": "Small Multiples Climate Grid",
+      "title_zh": "数据可视化：海报 / 杂志大片 / 宽幅 / 宽图 2048x1152",
+      "category": "📊 Data Visualization",
+      "category_zh": "数据可视化",
+      "image_count": 1,
+      "prompt_sha256": "5e678e0344451f8f407644b3a931b972c0e63c6147beeb30e8e10229b090419b",
+      "prompt_length": 949
+    },
+    {
+      "num": 108,
+      "title": "Network Graph Collaboration Map",
+      "title_zh": "数据可视化：地图 / 科研 / 网络图 / 横幅",
+      "category": "📊 Data Visualization",
+      "category_zh": "数据可视化",
+      "image_count": 1,
+      "prompt_sha256": "96f08804e0c9ff5a7f523803f73856302fab646807f5ed814c0cc80f6ae55936",
+      "prompt_length": 993
+    },
+    {
+      "num": 109,
+      "title": "Chord Diagram of Energy Flows",
+      "title_zh": "数据可视化：弦图 / 方图 / 方图 1024x1024 / 精选整理",
+      "category": "📊 Data Visualization",
+      "category_zh": "数据可视化",
+      "image_count": 1,
+      "prompt_sha256": "74a9ff9b980d62da3813bb7c11c9b9acd33121e980d18a49bde55b5bc4c721d2",
+      "prompt_length": 930
+    },
+    {
+      "num": 110,
+      "title": "Treemap Budget Allocation",
+      "title_zh": "数据可视化：字体排版 / 信息图 / 树图 / 横幅",
+      "category": "📊 Data Visualization",
+      "category_zh": "数据可视化",
+      "image_count": 1,
+      "prompt_sha256": "595797903c0b7f6bf3b92645e5ebc4137eb5c3a3c95a88ff05798401b319436b",
+      "prompt_length": 905
+    },
+    {
+      "num": 111,
+      "title": "Geographic Choropleth Yield Map",
+      "title_zh": "数据可视化：信息图 / 地图 / 分级设色地图 / 极简",
+      "category": "📊 Data Visualization",
+      "category_zh": "数据可视化",
+      "image_count": 1,
+      "prompt_sha256": "a6ff280c7b4c7c0d10c762950e11499ef17e0022b28d0250c9b8faa8ae881aca",
+      "prompt_length": 939
+    },
+    {
+      "num": 112,
+      "title": "Mechanical Watch Exploded View",
+      "title_zh": "机械腕表爆炸图",
+      "category": "⚙️ Technical Illustration",
+      "category_zh": "技术插图",
+      "image_count": 1,
+      "prompt_sha256": "1147bc0564e4da28cb0ff8b599981843578c58b3622f08fab6bca708ffde9947",
+      "prompt_length": 947
+    },
+    {
+      "num": 113,
+      "title": "Rocket Cutaway Diagram",
+      "title_zh": "火箭剖面图",
+      "category": "⚙️ Technical Illustration",
+      "category_zh": "技术插图",
+      "image_count": 1,
+      "prompt_sha256": "44ea74f58eac9a7acfe489d259440512f48e9bac066bc24c7049cc180ab1bad3",
+      "prompt_length": 900
+    },
+    {
+      "num": 114,
+      "title": "Mechanical Keyboard Exploded Assembly",
+      "title_zh": "机械键盘爆炸装配图",
+      "category": "⚙️ Technical Illustration",
+      "category_zh": "技术插图",
+      "image_count": 1,
+      "prompt_sha256": "15f52a3eef75ed57b4fa2964deb2fff60e8c742147dc2454f10a96d5f70fefbc",
+      "prompt_length": 897
+    },
+    {
+      "num": 115,
+      "title": "Car Powertrain Transparent Cutaway",
+      "title_zh": "汽车动力系统透明剖面图",
+      "category": "⚙️ Technical Illustration",
+      "category_zh": "技术插图",
+      "image_count": 1,
+      "prompt_sha256": "31a813f70debcee79a979f6a61fd731454ee488062836148b866bbf75cf6ac29",
+      "prompt_length": 957
+    },
+    {
+      "num": 116,
+      "title": "Smartphone Internals Layered View",
+      "title_zh": "智能手机内部层级图",
+      "category": "⚙️ Technical Illustration",
+      "category_zh": "技术插图",
+      "image_count": 1,
+      "prompt_sha256": "241656b6ce92e9c6f36a8fe66b46b75806b634bcf9f0469713d6a6230f531d64",
+      "prompt_length": 891
+    },
+    {
+      "num": 117,
+      "title": "Japanese Minimalist Living Room",
+      "title_zh": "建筑与室内：茶主题 / 论文 / 架构/建筑 / 数据可视化",
+      "category": "🏛️ Architecture & Interior",
+      "category_zh": "建筑与室内",
+      "image_count": 1,
+      "prompt_sha256": "5a593cbab5e4687787da5f26b11cfc5a75e6d5516a07d50d71c06948c99b0a9f",
+      "prompt_length": 925
+    },
+    {
+      "num": 118,
+      "title": "Brutalist Concrete Museum Atrium",
+      "title_zh": "建筑与室内：博物馆 / 导视 / 架构/建筑 / 室内",
+      "category": "🏛️ Architecture & Interior",
+      "category_zh": "建筑与室内",
+      "image_count": 1,
+      "prompt_sha256": "000ffc7180f67cbbc0dca2b35e890c8fad4295ec0d9c763ec7d240a29fa415ab",
+      "prompt_length": 942
+    },
+    {
+      "num": 119,
+      "title": "Mid-Century Modern Office",
+      "title_zh": "建筑与室内：架构/建筑 / 室内 / 棚拍 / 横幅",
+      "category": "🏛️ Architecture & Interior",
+      "category_zh": "建筑与室内",
+      "image_count": 1,
+      "prompt_sha256": "ba6e386f1bbc4dc8c834fda70cfb8e183664143fe8372730e3367879036eb93e",
+      "prompt_length": 948
+    },
+    {
+      "num": 120,
+      "title": "Biophilic Biotech Lab",
+      "title_zh": "建筑与室内：科研 / 架构/建筑 / 室内 / 亲自然",
+      "category": "🏛️ Architecture & Interior",
+      "category_zh": "建筑与室内",
+      "image_count": 1,
+      "prompt_sha256": "79512bca389ecf0e7a561a4d27f742f2f178b2c8a4c7e3e4a1eea7e1f74e1dee",
+      "prompt_length": 997
+    },
+    {
+      "num": 121,
+      "title": "Gothic Cathedral Interior",
+      "title_zh": "建筑与室内：架构/建筑 / 室内 / 哥特 / 长竖图",
+      "category": "🏛️ Architecture & Interior",
+      "category_zh": "建筑与室内",
+      "image_count": 1,
+      "prompt_sha256": "05d4528dcc61f95d5dbb249bde17785474ddab632761c801dd9a2b119565d473",
+      "prompt_length": 953
+    },
+    {
+      "num": 122,
+      "title": "Anatomy Poster",
+      "title_zh": "科学与教育：海报 / 科学教育 / 人体解剖 / 长竖图",
+      "category": "🔬 Scientific & Educational",
+      "category_zh": "科学与教育",
+      "image_count": 1,
+      "prompt_sha256": "86139c7f31e54d0029a74e10e305baa292cbe2498ecaf9b67c24014534cc018d",
+      "prompt_length": 924
+    },
+    {
+      "num": 123,
+      "title": "Skeletal System Poster",
+      "title_zh": "科学与教育：海报 / 科学教育 / 人体解剖 / 长竖图",
+      "category": "🔬 Scientific & Educational",
+      "category_zh": "科学与教育",
+      "image_count": 1,
+      "prompt_sha256": "8a2b8c16116a74295ca5034d405036c9df290f2000859fdb165424b306cd02aa",
+      "prompt_length": 813
+    },
+    {
+      "num": 124,
+      "title": "Circulatory System Poster",
+      "title_zh": "科学与教育：海报 / 科学教育 / 人体解剖 / 长竖图",
+      "category": "🔬 Scientific & Educational",
+      "category_zh": "科学与教育",
+      "image_count": 1,
+      "prompt_sha256": "47a04febaedb25727d9a7c9fbebd4fc8a575d1c769165f9dc96e50fcce5104c0",
+      "prompt_length": 849
+    },
+    {
+      "num": 125,
+      "title": "Periodic Table Spectral Variant",
+      "title_zh": "科学与教育：海报 / 科学教育 / 元素周期表 / 宽幅",
+      "category": "🔬 Scientific & Educational",
+      "category_zh": "科学与教育",
+      "image_count": 1,
+      "prompt_sha256": "62066835686e58fb4a2d090298ae2bcc728df28509702308727e4046a8d837a9",
+      "prompt_length": 945
+    },
+    {
+      "num": 126,
+      "title": "Tree of Life Poster",
+      "title_zh": "科学与教育：海报 / 科学教育 / 宽幅 / 宽图 2048x1152",
+      "category": "🔬 Scientific & Educational",
+      "category_zh": "科学与教育",
+      "image_count": 1,
+      "prompt_sha256": "b4cc4f2e24b5322fb05f8b67a5c63f47f691de9de851790515f4d0ccebb91845",
+      "prompt_length": 939
+    },
+    {
+      "num": 127,
+      "title": "Weather Systems Diagram",
+      "title_zh": "科学与教育：信息图 / 科学教育 / 天气系统 / 宽幅",
+      "category": "🔬 Scientific & Educational",
+      "category_zh": "科学与教育",
+      "image_count": 1,
+      "prompt_sha256": "5a1afda50f4fb419926c08f381166be37dd33964e22af4fb1ef43f7652ca3f81",
+      "prompt_length": 880
+    },
+    {
+      "num": 128,
+      "title": "Geological Strata Cross-Section",
+      "title_zh": "科学与教育：海报 / 分层 / 科学教育 / 地质",
+      "category": "🔬 Scientific & Educational",
+      "category_zh": "科学与教育",
+      "image_count": 1,
+      "prompt_sha256": "f723611dbedcbdb6f2dd037fe9e16f95adedf9cef65cc6616638883df1bbf9b3",
+      "prompt_length": 911
+    },
+    {
+      "num": 129,
+      "title": "Urban Streetwear Lookbook: Shibuya Night",
+      "title_zh": "都市街头服饰 Lookbook：涩谷夜景",
+      "category": "👗 Fashion Editorial",
+      "category_zh": "时尚大片",
+      "image_count": 1,
+      "prompt_sha256": "6f73f032ca40b1f0ed389d966e7e190ea21a4d14b13572baa0caea0b50d61448",
+      "prompt_length": 905
+    },
+    {
+      "num": 130,
+      "title": "Avant-Garde Haute Couture Runway",
+      "title_zh": "先锋高级定制秀场",
+      "category": "👗 Fashion Editorial",
+      "category_zh": "时尚大片",
+      "image_count": 1,
+      "prompt_sha256": "cd0a24f50696c41a5f83bd017401b430e69e138a19abce98ebd6ccee83e7fa8d",
+      "prompt_length": 822
+    },
+    {
+      "num": 131,
+      "title": "Y2K Revival: Cyber-Pop Studio Session",
+      "title_zh": "Y2K 复兴：赛博流行棚拍",
+      "category": "👗 Fashion Editorial",
+      "category_zh": "时尚大片",
+      "image_count": 1,
+      "prompt_sha256": "10aff4a1cac583f415edd180cd17544e4067adfdf89b634002fdfa40a66de401",
+      "prompt_length": 822
+    },
+    {
+      "num": 132,
+      "title": "Old Money Aesthetic: Equestrian Estate",
+      "title_zh": "老钱风：马术庄园",
+      "category": "👗 Fashion Editorial",
+      "category_zh": "时尚大片",
+      "image_count": 1,
+      "prompt_sha256": "4d75a6bbecb988e64faebfcce5bbf1e25a58f0572e63d816e04482aea1e187c5",
+      "prompt_length": 845
+    },
+    {
+      "num": 133,
+      "title": "Avant-Garde: Organic Surrealism",
+      "title_zh": "先锋时尚：有机超现实",
+      "category": "👗 Fashion Editorial",
+      "category_zh": "时尚大片",
+      "image_count": 1,
+      "prompt_sha256": "2b0390ce362c0fcbe5c00ffdd40535945cf4bf7351aec53b9afc8abe9eef0bf5",
+      "prompt_length": 852
+    },
+    {
+      "num": 134,
+      "title": "Muted streetwear studio editorial portrait",
+      "title_zh": "低饱和街头服饰棚拍人像",
+      "category": "👗 Fashion Editorial",
+      "category_zh": "时尚大片",
+      "image_count": 1,
+      "prompt_sha256": "a5ab7f9f2bb553c655716b91416552c0d64641e40f2d5a1d6a07ba443f2929d8",
+      "prompt_length": 1116
+    },
+    {
+      "num": 135,
+      "title": "Eiffel Tower luxury night editorial",
+      "title_zh": "埃菲尔铁塔夜景奢华大片",
+      "category": "👗 Fashion Editorial",
+      "category_zh": "时尚大片",
+      "image_count": 1,
+      "prompt_sha256": "212caf023875a4d40de2c4443c5d4b90bd15831a70019fbbdd1722735406a313",
+      "prompt_length": 905
+    },
+    {
+      "num": 136,
+      "title": "Vibrant Impasto: Floral Rhythms",
+      "title_zh": "美术绘画：绘画 / 印象派 / 厚涂 / 方图",
+      "category": "🎨 Fine Art Painting",
+      "category_zh": "美术绘画",
+      "image_count": 1,
+      "prompt_sha256": "4324d68517668051212ce68d32e4f2bb1a5dd646cfa5b2936ce505422a38eb8b",
+      "prompt_length": 842
+    },
+    {
+      "num": 137,
+      "title": "Impressionist Lineage: River at Dusk",
+      "title_zh": "美术绘画：绘画 / 印象派 / 横幅 / 宽幅",
+      "category": "🎨 Fine Art Painting",
+      "category_zh": "美术绘画",
+      "image_count": 1,
+      "prompt_sha256": "a99dbf1d4113f1885106424b4626697d8180e57cc0486ba500cf713129dfbf4d",
+      "prompt_length": 826
+    },
+    {
+      "num": 138,
+      "title": "Mid-Century Modern: The Blue Pool",
+      "title_zh": "美术绘画：架构/建筑 / 极简 / 绘画 / 横幅",
+      "category": "🎨 Fine Art Painting",
+      "category_zh": "美术绘画",
+      "image_count": 1,
+      "prompt_sha256": "afc28beb4d849faf646185d9f4b5124b34ef16e9d54fed9f47ff8bd28f9d1f7f",
+      "prompt_length": 860
+    },
+    {
+      "num": 139,
+      "title": "Color Field Abstract: Crimson and Ochre",
+      "title_zh": "美术绘画：分层 / 绘画 / 长竖图 / 超长竖图 2160x3840",
+      "category": "🎨 Fine Art Painting",
+      "category_zh": "美术绘画",
+      "image_count": 1,
+      "prompt_sha256": "048475260b01947756365146fb364820e8906bb1ba96d2eb888a52e7a6e1356e",
+      "prompt_length": 826
+    },
+    {
+      "num": 140,
+      "title": "Social Realism: The Great Foundry",
+      "title_zh": "美术绘画：绘画 / 壁画 / 宽幅 / 宽图 2048x1152",
+      "category": "🎨 Fine Art Painting",
+      "category_zh": "美术绘画",
+      "image_count": 1,
+      "prompt_sha256": "affc13242bfb3fdfa21f0469ad00c8d34eea816bf47a3be41bdb8bd530b10ec0",
+      "prompt_length": 868
+    },
+    {
+      "num": 141,
+      "title": "Flat Design: Modern Wellness",
+      "title_zh": "更多插画风格：插画 / 极简 / 杂志大片 / 方图",
+      "category": "✏️ More Illustration Styles",
+      "category_zh": "更多插画风格",
+      "image_count": 1,
+      "prompt_sha256": "55a134ead755be13cff4c794ddb7d9419f92d31eaf059a325bd66ea713896163",
+      "prompt_length": 846
+    },
+    {
+      "num": 142,
+      "title": "Chibi Style: The Starry Bakery",
+      "title_zh": "更多插画风格：插画 / 方图 / 方图 1024x1024 / 精选整理",
+      "category": "✏️ More Illustration Styles",
+      "category_zh": "更多插画风格",
+      "image_count": 1,
+      "prompt_sha256": "a22a1066a1ae34790fa61d059f5acaef4adfe857a968b2911ec157b3f853753f",
+      "prompt_length": 801
+    },
+    {
+      "num": 143,
+      "title": "Low-Poly Geometric: Alpine Sunset",
+      "title_zh": "更多插画风格：游戏 / 低多边形 / 插画 / 横幅",
+      "category": "✏️ More Illustration Styles",
+      "category_zh": "更多插画风格",
+      "image_count": 1,
+      "prompt_sha256": "5f86b94e7e28fb068ca6901e0f33ea29d5db1eef893267f001745f4f9b8938f1",
+      "prompt_length": 831
+    },
+    {
+      "num": 144,
+      "title": "Sticker Design: Cyber-Explorer Club",
+      "title_zh": "更多插画风格：复古 / 插画 / 方图 / 方图 1024x1024",
+      "category": "✏️ More Illustration Styles",
+      "category_zh": "更多插画风格",
+      "image_count": 1,
+      "prompt_sha256": "733f95bf4746992b3e250792b9ac6a26035080fe8d5417d4ef37a55a6474c587",
+      "prompt_length": 817
+    },
+    {
+      "num": 145,
+      "title": "Kawaii sticker pack: Mexico icons",
+      "title_zh": "更多插画风格：设定表 / 插画 / 食物 / 方图",
+      "category": "✏️ More Illustration Styles",
+      "category_zh": "更多插画风格",
+      "image_count": 1,
+      "prompt_sha256": "70dd7ee883633626a1b858177cdd59ab085b11fa4b0435bccde0fea1a6c5379d",
+      "prompt_length": 289
+    },
+    {
+      "num": 146,
+      "title": "Risograph Print: City Shadows",
+      "title_zh": "更多插画风格：插画 / 水墨 / 横幅 / 竖幅",
+      "category": "✏️ More Illustration Styles",
+      "category_zh": "更多插画风格",
+      "image_count": 1,
+      "prompt_sha256": "c40a9b16d86edeb9d5e25266133a1db5294e55fcde90521fe2bf10101b405449",
+      "prompt_length": 853
+    },
+    {
+      "num": 147,
+      "title": "Symmetric Pastel: The Grand Conservatory",
+      "title_zh": "电影风格参考：电影感 / 电影 / 横幅 / 宽幅",
+      "category": "🎥 Cinematic Film References",
+      "category_zh": "电影风格参考",
+      "image_count": 1,
+      "prompt_sha256": "d6b0dd4386d493140404a039fe782d73a17463d29b2b634dc4e89869730a22b7",
+      "prompt_length": 886
+    },
+    {
+      "num": 148,
+      "title": "Monolithic Scifi: The Obsidian Gate",
+      "title_zh": "电影风格参考：电影感 / 图表 / 电影 / 宽幅",
+      "category": "🎥 Cinematic Film References",
+      "category_zh": "电影风格参考",
+      "image_count": 1,
+      "prompt_sha256": "a4f796edcda49a7126ff8b5ee1c33cc2b8fa59f69002bf9cad2be0047a071bef",
+      "prompt_length": 838
+    },
+    {
+      "num": 149,
+      "title": "Dreamscape: The Floating Garden",
+      "title_zh": "电影风格参考：电影感 / 动画 / 电影 / 横幅",
+      "category": "🎥 Cinematic Film References",
+      "category_zh": "电影风格参考",
+      "image_count": 1,
+      "prompt_sha256": "3a50e7ead26a2cbb8bff1546e5c569fe2c7b29db03646a7513d0b81991868368",
+      "prompt_length": 872
+    },
+    {
+      "num": 150,
+      "title": "Slow Cinema: The Misty Orchard",
+      "title_zh": "电影风格参考：电影感 / 电影 / 宽幅 / 长竖图",
+      "category": "🎥 Cinematic Film References",
+      "category_zh": "电影风格参考",
+      "image_count": 1,
+      "prompt_sha256": "8f48315078b64b86a344cbfe933b10aec224fd14b391b6fd49462a65e37c7160",
+      "prompt_length": 839
+    },
+    {
+      "num": 151,
+      "title": "Neo-Noir: The Orange Fog",
+      "title_zh": "电影风格参考：电影感 / 黑色电影 / 电影 / 宽幅",
+      "category": "🎥 Cinematic Film References",
+      "category_zh": "电影风格参考",
+      "image_count": 1,
+      "prompt_sha256": "61c5b7d508fcd6a190b464d89ab4bd0d85acae7d78e63e46d078cc0c09dec912",
+      "prompt_length": 862
+    },
+    {
+      "num": 152,
+      "title": "Expressionist Noir: The Clockwork Alley",
+      "title_zh": "电影风格参考：电影感 / 黑色电影 / 水墨 / 电影",
+      "category": "🎥 Cinematic Film References",
+      "category_zh": "电影风格参考",
+      "image_count": 1,
+      "prompt_sha256": "350cec01e08d6a0bccb561277e2f650e58d522980ee52e3c777c8934659e7c00",
+      "prompt_length": 910
+    },
+    {
+      "num": 153,
+      "title": "Quiet-luxury skincare morning tray",
+      "title_zh": "美妆与生活方式：品牌 / 杂志大片 / 美妆 / 护肤",
+      "category": "💄 Beauty & Lifestyle",
+      "category_zh": "美妆与生活方式",
+      "image_count": 1,
+      "prompt_sha256": "f1d513ef7ebfb9eb3f0924b81a42897c05fde4ee629c12a2c943e3de3c1e9d82",
+      "prompt_length": 717
+    },
+    {
+      "num": 154,
+      "title": "Fragrance evening ritual vanity",
+      "title_zh": "美妆与生活方式：产品 / 杂志大片 / 美妆 / 香氛",
+      "category": "💄 Beauty & Lifestyle",
+      "category_zh": "美妆与生活方式",
+      "image_count": 1,
+      "prompt_sha256": "b7bdc67dcdadd8ffa439938ebb30db80713dd2879c7ed44903af8fac2223c724",
+      "prompt_length": 899
+    },
+    {
+      "num": 155,
+      "title": "Zoo visitor wayfinding map",
+      "title_zh": "活动与体验设计：导视 / 地图 / 论文 / 横幅",
+      "category": "🎟️ Events & Experience",
+      "category_zh": "活动与体验设计",
+      "image_count": 1,
+      "prompt_sha256": "a943c330f705f1dd383d87b65618de5be0e0efebad38db4fbcbd7930ce2dc728",
+      "prompt_length": 775
+    },
+    {
+      "num": 156,
+      "title": "Huashan 5A scenic wayfinding map",
+      "title_zh": "活动与体验设计：字体排版 / 水墨 / 中文 / 导视",
+      "category": "🎟️ Events & Experience",
+      "category_zh": "活动与体验设计",
+      "image_count": 1,
+      "prompt_sha256": "1e908f53cb4691ad04ab82aa7efb4fa9ac5d00666e6b95cb7c137ab089604de9",
+      "prompt_length": 788
+    },
+    {
+      "num": 157,
+      "title": "Realistic black-and-grey sleeve study",
+      "title_zh": "纹身设计：设定表 / 剪影 / 品牌 / 摄影",
+      "category": "🖋️ Tattoo Design",
+      "category_zh": "纹身设计",
+      "image_count": 1,
+      "prompt_sha256": "0921b1ca99f3b5f9b94ba67003fa997dcc317a419e3e18506e3434d0a58e1326",
+      "prompt_length": 745
+    },
+    {
+      "num": 158,
+      "title": "Color neo-traditional fox and flora",
+      "title_zh": "纹身设计：海报 / 品牌 / 论文 / 纹身",
+      "category": "🖋️ Tattoo Design",
+      "category_zh": "纹身设计",
+      "image_count": 1,
+      "prompt_sha256": "95b94cef8ee53b417286b21ca1356b234330592e5b107356e4941644c5c30ec3",
+      "prompt_length": 693
+    },
+    {
+      "num": 159,
+      "title": "Japanese traditional dragon and koi back piece",
+      "title_zh": "纹身设计：动漫 / 海报 / 论文 / 纹身",
+      "category": "🖋️ Tattoo Design",
+      "category_zh": "纹身设计",
+      "image_count": 1,
+      "prompt_sha256": "e357c7f16b2c2083003e752330c2abb2baa384bfe0f251a0e81e10ac2c976319",
+      "prompt_length": 743
+    },
+    {
+      "num": 160,
+      "title": "Dark surrealist moth cathedral",
+      "title_zh": "纹身设计：设定表 / 剪影 / 哥特 / 纹身",
+      "category": "🖋️ Tattoo Design",
+      "category_zh": "纹身设计",
+      "image_count": 1,
+      "prompt_sha256": "02ca1c8dbaedbeec23962f5e481dd9609f5995e4778300784655321f2a8ca02f",
+      "prompt_length": 756
+    },
+    {
+      "num": 161,
+      "title": "Music app + webcam preview",
+      "title_zh": "屏幕摄影：像素风 / 摄影 / App / 屏幕拍摄",
+      "category": "🖥️ Screen Photography",
+      "category_zh": "屏幕摄影",
+      "image_count": 1,
+      "prompt_sha256": "cc596404ebe6cf8aacb4224252b89eacf574dfc2dda63c097180c8cd81c83a1e",
+      "prompt_length": 1054
+    },
+    {
+      "num": 162,
+      "title": "Notes + FaceTime work screen",
+      "title_zh": "屏幕摄影：摄影 / App / 棚拍 / 屏幕拍摄",
+      "category": "🖥️ Screen Photography",
+      "category_zh": "屏幕摄影",
+      "image_count": 1,
+      "prompt_sha256": "34812e323058235b7ba82c98bc64fd44cccc02ead38348d62f8460912b259d07",
+      "prompt_length": 1152
+    }
+  ]
+}
