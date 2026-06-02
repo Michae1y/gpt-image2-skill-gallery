@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260603-lightbox">
+<link rel="stylesheet" href="assets/styles.css?v=20260603-prompt-slow">
 </head>
 <body id="top">
 <nav class="side-nav" aria-label="分类导航">
@@ -3745,6 +3745,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   let railDrag = null;
   let lightboxTimer = null;
   let lastLightboxTrigger = null;
+  const promptTimers = new WeakMap();
 
   const setActive = (id) => {
     const activeIndex = links.findIndex((link) => link.getAttribute('href') === `#${id}`);
@@ -3894,6 +3895,50 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     }
   };
 
+  const clearPromptTimer = (details) => {
+    const timer = promptTimers.get(details);
+    if (timer) {
+      window.clearTimeout(timer);
+      promptTimers.delete(details);
+    }
+  };
+
+  const finishPromptMotion = (details) => {
+    details.classList.remove('is-opening', 'is-closing');
+    promptTimers.delete(details);
+  };
+
+  const setPromptOpen = (details, shouldOpen) => {
+    const entry = details.closest('.entry');
+    clearPromptTimer(details);
+    details.classList.remove('is-opening', 'is-closing');
+
+    if (shouldOpen) {
+      if (!details.open) {
+        details.open = true;
+      }
+      syncEntryState(entry);
+      window.requestAnimationFrame(() => {
+        details.classList.add('is-opening');
+        promptTimers.set(details, window.setTimeout(() => finishPromptMotion(details), 860));
+      });
+      return;
+    }
+
+    if (!details.open) {
+      syncEntryState(entry);
+      return;
+    }
+
+    syncEntryState(entry);
+    details.classList.add('is-closing');
+    promptTimers.set(details, window.setTimeout(() => {
+      details.open = false;
+      syncEntryState(entry);
+      finishPromptMotion(details);
+    }, 800));
+  };
+
   document.querySelectorAll('.entry').forEach((entry) => {
     const details = entry.querySelector('.prompt-details');
     const hasHiddenDetails = Boolean(
@@ -3906,6 +3951,13 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     entry.tabIndex = 0;
     syncEntryState(entry);
 
+    details?.querySelector('summary')?.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const isVisiblyOpen = details.open && !details.classList.contains('is-closing');
+      setPromptOpen(details, !isVisiblyOpen);
+    });
+
     entry.addEventListener('click', (event) => {
       if (event.target.closest('a, summary, pre, code, button, .figure img')) {
         return;
@@ -3914,8 +3966,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
         if (details.open) {
           return;
         }
-        details.open = true;
-        syncEntryState(entry);
+        setPromptOpen(details, true);
         return;
       }
       entry.classList.toggle('is-expanded');
@@ -3930,14 +3981,18 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       }
       event.preventDefault();
       if (details) {
-        details.open = !details.open;
-        syncEntryState(entry);
+        const isVisiblyOpen = details.open && !details.classList.contains('is-closing');
+        setPromptOpen(details, !isVisiblyOpen);
       } else {
         entry.classList.toggle('is-expanded');
       }
     });
 
-    details?.addEventListener('toggle', () => syncEntryState(entry));
+    details?.addEventListener('toggle', () => {
+      if (!details.classList.contains('is-closing')) {
+        syncEntryState(entry);
+      }
+    });
   });
 
   let ticking = false;

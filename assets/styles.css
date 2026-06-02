@@ -641,12 +641,14 @@ main {
   background: transparent;
   border: 0;
   border-radius: 0;
+  --prompt-duration: 800ms;
+  --prompt-ease: cubic-bezier(0.45, 0, 0.25, 1);
 }
 
 .prompt-details summary {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
+  gap: 9px;
   width: fit-content;
   cursor: pointer;
   padding: 7px 10px;
@@ -658,6 +660,8 @@ main {
   font-weight: 720;
   line-height: 1;
   list-style: none;
+  transition: background 240ms ease, border-color 240ms ease, color 240ms ease,
+    box-shadow 240ms ease;
 }
 
 .prompt-details summary::-webkit-details-marker {
@@ -667,10 +671,15 @@ main {
 .prompt-details summary::after {
   color: var(--muted);
   content: "+";
+  transition: color 240ms ease, background 240ms ease, transform 240ms ease;
 }
 
 .prompt-details[open] summary::after {
-  content: "-";
+  padding: 4px 9px;
+  color: #fff;
+  background: var(--accent);
+  border-radius: 999px;
+  content: "收起 ×";
 }
 
 .prompt-details summary:hover,
@@ -686,18 +695,63 @@ main {
   background: #fff;
   border: 1px solid var(--line-strong);
   border-radius: 5px;
+  box-shadow: 0 12px 26px rgba(38, 38, 38, 0.07);
 }
 
 .entry.is-expanded .prompt-details summary {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 9px 10px;
-  background: #f7f7f5;
+  padding: 11px 12px;
+  color: var(--accent);
+  background: #eef5f5;
   border: 0;
   border-bottom: 1px solid var(--line);
   border-radius: 0;
-  font-size: 11.5px;
+  box-shadow: inset 0 -1px 0 rgba(36, 93, 108, 0.08);
+  font-size: 13px;
+}
+
+.entry.is-expanded .prompt-details summary:hover,
+.entry.is-expanded .prompt-details summary:focus-visible {
+  color: var(--accent);
+  background: #e4eeee;
+}
+
+.prompt-details.is-opening pre.prompt {
+  animation: prompt-open var(--prompt-duration) var(--prompt-ease) both;
+}
+
+.prompt-details.is-closing pre.prompt {
+  animation: prompt-close var(--prompt-duration) cubic-bezier(0.33, 0, 0.2, 1) both;
+}
+
+@keyframes prompt-open {
+  from {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    max-height: 360px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes prompt-close {
+  from {
+    max-height: 360px;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-6px);
+  }
 }
 
 pre.prompt {
