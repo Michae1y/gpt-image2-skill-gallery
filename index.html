@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260603-nav3">
+<link rel="stylesheet" href="assets/styles.css?v=20260603-lightbox">
 </head>
 <body id="top">
 <nav class="side-nav" aria-label="分类导航">
@@ -3715,6 +3715,17 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
 </section>
 <p class="footer">原仓库作者：Wuyoscar · 原仓库：<a href="https://github.com/wuyoscar/GPT-Image2-Skill">wuyoscar/GPT-Image2-Skill</a>。本标准网页由本地整理生成，图片为缩略图资源，prompt 为 Reference Gallery 中 text 代码块的完整原文。</p>
 </main>
+<div class="lightbox" aria-hidden="true">
+<button class="lightbox-backdrop" type="button" aria-label="关闭图片预览"></button>
+<article class="lightbox-card" role="dialog" aria-modal="true" aria-label="图片预览">
+<button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+<img class="lightbox-image" alt="">
+<div class="lightbox-caption">
+<strong></strong>
+<span></span>
+</div>
+</article>
+</div>
 <script>
 (() => {
   const nav = document.querySelector('.side-nav');
@@ -3724,8 +3735,16 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     .filter(Boolean);
   const sectionTargets = targets.filter((target) => target.classList.contains('category'));
   const waveClasses = ['is-wave-1', 'is-wave-2', 'is-wave-3', 'is-wave-4'];
+  const lightbox = document.querySelector('.lightbox');
+  const lightboxImage = document.querySelector('.lightbox-image');
+  const lightboxTitle = document.querySelector('.lightbox-caption strong');
+  const lightboxSubtitle = document.querySelector('.lightbox-caption span');
+  const lightboxClose = document.querySelector('.lightbox-close');
+  const lightboxBackdrop = document.querySelector('.lightbox-backdrop');
   let activeScrollTimer = null;
   let railDrag = null;
+  let lightboxTimer = null;
+  let lastLightboxTrigger = null;
 
   const setActive = (id) => {
     const activeIndex = links.findIndex((link) => link.getAttribute('href') === `#${id}`);
@@ -3804,6 +3823,70 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     });
   });
 
+  const closeLightbox = () => {
+    if (!lightbox.classList.contains('is-open')) {
+      return;
+    }
+    lightbox.classList.remove('is-open');
+    lightbox.classList.add('is-closing');
+    window.clearTimeout(lightboxTimer);
+    lightboxTimer = window.setTimeout(() => {
+      lightbox.classList.remove('is-closing');
+      lightbox.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('lightbox-open');
+      lightboxImage.removeAttribute('src');
+      if (lastLightboxTrigger) {
+        lastLightboxTrigger.focus({ preventScroll: true });
+      }
+    }, 260);
+  };
+
+  const openLightbox = (img) => {
+    const entry = img.closest('.entry');
+    const figure = img.closest('.figure');
+    const title = entry?.querySelector('.entry-title')?.textContent.trim() || img.alt || '图片预览';
+    const subtitle = entry?.querySelector('.title-en')?.textContent.trim()
+      || figure?.querySelector('figcaption')?.textContent.trim()
+      || img.alt
+      || '';
+
+    lastLightboxTrigger = img;
+    window.clearTimeout(lightboxTimer);
+    lightbox.classList.remove('is-closing');
+    lightboxImage.src = img.currentSrc || img.src;
+    lightboxImage.alt = img.alt || title;
+    lightboxTitle.textContent = title;
+    lightboxSubtitle.textContent = subtitle;
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+    window.requestAnimationFrame(() => {
+      lightbox.classList.add('is-open');
+      lightboxClose.focus({ preventScroll: true });
+    });
+  };
+
+  document.querySelectorAll('.figure img').forEach((img) => {
+    img.tabIndex = 0;
+    img.setAttribute('role', 'button');
+    img.setAttribute('aria-label', `查看大图：${img.alt || '图片预览'}`);
+    img.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      openLightbox(img);
+    });
+    img.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') {
+        return;
+      }
+      event.preventDefault();
+      openLightbox(img);
+    });
+  });
+
+  lightboxClose.addEventListener('click', closeLightbox);
+  lightboxBackdrop.addEventListener('click', closeLightbox);
+  lightboxImage.addEventListener('click', closeLightbox);
+
   const syncEntryState = (entry) => {
     const details = entry.querySelector('.prompt-details');
     if (details) {
@@ -3824,7 +3907,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     syncEntryState(entry);
 
     entry.addEventListener('click', (event) => {
-      if (event.target.closest('a, summary, pre, code, button')) {
+      if (event.target.closest('a, summary, pre, code, button, .figure img')) {
         return;
       }
       if (details) {
@@ -3842,7 +3925,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       if (event.key !== 'Enter' && event.key !== ' ') {
         return;
       }
-      if (event.target.closest('summary, pre, code, a, button')) {
+      if (event.target.closest('summary, pre, code, a, button, .figure img')) {
         return;
       }
       event.preventDefault();
@@ -3878,6 +3961,11 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     }
   }, { passive: true });
   window.addEventListener('resize', updateActiveFromScroll);
+  window.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeLightbox();
+    }
+  });
 
   nav.addEventListener('pointerdown', (event) => {
     if (event.button !== 0) {

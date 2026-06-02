@@ -30,6 +30,20 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+body.lightbox-open {
+  overflow: hidden;
+}
+
+body.lightbox-open .side-nav,
+body.lightbox-open header.hero,
+body.lightbox-open main {
+  filter: blur(10px);
+  opacity: 0.38;
+  pointer-events: none;
+  transform: scale(0.996);
+  transition: filter 220ms ease, opacity 220ms ease, transform 220ms ease;
+}
+
 a {
   color: var(--ink);
   text-decoration-color: rgba(38, 38, 38, 0.42);
@@ -44,36 +58,35 @@ a:hover {
 
 .side-nav {
   position: fixed;
-  top: 28px;
-  left: 18px;
+  top: 0;
+  bottom: 0;
+  left: 0;
   z-index: 70;
   display: flex;
   flex-direction: column;
   width: 220px;
-  height: min(72vh, 680px);
-  max-height: calc(100vh - 56px);
-  padding: 10px 7px 10px 40px;
+  height: auto;
+  max-height: none;
+  padding: 24px 7px 24px 40px;
   overflow: hidden;
-  background: rgba(237, 237, 235, 0.84);
-  border: 1px solid var(--line);
-  border-radius: 5px;
-  backdrop-filter: blur(14px);
+  background: linear-gradient(90deg, rgba(237, 237, 235, 0.92), rgba(237, 237, 235, 0.72) 72%, transparent);
+  border: 0;
+  border-radius: 0;
+  backdrop-filter: blur(10px);
   cursor: default;
-  transition: background 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  transition: background 180ms ease;
 }
 
 .side-nav:hover,
 .side-nav:focus-within,
 .side-nav.is-dragging {
-  background: rgba(247, 247, 245, 0.94);
-  border-color: var(--line-strong);
-  box-shadow: 0 18px 46px rgba(38, 38, 38, 0.08);
+  background: linear-gradient(90deg, rgba(247, 247, 245, 0.96), rgba(247, 247, 245, 0.78) 72%, transparent);
 }
 
 .side-nav::before {
   position: absolute;
-  top: 14px;
-  bottom: 14px;
+  top: 0;
+  bottom: 0;
   left: 27px;
   width: 1px;
   background-image: linear-gradient(
@@ -89,11 +102,11 @@ a:hover {
 
 .side-nav::after {
   position: absolute;
-  top: 14px;
+  top: 0;
   left: 27px;
   width: 1px;
   height: var(--scroll-progress, 0%);
-  max-height: calc(100% - 28px);
+  max-height: 100%;
   background: var(--accent);
   content: "";
   opacity: 0.58;
@@ -136,8 +149,8 @@ a:hover {
   padding: 5px 4px;
   overflow: visible;
   color: var(--ink);
-  border: 1px solid transparent;
-  border-radius: 5px;
+  border: 0;
+  border-radius: 0;
   text-decoration: none;
   white-space: nowrap;
   transition: background 160ms ease, border-color 160ms ease, color 160ms ease;
@@ -165,8 +178,7 @@ a:hover {
 
 .side-home {
   margin-bottom: 4px;
-  background: rgba(255, 255, 255, 0.38);
-  border-color: rgba(38, 38, 38, 0.08);
+  background: rgba(255, 255, 255, 0.28);
 }
 
 .side-nav a.is-active {
@@ -175,7 +187,6 @@ a:hover {
   --tick-color: var(--accent);
   color: var(--accent);
   background: rgba(223, 233, 233, 0.82);
-  border-color: rgba(36, 93, 108, 0.24);
 }
 
 .side-nav a.is-wave-1 {
@@ -204,7 +215,6 @@ a:hover {
 .side-nav-list a:focus-visible {
   color: var(--accent);
   background: rgba(223, 233, 233, 0.58);
-  border-color: rgba(36, 93, 108, 0.18);
 }
 
 .side-home:focus-visible,
@@ -504,6 +514,16 @@ main {
   background: #fbfbf9;
   border: 1px solid var(--line);
   border-radius: 5px;
+  cursor: zoom-in;
+  transition: border-color 180ms ease, filter 180ms ease, transform 180ms ease;
+}
+
+.figure img:hover,
+.figure img:focus-visible {
+  border-color: var(--line-strong);
+  filter: saturate(1.04) contrast(1.02);
+  outline: 0;
+  transform: translateY(-1px);
 }
 
 .images:has(.figure + .figure) .figure img {
@@ -719,6 +739,121 @@ pre.prompt {
   opacity: 0.28;
 }
 
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 220;
+  display: grid;
+  place-items: center;
+  padding: clamp(18px, 4vw, 64px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+}
+
+.lightbox.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.lightbox.is-closing {
+  opacity: 0;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  display: block;
+  padding: 0;
+  background: rgba(237, 237, 235, 0.62);
+  border: 0;
+  cursor: zoom-out;
+}
+
+.lightbox-card {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  gap: 10px;
+  width: min(1120px, 92vw);
+  max-height: 92vh;
+  padding: 12px;
+  overflow: hidden;
+  background: #fbfbf9;
+  border: 1px solid rgba(38, 38, 38, 0.16);
+  border-radius: 8px;
+  box-shadow: 0 28px 90px rgba(38, 38, 38, 0.24);
+  opacity: 0;
+  transform: translateY(18px) scale(0.92);
+  transform-origin: center;
+  transition: opacity 260ms ease, transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.lightbox.is-open .lightbox-card {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.lightbox.is-closing .lightbox-card {
+  opacity: 0;
+  transform: translateY(10px) scale(0.92);
+}
+
+.lightbox-image {
+  display: block;
+  width: 100%;
+  max-height: calc(92vh - 96px);
+  object-fit: contain;
+  background: #fff;
+  border-radius: 5px;
+  cursor: zoom-out;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: var(--ink);
+  background: rgba(251, 251, 249, 0.88);
+  border: 1px solid rgba(38, 38, 38, 0.16);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 30px;
+}
+
+.lightbox-close:hover,
+.lightbox-close:focus-visible {
+  color: var(--accent);
+  outline: 0;
+}
+
+.lightbox-caption {
+  display: grid;
+  gap: 3px;
+  min-width: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.lightbox-caption strong {
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+.lightbox-caption span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @media (max-width: 1180px) {
   .hero-copy {
     max-width: 100%;
@@ -739,7 +874,7 @@ pre.prompt {
   }
 
   .side-nav {
-    left: 10px;
+    left: 0;
     width: 216px;
     padding-right: 6px;
     padding-left: 40px;
@@ -761,12 +896,12 @@ pre.prompt {
   }
 
   .side-nav {
-    top: 10px;
-    bottom: auto;
-    left: 8px;
+    top: 0;
+    bottom: 0;
+    left: 0;
     width: 176px;
-    height: min(70vh, 620px);
-    padding: 8px 5px 8px 34px;
+    height: auto;
+    padding: 18px 5px 18px 34px;
   }
 
   .side-nav::before,
@@ -899,9 +1034,9 @@ pre.prompt {
 
 @media (max-height: 760px) {
   .side-nav {
-    top: 8px;
-    bottom: auto;
-    height: min(78vh, 600px);
+    top: 0;
+    bottom: 0;
+    height: auto;
     padding-top: 7px;
     padding-bottom: 7px;
   }
