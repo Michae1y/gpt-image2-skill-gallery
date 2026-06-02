@@ -6,7 +6,8 @@
 
 - `index.html`：页面内容
 - `assets/styles.css`：样式
-- `assets/images/`：图片缩略图资源
+- `assets/images/`：页面卡片缩略图资源
+- `assets/full/`：点击图片后使用的高清预览图资源
 
 页面整理自 wuyoscar/GPT-Image2-Skill，原仓库作者：Wuyoscar。
 

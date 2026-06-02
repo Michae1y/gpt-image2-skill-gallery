@@ -8,6 +8,8 @@
   "entry_count": 162,
   "entry_image_reference_count": 164,
   "asset_image_count": 164,
+  "full_size_image_count": 164,
+  "image_quality_strategy": "cards use 1200px high-quality JPEG thumbnails; image preview uses original-dimension high-quality JPEG files",
   "all_docs_image_count": 164,
   "extra_image_count": 2,
   "standard_site": true,
