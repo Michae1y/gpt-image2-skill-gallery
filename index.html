@@ -4,10 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260603-smooth-motion">
+<link rel="stylesheet" href="assets/styles.css?v=20260603-mobile-layout">
 </head>
 <body id="top">
-<nav class="side-nav" aria-label="分类导航">
+<button class="mobile-nav-toggle" type="button" aria-controls="category-nav" aria-expanded="false">
+<span class="mobile-nav-icon" aria-hidden="true"></span>
+<span class="mobile-nav-label">目录</span>
+</button>
+<button class="mobile-nav-backdrop" type="button" aria-label="关闭分类导航"></button>
+<nav id="category-nav" class="side-nav" aria-label="分类导航">
 <a class="side-home" href="#top" title="回到顶部">
 <span class="nav-index">TOP</span><span class="nav-text">GPT Image Gallery<small>回到顶部</small></span>
 </a>
@@ -3729,6 +3734,9 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
 <script>
 (() => {
   const nav = document.querySelector('.side-nav');
+  const mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+  const mobileNavBackdrop = document.querySelector('.mobile-nav-backdrop');
+  const mobileNavLabel = document.querySelector('.mobile-nav-label');
   const links = Array.from(document.querySelectorAll('.side-nav a[href^="#"]'));
   const targets = links
     .map((link) => document.getElementById(link.getAttribute('href').slice(1)))
@@ -3749,6 +3757,21 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const lightboxCloseMs = 420;
   const layoutEase = 'cubic-bezier(0.2, 0.7, 0.18, 1)';
+  const mobileNavQuery = window.matchMedia('(max-width: 780px)');
+
+  const setMobileNavOpen = (isOpen) => {
+    document.body.classList.toggle('mobile-nav-open', isOpen);
+    mobileNavToggle?.setAttribute('aria-expanded', String(isOpen));
+    if (mobileNavLabel) {
+      mobileNavLabel.textContent = isOpen ? '关闭' : '目录';
+    }
+    if (isOpen) {
+      window.requestAnimationFrame(() => {
+        const activeLink = nav.querySelector('a.is-active') || nav.querySelector('a');
+        activeLink?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      });
+    }
+  };
 
   const setActive = (id) => {
     const activeIndex = links.findIndex((link) => link.getAttribute('href') === `#${id}`);
@@ -3857,7 +3880,18 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       flashTarget(target);
       scrollToTarget(target);
       window.history.replaceState(null, '', `#${id}`);
+      if (mobileNavQuery.matches) {
+        setMobileNavOpen(false);
+      }
     });
+  });
+
+  mobileNavToggle?.addEventListener('click', () => {
+    setMobileNavOpen(!document.body.classList.contains('mobile-nav-open'));
+  });
+
+  mobileNavBackdrop?.addEventListener('click', () => {
+    setMobileNavOpen(false);
   });
 
   const closeLightbox = () => {
@@ -4099,9 +4133,18 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       ticking = true;
     }
   }, { passive: true });
-  window.addEventListener('resize', updateActiveFromScroll);
+  window.addEventListener('resize', () => {
+    if (!mobileNavQuery.matches) {
+      setMobileNavOpen(false);
+    }
+    updateActiveFromScroll();
+  });
   window.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') {
+      if (document.body.classList.contains('mobile-nav-open')) {
+        setMobileNavOpen(false);
+        return;
+      }
       closeLightbox();
     }
   });
