@@ -11,6 +11,8 @@
   --code: #1f2426;
   --content-left: clamp(260px, 17vw, 320px);
   --dash: linear-gradient(to right, var(--ink) 0%, var(--ink) 25%, transparent 26%);
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.18, 1);
+  --ease-exit: cubic-bezier(0.35, 0, 0.2, 1);
 }
 
 * {
@@ -34,6 +36,13 @@ body.lightbox-open {
   overflow: hidden;
 }
 
+.side-nav,
+header.hero,
+main {
+  transition: filter 460ms var(--ease-soft), opacity 460ms var(--ease-soft),
+    transform 460ms var(--ease-soft);
+}
+
 body.lightbox-open .side-nav,
 body.lightbox-open header.hero,
 body.lightbox-open main {
@@ -41,7 +50,6 @@ body.lightbox-open main {
   opacity: 0.38;
   pointer-events: none;
   transform: scale(0.996);
-  transition: filter 220ms ease, opacity 220ms ease, transform 220ms ease;
 }
 
 a {
@@ -461,8 +469,10 @@ main {
   border: 1px solid transparent;
   border-radius: 5px;
   cursor: pointer;
-  transition: border-color 160ms ease, background 160ms ease, box-shadow 160ms ease,
-    transform 160ms ease;
+  transition: padding 420ms var(--ease-soft), gap 420ms var(--ease-soft),
+    border-color 360ms var(--ease-soft), background 360ms var(--ease-soft),
+    box-shadow 420ms var(--ease-soft), transform 320ms var(--ease-soft);
+  will-change: transform;
 }
 
 .entry:hover {
@@ -515,7 +525,9 @@ main {
   border: 1px solid var(--line);
   border-radius: 5px;
   cursor: zoom-in;
-  transition: border-color 180ms ease, filter 180ms ease, transform 180ms ease;
+  transition: border-color 260ms var(--ease-soft), filter 260ms var(--ease-soft),
+    transform 260ms var(--ease-soft);
+  will-change: transform;
 }
 
 .figure img:hover,
@@ -536,16 +548,25 @@ main {
 }
 
 .figure figcaption {
-  display: none;
-  margin-top: 6px;
+  display: block;
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  opacity: 0;
   color: var(--muted);
   font-size: 10.5px;
   line-height: 1.4;
+  transform: translateY(-4px);
+  transition: max-height 460ms var(--ease-soft), margin-top 460ms var(--ease-soft),
+    opacity 320ms ease, transform 460ms var(--ease-soft);
   word-break: break-word;
 }
 
 .entry.is-expanded .figure figcaption {
-  display: block;
+  max-height: 92px;
+  margin-top: 6px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .caption-zh {
@@ -599,12 +620,19 @@ main {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+  max-height: 0;
   margin: 3px 0 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: max-height 460ms var(--ease-soft), opacity 320ms ease,
+    transform 460ms var(--ease-soft);
 }
 
-.entry:not(.is-expanded) .tag-list,
-.entry:not(.is-expanded) .kv {
-  display: none;
+.entry.is-expanded .tag-list {
+  max-height: 96px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .tag {
@@ -619,11 +647,23 @@ main {
 
 .kv {
   order: 3;
+  max-height: 0;
   margin: 0;
   padding: 0;
+  overflow: hidden;
+  opacity: 0;
   color: var(--muted);
   font-size: 11.5px;
   line-height: 1.5;
+  transform: translateY(-4px);
+  transition: max-height 440ms var(--ease-soft), opacity 300ms ease,
+    transform 440ms var(--ease-soft);
+}
+
+.entry.is-expanded .kv {
+  max-height: 56px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .kv strong {
@@ -637,12 +677,15 @@ main {
 .prompt-details {
   order: 4;
   margin-top: 2px;
-  overflow: visible;
+  overflow: hidden;
   background: transparent;
   border: 0;
   border-radius: 0;
-  --prompt-duration: 800ms;
-  --prompt-ease: cubic-bezier(0.45, 0, 0.25, 1);
+  --prompt-duration: 620ms;
+  --prompt-height: 360px;
+  --prompt-ease: var(--ease-soft);
+  transition: margin 420ms var(--ease-soft), background 420ms var(--ease-soft),
+    border-color 420ms var(--ease-soft), box-shadow 420ms var(--ease-soft);
 }
 
 .prompt-details summary {
@@ -660,8 +703,8 @@ main {
   font-weight: 720;
   line-height: 1;
   list-style: none;
-  transition: background 240ms ease, border-color 240ms ease, color 240ms ease,
-    box-shadow 240ms ease;
+  transition: background 280ms var(--ease-soft), border-color 280ms var(--ease-soft),
+    color 280ms var(--ease-soft), box-shadow 280ms var(--ease-soft);
 }
 
 .prompt-details summary::-webkit-details-marker {
@@ -671,7 +714,8 @@ main {
 .prompt-details summary::after {
   color: var(--muted);
   content: "+";
-  transition: color 240ms ease, background 240ms ease, transform 240ms ease;
+  transition: color 280ms var(--ease-soft), background 280ms var(--ease-soft),
+    transform 280ms var(--ease-soft);
 }
 
 .prompt-details[open] summary::after {
@@ -719,52 +763,53 @@ main {
 }
 
 .prompt-details.is-opening pre.prompt {
-  animation: prompt-open var(--prompt-duration) var(--prompt-ease) both;
+  overflow: hidden;
 }
 
 .prompt-details.is-closing pre.prompt {
-  animation: prompt-close var(--prompt-duration) cubic-bezier(0.33, 0, 0.2, 1) both;
-}
-
-@keyframes prompt-open {
-  from {
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-8px);
-  }
-
-  to {
-    max-height: 360px;
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes prompt-close {
-  from {
-    max-height: 360px;
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  to {
-    max-height: 0;
-    opacity: 0;
-    transform: translateY(-6px);
-  }
+  overflow: hidden;
 }
 
 pre.prompt {
-  max-height: 360px;
+  max-height: 0;
   margin: 0;
-  overflow: auto;
-  padding: 12px;
+  overflow: hidden;
+  padding: 0 12px;
+  opacity: 0;
   color: #f4f1e9;
   background: var(--code);
   font: 12px/1.65 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  transform: translateY(-6px);
+  transition: max-height var(--prompt-duration) var(--prompt-ease),
+    padding-top var(--prompt-duration) var(--prompt-ease),
+    padding-bottom var(--prompt-duration) var(--prompt-ease),
+    opacity calc(var(--prompt-duration) * 0.7) ease,
+    transform var(--prompt-duration) var(--prompt-ease);
   white-space: pre-wrap;
   word-break: break-word;
   overflow-wrap: anywhere;
+}
+
+.prompt-details.is-opened pre.prompt,
+.prompt-details.is-opening pre.prompt {
+  max-height: var(--prompt-height);
+  padding-top: 12px;
+  padding-bottom: 12px;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.prompt-details.is-ready pre.prompt {
+  overflow: auto;
+}
+
+.prompt-details.is-closing pre.prompt {
+  max-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition-timing-function: var(--ease-exit);
 }
 
 .extra {
@@ -802,7 +847,7 @@ pre.prompt {
   padding: clamp(18px, 4vw, 64px);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 220ms ease;
+  transition: opacity 420ms var(--ease-soft);
 }
 
 .lightbox.is-open {
@@ -822,6 +867,14 @@ pre.prompt {
   background: rgba(237, 237, 235, 0.62);
   border: 0;
   cursor: zoom-out;
+  opacity: 0;
+  transition: opacity 420ms var(--ease-soft), backdrop-filter 420ms var(--ease-soft);
+  backdrop-filter: blur(0);
+}
+
+.lightbox.is-open .lightbox-backdrop {
+  opacity: 1;
+  backdrop-filter: blur(2px);
 }
 
 .lightbox-card {
@@ -839,19 +892,26 @@ pre.prompt {
   border-radius: 8px;
   box-shadow: 0 28px 90px rgba(38, 38, 38, 0.24);
   opacity: 0;
-  transform: translateY(18px) scale(0.92);
+  filter: blur(3px);
+  transform: translateY(22px) scale(0.94);
   transform-origin: center;
-  transition: opacity 260ms ease, transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: opacity 460ms var(--ease-soft), filter 520ms var(--ease-soft),
+    transform 520ms var(--ease-soft);
+  will-change: transform, opacity, filter;
 }
 
 .lightbox.is-open .lightbox-card {
   opacity: 1;
+  filter: blur(0);
   transform: translateY(0) scale(1);
 }
 
 .lightbox.is-closing .lightbox-card {
   opacity: 0;
-  transform: translateY(10px) scale(0.92);
+  filter: blur(2px);
+  transform: translateY(12px) scale(0.955);
+  transition-duration: 360ms;
+  transition-timing-function: var(--ease-exit);
 }
 
 .lightbox-image {
@@ -859,9 +919,17 @@ pre.prompt {
   width: 100%;
   max-height: calc(92vh - 96px);
   object-fit: contain;
+  opacity: 0;
   background: #fff;
   border-radius: 5px;
   cursor: zoom-out;
+  transform: scale(0.985);
+  transition: opacity 360ms ease 100ms, transform 420ms var(--ease-soft) 80ms;
+}
+
+.lightbox-image.is-loaded {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .lightbox-close {
@@ -1106,6 +1174,20 @@ pre.prompt {
 
   .nav-text small {
     font-size: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    scroll-behavior: auto !important;
+    transition-duration: 1ms !important;
   }
 }
 
