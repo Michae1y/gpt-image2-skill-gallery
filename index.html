@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260603-bugfix-nav-lightbox">
+<link rel="stylesheet" href="assets/styles.css?v=20260603-touch-lightbox">
 </head>
 <body id="top">
 <button class="mobile-nav-toggle" type="button" aria-controls="category-nav" aria-expanded="false">
@@ -3759,6 +3759,8 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   let lastLightboxTrigger = null;
   let currentActiveId = null;
   let lightboxState = 'closed';
+  let lightboxOpenedAt = 0;
+  let lastImageGestureAt = 0;
   const promptTimers = new WeakMap();
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const lightboxCloseMs = 420;
@@ -3964,7 +3966,20 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     }, lightboxCloseMs);
   };
 
+  const closeLightboxFromBackdrop = (event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    if (performance.now() - lightboxOpenedAt < 700) {
+      return;
+    }
+    closeLightbox();
+  };
+
   const openLightbox = (img) => {
+    if (!img || lightboxState === 'opening') {
+      return;
+    }
+    scrollWindowTo(window.scrollY, 'instant');
     const entry = img.closest('.entry');
     const figure = img.closest('.figure');
     const title = entry?.querySelector('.entry-title')?.textContent.trim() || img.alt || '图片预览';
@@ -3975,6 +3990,7 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
 
     lastLightboxTrigger = img;
     lightboxState = 'opening';
+    lightboxOpenedAt = performance.now();
     window.clearTimeout(lightboxTimer);
     setMobileNavOpen(false);
     lightbox.classList.remove('is-closing', 'is-open');
@@ -4009,29 +4025,87 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     lightboxImage.classList.add('is-loaded');
   });
 
+  const openImageFromEvent = (img, event) => {
+    event?.preventDefault();
+    event?.stopPropagation();
+    lastImageGestureAt = performance.now();
+    openLightbox(img);
+  };
+
   document.querySelectorAll('.figure img').forEach((img) => {
     img.tabIndex = 0;
     img.setAttribute('role', 'button');
     img.setAttribute('aria-label', `查看大图：${img.alt || '图片预览'}`);
+    let tapStart = null;
+    img.addEventListener('pointerdown', (event) => {
+      if (event.button !== 0) {
+        return;
+      }
+      tapStart = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY
+      };
+      event.stopPropagation();
+    });
+    img.addEventListener('pointerup', (event) => {
+      if (!tapStart || event.pointerId !== tapStart.id) {
+        return;
+      }
+      const distance = Math.hypot(event.clientX - tapStart.x, event.clientY - tapStart.y);
+      tapStart = null;
+      event.preventDefault();
+      event.stopPropagation();
+      if (distance <= 12) {
+        openImageFromEvent(img, event);
+      }
+    }, { passive: false });
+    img.addEventListener('pointercancel', () => {
+      tapStart = null;
+    });
+    if (!window.PointerEvent) {
+      let touchStart = null;
+      img.addEventListener('touchstart', (event) => {
+        const touch = event.changedTouches[0];
+        touchStart = touch ? { x: touch.clientX, y: touch.clientY } : null;
+      }, { passive: true });
+      img.addEventListener('touchend', (event) => {
+        const touch = event.changedTouches[0];
+        if (!touchStart || !touch) {
+          return;
+        }
+        const distance = Math.hypot(touch.clientX - touchStart.x, touch.clientY - touchStart.y);
+        touchStart = null;
+        if (distance <= 12) {
+          openImageFromEvent(img, event);
+        }
+      }, { passive: false });
+    }
     img.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
+      if (performance.now() - lastImageGestureAt < 700) {
+        return;
+      }
       openLightbox(img);
-    });
+    }, { passive: false });
     img.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') {
         return;
       }
       event.preventDefault();
+      event.stopPropagation();
       openLightbox(img);
     });
   });
 
   lightboxClose.addEventListener('click', closeLightbox);
-  lightboxBackdrop.addEventListener('click', closeLightbox);
+  lightboxBackdrop.addEventListener('click', closeLightboxFromBackdrop);
+  lightboxBackdrop.addEventListener('pointerup', closeLightboxFromBackdrop);
   lightboxImage.addEventListener('click', (event) => {
+    event.preventDefault();
     event.stopPropagation();
-  });
+  }, { passive: false });
 
   const syncEntryState = (entry) => {
     const details = entry.querySelector('.prompt-details');

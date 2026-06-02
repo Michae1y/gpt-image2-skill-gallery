@@ -582,6 +582,10 @@ main {
   border: 1px solid var(--line);
   border-radius: 5px;
   cursor: zoom-in;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
   transition: border-color 260ms var(--ease-soft), filter 260ms var(--ease-soft),
     transform 260ms var(--ease-soft);
   will-change: transform;
@@ -904,6 +908,7 @@ pre.prompt {
   padding: clamp(18px, 4vw, 64px);
   opacity: 0;
   pointer-events: none;
+  touch-action: none;
   transition: opacity 420ms var(--ease-soft);
 }
 
@@ -925,6 +930,7 @@ pre.prompt {
   border: 0;
   cursor: zoom-out;
   opacity: 0;
+  touch-action: manipulation;
   transition: opacity 420ms var(--ease-soft), backdrop-filter 420ms var(--ease-soft);
   backdrop-filter: blur(0);
 }
@@ -954,6 +960,7 @@ pre.prompt {
   transform-origin: center;
   transition: opacity 460ms var(--ease-soft), filter 520ms var(--ease-soft),
     transform 520ms var(--ease-soft);
+  touch-action: manipulation;
   will-change: transform, opacity, filter;
 }
 
@@ -1012,6 +1019,10 @@ pre.prompt {
   background: #fff;
   border-radius: 5px;
   cursor: default;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
   transform: scale(0.985);
   transition: opacity 360ms ease 100ms, transform 420ms var(--ease-soft) 80ms;
 }
@@ -1034,6 +1045,7 @@ pre.prompt {
   border: 1px solid rgba(38, 38, 38, 0.16);
   border-radius: 999px;
   cursor: pointer;
+  touch-action: manipulation;
   font-size: 22px;
   line-height: 30px;
 }
