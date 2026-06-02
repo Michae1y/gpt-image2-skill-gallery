@@ -9,7 +9,7 @@
   --accent-soft: #dfe9e9;
   --chip: #f2f2ef;
   --code: #1f2426;
-  --content-left: clamp(264px, 22vw, 348px);
+  --content-left: clamp(260px, 17vw, 320px);
   --dash: linear-gradient(to right, var(--ink) 0%, var(--ink) 25%, transparent 26%);
 }
 
@@ -44,12 +44,15 @@ a:hover {
 
 .side-nav {
   position: fixed;
-  top: 20px;
-  bottom: 20px;
+  top: 28px;
   left: 18px;
   z-index: 70;
-  width: 248px;
-  padding: 12px 8px 12px 44px;
+  display: flex;
+  flex-direction: column;
+  width: 220px;
+  height: min(72vh, 680px);
+  max-height: calc(100vh - 56px);
+  padding: 10px 7px 10px 40px;
   overflow: hidden;
   background: rgba(237, 237, 235, 0.84);
   border: 1px solid var(--line);
@@ -99,25 +102,38 @@ a:hover {
 
 .side-nav-list {
   display: grid;
-  gap: 0;
-  margin: 4px 0 0;
-  padding: 0;
+  flex: 1;
+  gap: 2px;
+  margin: 6px 0 0;
+  padding: 0 3px 12px 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
   list-style: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(38, 38, 38, 0.28) transparent;
+}
+
+.side-nav-list::-webkit-scrollbar {
+  width: 5px;
+}
+
+.side-nav-list::-webkit-scrollbar-thumb {
+  background: rgba(38, 38, 38, 0.26);
+  border-radius: 999px;
 }
 
 .side-home,
 .side-nav-list a {
-  --tick-width: 10px;
+  --tick-width: 9px;
   --tick-opacity: 0.28;
   --tick-color: rgba(38, 38, 38, 0.72);
   position: relative;
   display: grid;
-  grid-template-columns: 24px minmax(0, 1fr);
-  gap: 6px;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 7px;
   align-items: center;
-  height: clamp(17px, 2.42vh, 22px);
-  min-height: 0;
-  padding: 0 4px;
+  min-height: 38px;
+  padding: 5px 4px;
   overflow: visible;
   color: var(--ink);
   border: 1px solid transparent;
@@ -154,7 +170,7 @@ a:hover {
 }
 
 .side-nav a.is-active {
-  --tick-width: 48px;
+  --tick-width: 40px;
   --tick-opacity: 1;
   --tick-color: var(--accent);
   color: var(--accent);
@@ -163,22 +179,22 @@ a:hover {
 }
 
 .side-nav a.is-wave-1 {
-  --tick-width: 38px;
+  --tick-width: 32px;
   --tick-opacity: 0.74;
 }
 
 .side-nav a.is-wave-2 {
-  --tick-width: 29px;
+  --tick-width: 24px;
   --tick-opacity: 0.56;
 }
 
 .side-nav a.is-wave-3 {
-  --tick-width: 20px;
+  --tick-width: 17px;
   --tick-opacity: 0.42;
 }
 
 .side-nav a.is-wave-4 {
-  --tick-width: 13px;
+  --tick-width: 11px;
   --tick-opacity: 0.32;
 }
 
@@ -201,11 +217,11 @@ a:hover {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
-  width: 24px;
-  min-width: 24px;
-  height: 14px;
+  width: 26px;
+  min-width: 26px;
+  height: 16px;
   color: rgba(38, 38, 38, 0.66);
-  font-size: 8px;
+  font-size: 10px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0;
@@ -220,26 +236,26 @@ a:hover {
 .nav-text {
   min-width: 0;
   overflow: hidden;
-  font-size: 10.5px;
-  font-weight: 750;
-  line-height: 1;
+  font-size: 13px;
+  font-weight: 780;
+  line-height: 1.08;
   text-overflow: ellipsis;
 }
 
 .nav-text small {
   display: block;
-  margin-top: 1px;
+  margin-top: 2px;
   overflow: hidden;
   color: var(--muted);
-  font-size: 7.5px;
+  font-size: 9px;
   font-weight: 500;
-  line-height: 1;
+  line-height: 1.08;
   text-overflow: ellipsis;
 }
 
 header.hero,
 main {
-  width: min(1120px, calc(100vw - var(--content-left) - 32px));
+  width: min(1500px, calc(100vw - var(--content-left) - 34px));
   margin-right: 28px;
   margin-left: var(--content-left);
 }
@@ -267,7 +283,7 @@ header.hero::after {
 }
 
 .hero-copy {
-  max-width: 860px;
+  max-width: min(860px, calc(100% - 380px));
 }
 
 .eyebrow {
@@ -304,7 +320,7 @@ header p {
 }
 
 .stats {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   gap: 8px 20px;
   margin-top: 22px;
@@ -333,40 +349,46 @@ header p {
 }
 
 main {
-  padding: 0 0 82px;
+  padding: 26px 0 82px;
 }
 
 .notice {
-  position: relative;
-  margin: 22px 0 4px;
-  padding: 22px 0 12px;
+  position: absolute;
+  top: 34px;
+  right: 0;
+  width: min(320px, 30vw);
+  margin: 0;
+  padding: 12px 14px;
+  background: rgba(247, 247, 245, 0.82);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  backdrop-filter: blur(12px);
 }
 
 .notice::before {
-  top: 0;
+  display: none;
 }
 
 .notice h2 {
   margin: 0 0 7px;
-  font-size: 15px;
+  font-size: 13px;
   line-height: 1.35;
 }
 
 .notice p {
-  max-width: 760px;
   margin: 0;
   color: var(--muted);
-  font-size: 12px;
-  line-height: 1.7;
+  font-size: 11px;
+  line-height: 1.55;
 }
 
 .category {
   position: relative;
   display: grid;
-  grid-template-columns: minmax(150px, 200px) minmax(0, 1fr);
-  gap: 20px 28px;
+  grid-template-columns: minmax(150px, 190px) minmax(0, 1fr);
+  gap: 20px 34px;
   margin: 0;
-  padding: 38px 0 48px;
+  padding: 44px 0 56px;
   scroll-margin-top: 24px;
 }
 
@@ -413,8 +435,8 @@ main {
 .pin-grid {
   grid-column: 2;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
-  gap: 30px 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 42px 28px;
   align-items: start;
 }
 
@@ -478,7 +500,7 @@ main {
   aspect-ratio: 4 / 3;
   height: auto;
   object-fit: contain;
-  padding: 4px;
+  padding: 6px;
   background: #fbfbf9;
   border: 1px solid var(--line);
   border-radius: 5px;
@@ -524,7 +546,7 @@ main {
 
 .entry-no {
   color: var(--muted);
-  font-size: 9px;
+  font-size: 11px;
   font-weight: 800;
   line-height: 1;
   letter-spacing: 0;
@@ -534,7 +556,7 @@ main {
 .entry-title {
   margin: 0;
   color: var(--ink);
-  font-size: 13.5px;
+  font-size: 17px;
   font-weight: 760;
   line-height: 1.26;
   letter-spacing: 0;
@@ -543,7 +565,7 @@ main {
 .title-en {
   margin: 0;
   color: var(--muted);
-  font-size: 10.5px;
+  font-size: 13px;
   font-weight: 500;
   line-height: 1.35;
 }
@@ -607,12 +629,12 @@ main {
   gap: 7px;
   width: fit-content;
   cursor: pointer;
-  padding: 5px 8px;
+  padding: 7px 10px;
   color: var(--ink);
   background: rgba(247, 247, 245, 0.78);
   border: 1px solid var(--line);
   border-radius: 999px;
-  font-size: 10.5px;
+  font-size: 13px;
   font-weight: 720;
   line-height: 1;
   list-style: none;
@@ -697,9 +719,23 @@ pre.prompt {
   opacity: 0.28;
 }
 
+@media (max-width: 1180px) {
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .notice {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(620px, 100%);
+    margin-top: 18px;
+  }
+}
+
 @media (max-width: 1040px) {
   :root {
-    --content-left: 232px;
+    --content-left: 248px;
   }
 
   .side-nav {
@@ -715,7 +751,7 @@ pre.prompt {
   }
 
   .pin-grid {
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -726,9 +762,10 @@ pre.prompt {
 
   .side-nav {
     top: 10px;
-    bottom: 10px;
+    bottom: auto;
     left: 8px;
     width: 176px;
+    height: min(70vh, 620px);
     padding: 8px 5px 8px 34px;
   }
 
@@ -746,7 +783,8 @@ pre.prompt {
   .side-nav-list a {
     grid-template-columns: 20px minmax(0, 1fr);
     gap: 4px;
-    height: clamp(16px, 2.35vh, 20px);
+    min-height: 34px;
+    padding: 4px 3px;
   }
 
   .nav-index {
@@ -756,11 +794,11 @@ pre.prompt {
   }
 
   .nav-text {
-    font-size: 9.5px;
+    font-size: 11px;
   }
 
   .nav-text small {
-    font-size: 7px;
+    font-size: 8px;
   }
 
   header.hero,
@@ -781,6 +819,18 @@ pre.prompt {
     grid-template-columns: 1fr;
     gap: 16px;
     padding: 34px 0 42px;
+  }
+
+  .hero-copy {
+    max-width: 100%;
+  }
+
+  .notice {
+    position: relative;
+    top: auto;
+    right: auto;
+    width: min(620px, 100%);
+    margin-top: 18px;
   }
 
   .category > h2 {
@@ -850,22 +900,23 @@ pre.prompt {
 @media (max-height: 760px) {
   .side-nav {
     top: 8px;
-    bottom: 8px;
+    bottom: auto;
+    height: min(78vh, 600px);
     padding-top: 7px;
     padding-bottom: 7px;
   }
 
   .side-home,
   .side-nav-list a {
-    height: clamp(15px, 2.22vh, 19px);
+    min-height: 34px;
   }
 
   .nav-text {
-    font-size: 9.5px;
+    font-size: 11px;
   }
 
   .nav-text small {
-    font-size: 7px;
+    font-size: 8px;
   }
 }
 

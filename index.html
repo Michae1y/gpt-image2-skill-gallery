@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260603-muuuuu">
+<link rel="stylesheet" href="assets/styles.css?v=20260603-nav3">
 </head>
 <body id="top">
 <nav class="side-nav" aria-label="分类导航">
@@ -60,11 +60,11 @@
 <div class="stat"><strong>164</strong>条目内图片引用</div>
 <div class="stat"><strong>164</strong>docs 图片总数</div>
 </div>
-</header>
-<main>
 <section class="notice"><h2>来源说明</h2>
 <p>本页面整理自 <a href="https://github.com/wuyoscar/GPT-Image2-Skill">wuyoscar/GPT-Image2-Skill</a>，原仓库作者为 Wuyoscar。本页仅作为图片与提示词参考库，prompt 原文未翻译。</p>
 </section>
+</header>
+<main>
 <section id="cat-anime-manga" class="category">
 <h2>动漫与漫画 <span class="meta">/ 🎌 Anime &amp; Manga · No. 1–12 · 12 条</span></h2>
 <div class="pin-grid">
@@ -3745,6 +3745,11 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
         link.removeAttribute('aria-current');
       }
     });
+    if (activeIndex >= 0 && !nav.matches(':hover') && !nav.classList.contains('is-dragging')) {
+      window.requestAnimationFrame(() => {
+        links[activeIndex].scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      });
+    }
   };
 
   const flashTarget = (target) => {
@@ -3873,12 +3878,6 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     }
   }, { passive: true });
   window.addEventListener('resize', updateActiveFromScroll);
-
-  nav.addEventListener('wheel', (event) => {
-    event.preventDefault();
-    window.scrollBy({ top: event.deltaY, left: 0, behavior: 'auto' });
-    updateActiveFromScroll();
-  }, { passive: false });
 
   nav.addEventListener('pointerdown', (event) => {
     if (event.button !== 0) {
