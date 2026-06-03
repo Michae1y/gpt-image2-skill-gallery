@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260604-yyyole-original-prompt">
+<link rel="stylesheet" href="assets/styles.css?v=20260604-floating-submission">
 </head>
 <body id="top">
 <button class="mobile-nav-toggle" type="button" aria-controls="category-nav" aria-expanded="false">
@@ -55,6 +55,11 @@
 <button class="back-to-top" type="button" aria-label="回到顶部" title="回到顶部">
 <span aria-hidden="true">↑</span>
 </button>
+<button class="submission-fab" type="button" aria-controls="submission-dock" aria-expanded="false" title="补充素材">
+<span class="submission-fab-mark" aria-hidden="true">+</span>
+<span>补充素材</span>
+</button>
+<button class="submission-dock-backdrop" type="button" aria-label="关闭补充素材输入"></button>
 
 <header class="hero">
 <div class="hero-copy">
@@ -3772,11 +3777,12 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
 </details>
 </article>
 </div>
-<div class="submit-workbench">
+<div id="submission-dock" class="submit-workbench submission-dock" role="dialog" aria-modal="true" aria-labelledby="submission-dock-title" aria-hidden="true" inert>
 <form id="submission-form" class="submission-form" autocomplete="off">
 <div class="submission-form-head">
 <p class="eyebrow">Supplement Draft</p>
-<h3>新增作品与提示词</h3>
+<h3 id="submission-dock-title">新增作品与提示词</h3>
+<button class="submission-dock-close" type="button" aria-label="关闭补充素材输入">×</button>
 <p>静态页面会保留本地草稿；公开发布仍需提交到仓库。</p>
 </div>
 <div class="submission-fields">
@@ -3858,6 +3864,10 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   const mobileNavBackdrop = document.querySelector('.mobile-nav-backdrop');
   const mobileNavLabel = document.querySelector('.mobile-nav-label');
   const backToTop = document.querySelector('.back-to-top');
+  const submissionFab = document.querySelector('.submission-fab');
+  const submissionDock = document.getElementById('submission-dock');
+  const submissionDockBackdrop = document.querySelector('.submission-dock-backdrop');
+  const submissionDockClose = document.querySelector('.submission-dock-close');
   const submissionForm = document.getElementById('submission-form');
   const submissionStatus = document.getElementById('submission-status');
   const submissionCategory = document.getElementById('submission-category');
@@ -3917,6 +3927,28 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
         const activeLink = nav.querySelector('a.is-active') || nav.querySelector('a');
         activeLink?.scrollIntoView({ block: 'nearest', inline: 'nearest' });
       });
+    }
+  };
+
+  const setSubmissionDockOpen = (isOpen) => {
+    if (!submissionDock) {
+      return;
+    }
+    document.body.classList.toggle('submission-dock-open', isOpen);
+    submissionDock.classList.toggle('is-open', isOpen);
+    submissionDock.setAttribute('aria-hidden', String(!isOpen));
+    if ('inert' in submissionDock) {
+      submissionDock.inert = !isOpen;
+    }
+    submissionFab?.setAttribute('aria-expanded', String(isOpen));
+    if (isOpen) {
+      setMobileNavOpen(false);
+      updateSubmissionPreview();
+      window.requestAnimationFrame(() => {
+        submissionForm?.elements.titleZh?.focus({ preventScroll: true });
+      });
+    } else {
+      submissionFab?.focus({ preventScroll: true });
     }
   };
 
@@ -4108,6 +4140,24 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     setMobileNavOpen(false);
     clearLocationHash();
     scrollWindowTo(0, reduceMotion.matches ? 'instant' : 'smooth');
+  });
+
+  submissionFab?.addEventListener('click', () => {
+    setSubmissionDockOpen(!document.body.classList.contains('submission-dock-open'));
+  });
+
+  submissionDockBackdrop?.addEventListener('click', () => {
+    setSubmissionDockOpen(false);
+  });
+
+  submissionDockClose?.addEventListener('click', () => {
+    setSubmissionDockOpen(false);
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && document.body.classList.contains('submission-dock-open')) {
+      setSubmissionDockOpen(false);
+    }
   });
 
   const submissionFields = () => {

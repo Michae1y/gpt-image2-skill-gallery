@@ -44,6 +44,10 @@ body.mobile-nav-open {
   overflow: hidden;
 }
 
+body.submission-dock-open {
+  overflow: hidden;
+}
+
 .side-nav,
 header.hero,
 main {
@@ -107,10 +111,88 @@ body.lightbox-open main {
 }
 
 body.lightbox-open .back-to-top,
-body.mobile-nav-open .back-to-top {
+body.mobile-nav-open .back-to-top,
+body.submission-dock-open .back-to-top {
   opacity: 0;
   pointer-events: none;
   transform: translateY(10px);
+}
+
+.submission-fab {
+  position: fixed;
+  right: 76px;
+  bottom: 22px;
+  z-index: 152;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 14px 0 10px;
+  color: #fbfbf9;
+  background: #262626;
+  border: 1px solid rgba(38, 38, 38, 0.1);
+  border-radius: 999px;
+  box-shadow: 0 16px 42px rgba(38, 38, 38, 0.18);
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 780;
+  line-height: 1;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 280ms var(--ease-soft), transform 280ms var(--ease-soft),
+    background 220ms ease, box-shadow 220ms ease;
+}
+
+.submission-fab-mark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  color: var(--ink);
+  background: #fbfbf9;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 650;
+  line-height: 1;
+}
+
+.submission-fab:hover,
+.submission-fab:focus-visible,
+body.submission-dock-open .submission-fab {
+  background: var(--accent);
+  box-shadow: 0 20px 52px rgba(36, 93, 108, 0.26);
+  outline: 0;
+  transform: translateY(-1px);
+}
+
+body.lightbox-open .submission-fab,
+body.mobile-nav-open .submission-fab,
+body.submission-dock-open .submission-fab {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px);
+}
+
+.submission-dock-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 195;
+  display: block;
+  padding: 0;
+  background: rgba(237, 237, 235, 0.62);
+  border: 0;
+  opacity: 0;
+  pointer-events: none;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
+  transition: opacity 360ms var(--ease-soft), backdrop-filter 360ms var(--ease-soft);
+}
+
+body.submission-dock-open .submission-dock-backdrop {
+  opacity: 1;
+  pointer-events: auto;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 a {
@@ -889,6 +971,36 @@ pre.prompt {
   align-items: start;
 }
 
+.submission-dock {
+  position: fixed;
+  right: 22px;
+  bottom: 78px;
+  z-index: 205;
+  grid-column: auto;
+  width: min(980px, calc(100vw - 44px));
+  max-height: calc(100dvh - 104px);
+  padding: 18px;
+  overflow: auto;
+  overscroll-behavior: contain;
+  background: rgba(247, 247, 245, 0.94);
+  border: 1px solid rgba(38, 38, 38, 0.14);
+  border-radius: 8px;
+  box-shadow: 0 30px 90px rgba(38, 38, 38, 0.22);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 18px, 0) scale(0.985);
+  transform-origin: 100% 100%;
+  transition: opacity 320ms var(--ease-soft), transform 380ms var(--ease-soft);
+}
+
+.submission-dock.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
 .submission-form,
 .submission-preview-pane {
   min-width: 0;
@@ -904,8 +1016,10 @@ pre.prompt {
 }
 
 .submission-form-head {
+  position: relative;
   display: grid;
   gap: 5px;
+  padding-right: 44px;
 }
 
 .submission-form-head h3 {
@@ -920,6 +1034,35 @@ pre.prompt {
   color: var(--muted);
   font-size: 12px;
   line-height: 1.55;
+}
+
+.submission-dock-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  color: var(--ink);
+  background: #fbfbf9;
+  border: 1px solid rgba(38, 38, 38, 0.16);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  transition: color 220ms ease, border-color 220ms ease, background 220ms ease,
+    transform 220ms var(--ease-soft);
+}
+
+.submission-dock-close:hover,
+.submission-dock-close:focus-visible {
+  color: var(--accent);
+  background: #fff;
+  border-color: rgba(36, 93, 108, 0.4);
+  outline: 0;
+  transform: rotate(90deg);
 }
 
 .submission-fields {
@@ -1416,6 +1559,12 @@ pre.prompt {
     transform: translateY(8px);
   }
 
+  body.submission-dock-open .mobile-nav-toggle {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+  }
+
   .lightbox {
     padding: max(10px, env(safe-area-inset-top)) max(10px, env(safe-area-inset-right))
       max(10px, env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left));
@@ -1468,6 +1617,39 @@ pre.prompt {
     width: 40px;
     height: 40px;
     font-size: 20px;
+  }
+
+  .submission-fab {
+    right: max(14px, env(safe-area-inset-right));
+    bottom: calc(max(14px, env(safe-area-inset-bottom)) + 106px);
+    z-index: 188;
+    min-height: 42px;
+    padding-right: 13px;
+    font-size: 13px;
+  }
+
+  .submission-dock {
+    right: max(10px, env(safe-area-inset-right));
+    bottom: max(10px, env(safe-area-inset-bottom));
+    left: max(10px, env(safe-area-inset-left));
+    width: auto;
+    max-height: calc(100dvh - 20px);
+    grid-template-columns: 1fr;
+    gap: 14px;
+    padding: 12px;
+    border-radius: 14px;
+    transform-origin: 100% 100%;
+  }
+
+  .submission-dock-backdrop {
+    background: rgba(237, 237, 235, 0.82);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  body.submission-dock-open .submission-dock-backdrop {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
 
   .side-nav {
@@ -1677,6 +1859,23 @@ pre.prompt {
   .back-to-top {
     right: 10px;
     bottom: calc(max(10px, env(safe-area-inset-bottom)) + 52px);
+  }
+
+  .submission-fab {
+    right: 10px;
+    bottom: calc(max(10px, env(safe-area-inset-bottom)) + 104px);
+  }
+
+  .submission-dock {
+    right: 8px;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    left: 8px;
+    padding: 10px;
+  }
+
+  .submission-dock-close {
+    width: 32px;
+    height: 32px;
   }
 }
 
