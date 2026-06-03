@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260604-floating-submission">
+<link rel="stylesheet" href="assets/styles.css?v=20260604-natural-prompt-height">
 </head>
 <body id="top">
 <button class="mobile-nav-toggle" type="button" aria-controls="category-nav" aria-expanded="false">
@@ -4641,13 +4641,12 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     prompt.style.maxHeight = 'none';
     prompt.style.paddingTop = '12px';
     prompt.style.paddingBottom = '12px';
-    const maxHeight = Math.min(520, Math.max(320, Math.floor(window.innerHeight * 0.58)));
-    const height = Math.min(prompt.scrollHeight, maxHeight);
+    const height = Math.ceil(prompt.scrollHeight);
     prompt.style.maxHeight = previousMaxHeight;
     prompt.style.paddingTop = previousPaddingTop;
     prompt.style.paddingBottom = previousPaddingBottom;
     details.style.setProperty('--prompt-height', `${height}px`);
-    details.style.setProperty('--prompt-duration', `${Math.min(760, Math.max(480, Math.round(height * 1.15)))}ms`);
+    details.style.setProperty('--prompt-duration', `${Math.min(1100, Math.max(520, Math.round(height * 0.72)))}ms`);
     return height;
   };
 

@@ -947,7 +947,8 @@ pre.prompt {
 }
 
 .prompt-details.is-ready pre.prompt {
-  overflow: auto;
+  max-height: none;
+  overflow: visible;
 }
 
 .prompt-details.is-closing pre.prompt {
