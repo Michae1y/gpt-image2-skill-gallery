@@ -19,6 +19,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -877,6 +881,175 @@ pre.prompt {
   background: transparent;
 }
 
+.submit-workbench {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: minmax(280px, 0.86fr) minmax(0, 1fr);
+  gap: 28px;
+  align-items: start;
+}
+
+.submission-form,
+.submission-preview-pane {
+  min-width: 0;
+}
+
+.submission-form {
+  display: grid;
+  gap: 14px;
+  padding: 14px;
+  background: rgba(247, 247, 245, 0.78);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+
+.submission-form-head {
+  display: grid;
+  gap: 5px;
+}
+
+.submission-form-head h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.18;
+}
+
+.submission-form-head p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+.submission-fields {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 11px;
+}
+
+.form-field {
+  display: grid;
+  gap: 6px;
+  min-width: 0;
+  color: var(--ink);
+  font-size: 11px;
+  font-weight: 780;
+  line-height: 1.2;
+}
+
+.form-field.span-all {
+  grid-column: 1 / -1;
+}
+
+.form-field input,
+.form-field select,
+.form-field textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 9px 10px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(38, 38, 38, 0.14);
+  border-radius: 5px;
+  font: inherit;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.form-field textarea {
+  min-height: 156px;
+  resize: vertical;
+}
+
+.form-field input:focus,
+.form-field select:focus,
+.form-field textarea:focus {
+  border-color: var(--accent);
+  outline: 0;
+  box-shadow: 0 0 0 3px rgba(36, 93, 108, 0.1);
+}
+
+.submission-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.submission-actions button {
+  min-height: 34px;
+  padding: 7px 11px;
+  color: var(--ink);
+  background: #fbfbf9;
+  border: 1px solid rgba(38, 38, 38, 0.16);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 760;
+  line-height: 1;
+  transition: color 220ms ease, border-color 220ms ease, background 220ms ease,
+    transform 220ms var(--ease-soft);
+}
+
+.submission-actions button:hover,
+.submission-actions button:focus-visible {
+  color: var(--accent);
+  border-color: rgba(36, 93, 108, 0.42);
+  outline: 0;
+  transform: translateY(-1px);
+}
+
+.submission-status {
+  min-height: 18px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.submission-preview-pane {
+  display: grid;
+  gap: 10px;
+}
+
+.submission-preview {
+  cursor: default;
+}
+
+.submission-preview:hover {
+  transform: none;
+}
+
+.submission-preview .tag-list,
+.submission-preview .kv,
+.submission-preview .figure figcaption {
+  max-height: none;
+  opacity: 1;
+  transform: none;
+}
+
+.submission-figure {
+  position: relative;
+}
+
+.image-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 220px;
+  padding: 18px;
+  color: var(--muted);
+  background: #fbfbf9;
+  border: 1px dashed rgba(38, 38, 38, 0.2);
+  border-radius: 5px;
+  font-size: 12px;
+  line-height: 1.45;
+  text-align: center;
+}
+
+.submission-preview .prompt-details {
+  margin-top: 4px;
+}
+
 .footer {
   position: relative;
   max-width: 780px;
@@ -1111,6 +1284,10 @@ pre.prompt {
 
   .pin-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .submit-workbench {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1405,7 +1582,8 @@ pre.prompt {
   }
 
   .category > p.meta,
-  .pin-grid {
+  .pin-grid,
+  .submit-workbench {
     grid-column: 1;
   }
 
@@ -1477,6 +1655,18 @@ pre.prompt {
 
   .title-en {
     font-size: 12px;
+  }
+
+  .submission-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .submission-form {
+    padding: 11px;
+  }
+
+  .submission-actions button {
+    flex: 1 1 calc(50% - 8px);
   }
 
   .mobile-nav-toggle {

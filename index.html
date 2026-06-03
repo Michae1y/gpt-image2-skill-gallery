@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260603-mobile-lightbox-fix">
+<link rel="stylesheet" href="assets/styles.css?v=20260604-supplement-entry">
 </head>
 <body id="top">
 <button class="mobile-nav-toggle" type="button" aria-controls="category-nav" aria-expanded="false">
@@ -49,6 +49,7 @@
 <li><a href="#cat-tattoo-design" title="纹身设计 / Tattoo Design"><span class="nav-index">30</span><span class="nav-text">纹身设计<small>Tattoo Design · No. 157–160 · 4 条</small></span></a></li>
 <li><a href="#cat-screen-photography" title="屏幕摄影 / Screen Photography"><span class="nav-index">31</span><span class="nav-text">屏幕摄影<small>Screen Photography · No. 161–162 · 2 条</small></span></a></li>
 <li><a href="#extra-images" title="未绑定图片"><span class="nav-index">附</span><span class="nav-text">未绑定图片<small>Extra images · 2 张</small></span></a></li>
+<li><a href="#submit-reference" title="补充素材 / Add References"><span class="nav-index">+</span><span class="nav-text">补充素材<small>Add references · 本地草稿</small></span></a></li>
 </ol>
 </nav>
 <button class="back-to-top" type="button" aria-label="回到顶部" title="回到顶部">
@@ -3721,6 +3722,74 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
 </article>
 </div>
 </section>
+<section id="submit-reference" class="category submit-section">
+<h2>补充素材 <span class="meta">/ Add References · 本地草稿</span></h2>
+<div class="submit-workbench">
+<form id="submission-form" class="submission-form" autocomplete="off">
+<div class="submission-form-head">
+<p class="eyebrow">Supplement Draft</p>
+<h3>新增作品与提示词</h3>
+<p>静态页面会保留本地草稿；公开发布仍需提交到仓库。</p>
+</div>
+<div class="submission-fields">
+<label class="form-field">中文标题
+<input id="submission-title-zh" name="titleZh" type="text" placeholder="例如：电影感咖啡广告海报">
+</label>
+<label class="form-field">英文标题
+<input id="submission-title-en" name="titleEn" type="text" placeholder="Cinematic coffee campaign poster">
+</label>
+<label class="form-field">分类
+<select id="submission-category" name="category">
+<option value="">选择分类</option>
+</select>
+</label>
+<label class="form-field">标签
+<input id="submission-tags" name="tags" type="text" placeholder="海报，产品，电影感，咖啡">
+</label>
+<label class="form-field">作者 / 来源
+<input id="submission-source" name="source" type="text" placeholder="@author 或作品链接">
+</label>
+<label class="form-field">图片链接
+<input id="submission-image-url" name="imageUrl" type="url" placeholder="https://...">
+</label>
+<label class="form-field span-all">本地图片
+<input id="submission-image-file" name="imageFile" type="file" accept="image/*">
+</label>
+<label class="form-field span-all">完整提示词 / Original Prompt
+<textarea id="submission-prompt" name="prompt" rows="8" placeholder="粘贴原始 prompt，保持原文。"></textarea>
+</label>
+</div>
+<div class="submission-actions">
+<button type="submit">生成预览</button>
+<button type="button" data-submission-action="copy">复制补充包</button>
+<button type="button" data-submission-action="download">下载 JSON</button>
+<button type="reset">清空</button>
+</div>
+<p id="submission-status" class="submission-status" aria-live="polite"></p>
+</form>
+<aside class="submission-preview-pane" aria-live="polite">
+<p class="eyebrow">Live Preview</p>
+<article id="submission-preview-card" class="entry submission-preview is-expanded">
+<div class="entry-head">
+<div class="title-stack"><span class="entry-no">Draft</span><h3 id="submission-preview-title" class="entry-title">未命名补充素材</h3><p id="submission-preview-title-en" class="title-en">Supplement reference draft</p></div>
+<span id="submission-preview-badge" class="badge">补充素材 / Supplement</span>
+</div>
+<div id="submission-preview-tags" class="tag-list"><span class="tag">补充素材</span></div>
+<div class="images">
+<figure class="figure submission-figure">
+<img id="submission-preview-image" alt="补充素材预览图" loading="lazy" decoding="async" hidden>
+<div id="submission-image-placeholder" class="image-placeholder">选择图片后显示预览</div>
+<figcaption><span id="submission-preview-caption-zh" class="caption-zh">补充素材预览</span><br><span id="submission-preview-caption-en">Supplement reference draft</span></figcaption>
+</figure>
+</div>
+<p id="submission-preview-meta" class="kv"><strong>来源：</strong>待补充</p>
+<details class="prompt-details is-opened is-ready" open><summary>完整提示词 / Original Prompt</summary>
+<pre class="prompt"><code id="submission-preview-prompt">Prompt 待补充。</code></pre>
+</details>
+</article>
+</aside>
+</div>
+</section>
 <p class="footer">原仓库作者：Wuyoscar · 原仓库：<a href="https://github.com/wuyoscar/GPT-Image2-Skill">wuyoscar/GPT-Image2-Skill</a>。本标准网页由本地整理生成，卡片使用高清缩略图，点击图片可查看高清预览图；prompt 为 Reference Gallery 中 text 代码块的完整原文。</p>
 </main>
 <div class="lightbox" aria-hidden="true">
@@ -3741,6 +3810,19 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   const mobileNavBackdrop = document.querySelector('.mobile-nav-backdrop');
   const mobileNavLabel = document.querySelector('.mobile-nav-label');
   const backToTop = document.querySelector('.back-to-top');
+  const submissionForm = document.getElementById('submission-form');
+  const submissionStatus = document.getElementById('submission-status');
+  const submissionCategory = document.getElementById('submission-category');
+  const submissionPreviewImage = document.getElementById('submission-preview-image');
+  const submissionImagePlaceholder = document.getElementById('submission-image-placeholder');
+  const submissionPreviewTitle = document.getElementById('submission-preview-title');
+  const submissionPreviewTitleEn = document.getElementById('submission-preview-title-en');
+  const submissionPreviewBadge = document.getElementById('submission-preview-badge');
+  const submissionPreviewTags = document.getElementById('submission-preview-tags');
+  const submissionPreviewMeta = document.getElementById('submission-preview-meta');
+  const submissionPreviewCaptionZh = document.getElementById('submission-preview-caption-zh');
+  const submissionPreviewCaptionEn = document.getElementById('submission-preview-caption-en');
+  const submissionPreviewPrompt = document.getElementById('submission-preview-prompt');
   const links = Array.from(document.querySelectorAll('.side-nav a[href^="#"]'));
   const targets = links
     .map((link) => document.getElementById(link.getAttribute('href').slice(1)))
@@ -3765,8 +3847,10 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   let lightboxScrollY = 0;
   let lightboxScrollLocked = false;
   let imageClicksLockedUntil = 0;
+  let submissionObjectUrl = '';
   const promptTimers = new WeakMap();
   const fullImagePreloads = new Map();
+  const submissionStorageKey = 'gpt-image2-gallery-submission-draft';
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
   const hoverPreloadQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
   const lightboxCloseMs = 420;
@@ -3977,6 +4061,247 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     clearLocationHash();
     scrollWindowTo(0, reduceMotion.matches ? 'instant' : 'smooth');
   });
+
+  const submissionFields = () => {
+    if (!submissionForm) {
+      return null;
+    }
+    return {
+      titleZh: submissionForm.elements.titleZh,
+      titleEn: submissionForm.elements.titleEn,
+      category: submissionForm.elements.category,
+      tags: submissionForm.elements.tags,
+      source: submissionForm.elements.source,
+      imageUrl: submissionForm.elements.imageUrl,
+      imageFile: submissionForm.elements.imageFile,
+      prompt: submissionForm.elements.prompt
+    };
+  };
+
+  const splitTags = (value) => value
+    .split(/[,，、]/)
+    .map((tag) => tag.trim())
+    .filter(Boolean);
+
+  const selectedCategoryLabel = (value) => {
+    if (!submissionCategory || !value) {
+      return '补充素材 / Supplement';
+    }
+    const option = Array.from(submissionCategory.options).find((item) => item.value === value);
+    return option?.textContent.trim() || '补充素材 / Supplement';
+  };
+
+  const collectSubmission = () => {
+    const fields = submissionFields();
+    const file = fields?.imageFile?.files?.[0] || null;
+    const categoryValue = fields?.category?.value.trim() || 'supplement';
+    const categoryLabel = selectedCategoryLabel(categoryValue);
+    return {
+      type: 'gpt-image2-gallery-supplement',
+      title_zh: fields?.titleZh?.value.trim() || '未命名补充素材',
+      title_en: fields?.titleEn?.value.trim() || 'Supplement reference draft',
+      category: categoryLabel,
+      category_id: categoryValue,
+      tags: splitTags(fields?.tags?.value || ''),
+      source: fields?.source?.value.trim() || '',
+      image_url: fields?.imageUrl?.value.trim() || '',
+      image_file: file?.name || '',
+      prompt: fields?.prompt?.value.trim() || '',
+      created_at: new Date().toISOString()
+    };
+  };
+
+  const setSubmissionStatus = (message) => {
+    if (submissionStatus) {
+      submissionStatus.textContent = message;
+    }
+  };
+
+  const copyTextForSubmission = (data) => [
+    'GPT Image Gallery 补充素材',
+    `中文标题：${data.title_zh}`,
+    `英文标题：${data.title_en}`,
+    `分类：${data.category}`,
+    `标签：${data.tags.join('，') || '无'}`,
+    `来源：${data.source || '未填写'}`,
+    `图片链接：${data.image_url || '无'}`,
+    `本地图片文件：${data.image_file || '无'}`,
+    '',
+    'Original Prompt:',
+    data.prompt || '未填写'
+  ].join('\n');
+
+  const updateSubmissionPreview = () => {
+    if (!submissionForm) {
+      return;
+    }
+    const data = collectSubmission();
+    const tags = data.tags.length ? data.tags : ['补充素材'];
+    const imageSrc = submissionObjectUrl || data.image_url;
+
+    submissionPreviewTitle.textContent = data.title_zh;
+    submissionPreviewTitleEn.textContent = data.title_en;
+    submissionPreviewBadge.textContent = data.category;
+    submissionPreviewCaptionZh.textContent = data.title_zh;
+    submissionPreviewCaptionEn.textContent = data.title_en;
+    submissionPreviewMeta.innerHTML = '';
+    const sourceLabel = document.createElement('strong');
+    sourceLabel.textContent = '来源：';
+    submissionPreviewMeta.append(sourceLabel, data.source || '待补充');
+    submissionPreviewPrompt.textContent = data.prompt || 'Prompt 待补充。';
+
+    submissionPreviewTags.innerHTML = '';
+    tags.forEach((tag) => {
+      const chip = document.createElement('span');
+      chip.className = 'tag';
+      chip.textContent = tag;
+      submissionPreviewTags.append(chip);
+    });
+
+    if (imageSrc) {
+      submissionPreviewImage.hidden = false;
+      submissionPreviewImage.src = imageSrc;
+      submissionImagePlaceholder.hidden = true;
+    } else {
+      submissionPreviewImage.hidden = true;
+      submissionPreviewImage.removeAttribute('src');
+      submissionImagePlaceholder.hidden = false;
+    }
+  };
+
+  const saveSubmissionDraft = () => {
+    if (!submissionForm) {
+      return;
+    }
+    const data = collectSubmission();
+    window.localStorage.setItem(submissionStorageKey, JSON.stringify({
+      title_zh: data.title_zh === '未命名补充素材' ? '' : data.title_zh,
+      title_en: data.title_en === 'Supplement reference draft' ? '' : data.title_en,
+      category_id: data.category_id,
+      tags: data.tags.join('，'),
+      source: data.source,
+      image_url: data.image_url,
+      prompt: data.prompt
+    }));
+  };
+
+  const restoreSubmissionDraft = () => {
+    if (!submissionForm) {
+      return;
+    }
+    try {
+      const draft = JSON.parse(window.localStorage.getItem(submissionStorageKey) || '{}');
+      const fields = submissionFields();
+      fields.titleZh.value = draft.title_zh || '';
+      fields.titleEn.value = draft.title_en || '';
+      fields.category.value = draft.category_id || '';
+      fields.tags.value = draft.tags || '';
+      fields.source.value = draft.source || '';
+      fields.imageUrl.value = draft.image_url || '';
+      fields.prompt.value = draft.prompt || '';
+    } catch (error) {
+      window.localStorage.removeItem(submissionStorageKey);
+    }
+  };
+
+  const populateSubmissionCategories = () => {
+    if (!submissionCategory) {
+      return;
+    }
+    const currentValue = submissionCategory.value;
+    const options = links
+      .map((link) => {
+        const id = link.getAttribute('href').slice(1);
+        const label = link.querySelector('.nav-text')?.childNodes[0]?.textContent.trim() || '';
+        return { id, label };
+      })
+      .filter(({ id, label }) => id.startsWith('cat-') && label);
+    submissionCategory.innerHTML = '<option value="">选择分类</option>';
+    options.forEach(({ id, label }) => {
+      const option = document.createElement('option');
+      option.value = id;
+      option.textContent = label;
+      submissionCategory.append(option);
+    });
+    const supplementOption = document.createElement('option');
+    supplementOption.value = 'supplement';
+    supplementOption.textContent = '补充素材';
+    submissionCategory.append(supplementOption);
+    submissionCategory.value = currentValue;
+  };
+
+  const downloadSubmissionJson = () => {
+    const data = collectSubmission();
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const link = document.createElement('a');
+    const title = data.title_en || data.title_zh || 'supplement';
+    const filename = title.toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/gi, '-').replace(/^-|-$/g, '') || 'supplement';
+    link.href = URL.createObjectURL(blob);
+    link.download = `${filename}.json`;
+    document.body.append(link);
+    link.click();
+    link.remove();
+    window.setTimeout(() => URL.revokeObjectURL(link.href), 500);
+    setSubmissionStatus('JSON 已下载。');
+  };
+
+  const bindSubmissionForm = () => {
+    if (!submissionForm) {
+      return;
+    }
+    populateSubmissionCategories();
+    restoreSubmissionDraft();
+    updateSubmissionPreview();
+
+    submissionForm.addEventListener('input', () => {
+      saveSubmissionDraft();
+      updateSubmissionPreview();
+      setSubmissionStatus('草稿已更新。');
+    });
+
+    submissionForm.addEventListener('change', (event) => {
+      if (event.target === submissionForm.elements.imageFile) {
+        if (submissionObjectUrl) {
+          URL.revokeObjectURL(submissionObjectUrl);
+        }
+        const file = submissionForm.elements.imageFile.files?.[0];
+        submissionObjectUrl = file ? URL.createObjectURL(file) : '';
+      }
+      saveSubmissionDraft();
+      updateSubmissionPreview();
+    });
+
+    submissionForm.addEventListener('submit', (event) => {
+      event.preventDefault();
+      saveSubmissionDraft();
+      updateSubmissionPreview();
+      setSubmissionStatus('预览已生成。');
+    });
+
+    submissionForm.addEventListener('reset', () => {
+      window.setTimeout(() => {
+        if (submissionObjectUrl) {
+          URL.revokeObjectURL(submissionObjectUrl);
+        }
+        submissionObjectUrl = '';
+        window.localStorage.removeItem(submissionStorageKey);
+        updateSubmissionPreview();
+        setSubmissionStatus('草稿已清空。');
+      });
+    });
+
+    submissionForm.querySelector('[data-submission-action="copy"]')?.addEventListener('click', async () => {
+      const data = collectSubmission();
+      try {
+        await navigator.clipboard.writeText(copyTextForSubmission(data));
+        setSubmissionStatus('补充包已复制。');
+      } catch (error) {
+        setSubmissionStatus('复制失败，可以下载 JSON。');
+      }
+    });
+
+    submissionForm.querySelector('[data-submission-action="download"]')?.addEventListener('click', downloadSubmissionJson);
+  };
 
   const closeLightbox = (options = {}) => {
     const { force = false } = options;
@@ -4304,6 +4629,9 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     });
 
     entry.addEventListener('click', (event) => {
+      if (entry.classList.contains('submission-preview')) {
+        return;
+      }
       if (event.target.closest('a, summary, pre, code, button, .figure img')) {
         return;
       }
@@ -4323,6 +4651,9 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
         return;
       }
       event.preventDefault();
+      if (entry.classList.contains('submission-preview')) {
+        return;
+      }
       if (details) {
         const isVisiblyOpen = details.open && !details.classList.contains('is-closing');
         setPromptOpen(details, !isVisiblyOpen);
@@ -4428,6 +4759,8 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
 
   nav.addEventListener('pointerup', finishRailDrag);
   nav.addEventListener('pointercancel', finishRailDrag);
+
+  bindSubmissionForm();
 
   if (window.location.hash) {
     const target = document.getElementById(window.location.hash.slice(1));
