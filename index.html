@@ -3766,7 +3766,9 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   const promptTimers = new WeakMap();
   const fullImagePreloads = new Map();
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const hoverPreloadQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
   const lightboxCloseMs = 420;
+  const maxFullImagePreloads = 10;
   const layoutEase = 'cubic-bezier(0.2, 0.7, 0.18, 1)';
   const mobileNavQuery = window.matchMedia('(max-width: 780px)');
 
@@ -4070,6 +4072,9 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     if (!src || fullImagePreloads.has(src)) {
       return;
     }
+    if (fullImagePreloads.size >= maxFullImagePreloads) {
+      fullImagePreloads.delete(fullImagePreloads.keys().next().value);
+    }
     const preload = new Image();
     preload.decoding = 'async';
     preload.src = src;
@@ -4102,17 +4107,14 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     img.setAttribute('role', 'button');
     img.setAttribute('aria-label', `查看大图：${img.alt || '图片预览'}`);
     img.addEventListener('pointerdown', (event) => {
-      if (event.button !== 0) {
+      if (event.button !== 0 && event.pointerType !== 'touch') {
         return;
       }
-      preloadFullImage(img);
+      if (hoverPreloadQuery.matches && (!event.pointerType || event.pointerType === 'mouse')) {
+        preloadFullImage(img);
+      }
       event.stopPropagation();
     });
-    if (!window.PointerEvent) {
-      img.addEventListener('touchstart', (event) => {
-        preloadFullImage(img);
-      }, { passive: true });
-    }
     img.addEventListener('click', (event) => {
       event.preventDefault();
       event.stopPropagation();
@@ -4126,7 +4128,9 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
       openLightbox(img);
     }, { passive: false });
     img.addEventListener('mouseenter', () => {
-      preloadFullImage(img);
+      if (hoverPreloadQuery.matches) {
+        preloadFullImage(img);
+      }
     });
     img.addEventListener('keydown', (event) => {
       if (event.key !== 'Enter' && event.key !== ' ') {
@@ -4404,6 +4408,12 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
   }
   updateProgress();
   updateBackToTop();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js').catch(() => {});
+    });
+  }
 })();
 </script>
 </body></html>
