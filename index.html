@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT-Image2-Skill 图片与提示词参考库</title>
-<link rel="stylesheet" href="assets/styles.css?v=20260604-natural-prompt-height">
+<link rel="stylesheet" href="assets/styles.css?v=20260604-prompt-copy">
 </head>
 <body id="top">
 <button class="mobile-nav-toggle" type="button" aria-controls="category-nav" aria-expanded="false">
@@ -4706,6 +4706,72 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     }, promptDuration(details) + 40));
   };
 
+  const copyTextToClipboard = async (text) => {
+    if (!text) {
+      return false;
+    }
+    if (navigator.clipboard?.writeText && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return true;
+    }
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.setAttribute('readonly', '');
+    textarea.style.position = 'fixed';
+    textarea.style.top = '0';
+    textarea.style.left = '-9999px';
+    document.body.append(textarea);
+    textarea.select();
+    const copied = document.execCommand('copy');
+    textarea.remove();
+    return copied;
+  };
+
+  const flashCopyButton = (button, label) => {
+    const defaultLabel = button.dataset.defaultLabel || '复制';
+    window.clearTimeout(Number(button.dataset.resetTimer || 0));
+    button.textContent = label;
+    button.classList.toggle('is-copied', label === '已复制');
+    const timer = window.setTimeout(() => {
+      button.textContent = defaultLabel;
+      button.classList.remove('is-copied');
+      button.dataset.resetTimer = '';
+    }, 1600);
+    button.dataset.resetTimer = String(timer);
+  };
+
+  const setupPromptCopy = (details) => {
+    const summary = details.querySelector('summary');
+    if (!summary || summary.querySelector('.prompt-copy-button')) {
+      return;
+    }
+    const label = document.createElement('span');
+    label.className = 'prompt-summary-label';
+    label.textContent = summary.textContent.trim();
+    const button = document.createElement('button');
+    button.className = 'prompt-copy-button';
+    button.type = 'button';
+    button.textContent = '复制';
+    button.dataset.defaultLabel = '复制';
+    button.setAttribute('aria-label', '复制提示词');
+    button.title = '复制提示词';
+    summary.textContent = '';
+    summary.append(label, button);
+    button.addEventListener('click', async (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      const prompt = details.querySelector('pre.prompt code')?.textContent
+        || details.querySelector('pre.prompt')?.textContent
+        || '';
+      try {
+        const copied = await copyTextToClipboard(prompt.trim());
+        flashCopyButton(button, copied ? '已复制' : '复制失败');
+      } catch (error) {
+        flashCopyButton(button, '复制失败');
+      }
+    });
+  };
+
   document.querySelectorAll('.entry').forEach((entry) => {
     const details = entry.querySelector('.prompt-details');
     const hasHiddenDetails = Boolean(
@@ -4716,6 +4782,9 @@ Panel 4: The door opens. The pet is seated perfectly by the entrance, alert and 
     }
 
     entry.tabIndex = 0;
+    if (details) {
+      setupPromptCopy(details);
+    }
     syncEntryState(entry);
 
     details?.querySelector('summary')?.addEventListener('click', (event) => {
