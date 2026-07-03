@@ -1,0 +1,459 @@
+{
+  "type": "x-author-latest-posts-collection",
+  "author": {
+    "name": "小小东",
+    "handle": "@xiaoxiaodong01",
+    "profile_url": "https://x.com/xiaoxiaodong01"
+  },
+  "collected_at": "2026-07-03T19:08:04.576Z",
+  "source": "Chrome logged-in timeline + public tweet HTML fallback",
+  "count": 10,
+  "posts": [
+    {
+      "n": 1,
+      "status_id": "2072982578064437687",
+      "url": "https://x.com/xiaoxiaodong01/status/2072982578064437687",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-03T09:55:35.000Z",
+      "title": "GPT2 x 文字 x 透视 x 空间错觉 x 美学提示词",
+      "source_text": "GPT2 x 文字 x 透视 x 空间错觉 x 美学提示词\n\n文字空间化，这个创意，GPT2 算是玩明白了！\n\n其实，这组提示词，竖版，比如1:2，超级适合做壁纸\n\n适合用来，给自己打打热血\n\n提示词输出的排版布局、还有空间感，稳定性够够的\n\n```\n让主体变小，情绪反而会变大。\n人被文字包围，但也被文字推着向前。\n——",
+      "suggested_category_id": "cat-typography-posters",
+      "suggested_category_zh": "字体与海报",
+      "category_reason": "文字透视、空间错觉、宣言海报",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMS0QWZasAAtMBI",
+          "preview_url": "https://pbs.twimg.com/media/HMS0QWZasAAtMBI?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMS0QWZasAAtMBI?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张强透视的文字空间视觉：画面像一条由主题关键词和短句构成的深邃通道，文字不是普通排版，而是铺满两侧、顶部与地面的巨大信息墙，沿同一个消失点急速缩小、翻转、倒置、拉伸，形成压迫性的视觉回声；近处字形巨大到被边缘裁切，远处字形密集收束，中央留出一个强烈发光的出口或空白核心，让观者先感到被文字包围，再被远处光源牵引。主题主体只作为极小的尺度锚点或象征性行动者出现在通道中心附近，背光成剪影，脚下带长投影，强化孤独、前进、蜕变或被信息推向选择的情绪。色彩从主题自身的情绪、材质与语义中提取，保留大面积低明度结构底色、少量高饱和信息强调色、极亮洁净出口光和清晰明暗阶梯的关系，整体冷静、紧张、锋利而干净，强调色承担情绪冲击，暗部承担空间深度，光源承担希望与方向，避免脏灰、复古泛黄或装饰性渐变。字体使用粗重无衬线、紧凑字距和重复节奏，文字既要形成可识别的信息压力，也要服从空间透视与墙面结构；底部或前景可放置一个极大的主题动词或核心宣言，与通道文字形成近景压迫和远景召唤的双层阅读。\n\n\n——————\n成长宣言: 自我突破+行动关键词+白色出口+前进者剪影\n手机海报用途: 个人成长课程封面+社群打卡开屏\n冷感配色: 深海蓝+银灰白+电光青+暗场高对比\n主视觉重心: 单人背影居中+尽头强光门洞+近景巨型动词裁切\n比例：16:9\n",
+          "alt_length": 572
+        },
+        {
+          "order": 2,
+          "media_id": "HMSx85DbkAAvqgB",
+          "preview_url": "https://pbs.twimg.com/media/HMSx85DbkAAvqgB?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMSx85DbkAAvqgB?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 3,
+          "media_id": "HMSx-vbaoAAThtt",
+          "preview_url": "https://pbs.twimg.com/media/HMSx-vbaoAAThtt?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMSx-vbaoAAThtt?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 4,
+          "media_id": "HMSyBEBbUAAAnXK",
+          "preview_url": "https://pbs.twimg.com/media/HMSyBEBbUAAAnXK?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMSyBEBbUAAAnXK?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        }
+      ],
+      "prompt_sources": [
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 1",
+          "text": "围绕任意主题对象生成一张强透视的文字空间视觉：画面像一条由主题关键词和短句构成的深邃通道，文字不是普通排版，而是铺满两侧、顶部与地面的巨大信息墙，沿同一个消失点急速缩小、翻转、倒置、拉伸，形成压迫性的视觉回声；近处字形巨大到被边缘裁切，远处字形密集收束，中央留出一个强烈发光的出口或空白核心，让观者先感到被文字包围，再被远处光源牵引。主题主体只作为极小的尺度锚点或象征性行动者出现在通道中心附近，背光成剪影，脚下带长投影，强化孤独、前进、蜕变或被信息推向选择的情绪。色彩从主题自身的情绪、材质与语义中提取，保留大面积低明度结构底色、少量高饱和信息强调色、极亮洁净出口光和清晰明暗阶梯的关系，整体冷静、紧张、锋利而干净，强调色承担情绪冲击，暗部承担空间深度，光源承担希望与方向，避免脏灰、复古泛黄或装饰性渐变。字体使用粗重无衬线、紧凑字距和重复节奏，文字既要形成可识别的信息压力，也要服从空间透视与墙面结构；底部或前景可放置一个极大的主题动词或核心宣言，与通道文字形成近景压迫和远景召唤的双层阅读。\n\n\n——————\n成长宣言: 自我突破+行动关键词+白色出口+前进者剪影\n手机海报用途: 个人成长课程封面+社群打卡开屏\n冷感配色: 深海蓝+银灰白+电光青+暗场高对比\n主视觉重心: 单人背影居中+尽头强光门洞+近景巨型动词裁切\n比例：16:9\n"
+        }
+      ],
+      "import_status": "ready_to_import"
+    },
+    {
+      "n": 2,
+      "status_id": "2072970775896977595",
+      "url": "https://x.com/xiaoxiaodong01/status/2072970775896977595",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-03T09:08:41.000Z",
+      "title": "GPT2 x PPT  想怎么玩就怎么玩 x 无限风格",
+      "source_text": "GPT2 x PPT  想怎么玩就怎么玩 x 无限风格\n\n结合最近流行的无限画布，其实\nppt更加好玩了，也就是，更加能指哪打哪了\n\n随便拿一组我的提示词演示，\n\n只要你有类似的说法，就可以一次得到10张ppt\n\n如果你还会垫入每张ppt的Markdown文档，其实，某种意义上：\nGPT-image2就是你的ppt顶级特助！\n\n佐料：",
+      "suggested_category_id": "cat-infographics-field-guides",
+      "suggested_category_zh": "信息图与图鉴",
+      "category_reason": "PPT/无限画布、批量知识页",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMSreFqasAAGekX",
+          "preview_url": "https://pbs.twimg.com/media/HMSreFqasAAGekX?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMSreFqasAAGekX?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 2,
+          "media_id": "HMSryqtbMAAR5KQ",
+          "preview_url": "https://pbs.twimg.com/media/HMSryqtbMAAR5KQ?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMSryqtbMAAR5KQ?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张具有“巨物场景化”视觉机制的精致摄影式画面：主题对象以近距离主形体占据画面两侧与纵深，局部被大胆裁切，像高大的自然结构一样形成前景门廊、背景层次和可穿行的空间；底部放置极小的主题派生尺度线索，让主形体显得宏大而亲近，形成第一眼的奇妙反差。主体表面保留清晰纹理、边缘厚度、微小水珠或透明高光，光线从侧后方穿过材质，产生湿润、清透、鲜活的细节；下方可有浅水或高反射承托面，把主体、尺度线索和阴影轻微倒映出来，增强沉浸感。背景保持暗部干净、层次柔化，前后景以浅景深分离，主形体的轮廓和表面颗粒最清晰。色彩从主题自身的材质、情绪与使用语境中提取，保留大面积清洁主色作为视觉主体，深色背景和阴影负责结构，少量高明度强调色集中在尺度线索或信息节点上；整体明亮清透、湿润有生气，色阶清楚、饱和度受控，不做灰脏、陈旧或烟熏处理。若加入文字，只作为简洁的信息层与节奏标记出现，使用白色或主题派生的高对比信息色，字体干净、留白充足，与主形体保持轻微距离，形成摄影主体、微缩尺度和排版信息三层阅读路径。\n\n\n\n\n\n——————\n\n主题：介绍10种夏季蔬果\n\n\n\n\n\n连续生成10张图片，每张都是不同的蔬果介绍，还有金句逻辑、知识逻辑，还有配色和排版逻辑\n\n\n\n类似于ppt，生成10张，确保彼此的排版差异\n\n比例16:9",
+          "alt_length": 561
+        },
+        {
+          "order": 3,
+          "media_id": "HMSrgDvacAAHOkZ",
+          "preview_url": "https://pbs.twimg.com/media/HMSrgDvacAAHOkZ?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMSrgDvacAAHOkZ?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 4,
+          "media_id": "HMSrhRxaoAACgdK",
+          "preview_url": "https://pbs.twimg.com/media/HMSrhRxaoAACgdK?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMSrhRxaoAACgdK?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        }
+      ],
+      "prompt_sources": [
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 1",
+          "text": "围绕任意主题对象生成一张具有“巨物场景化”视觉机制的精致摄影式画面：主题对象以近距离主形体占据画面两侧与纵深，局部被大胆裁切，像高大的自然结构一样形成前景门廊、背景层次和可穿行的空间；底部放置极小的主题派生尺度线索，让主形体显得宏大而亲近，形成第一眼的奇妙反差。主体表面保留清晰纹理、边缘厚度、微小水珠或透明高光，光线从侧后方穿过材质，产生湿润、清透、鲜活的细节；下方可有浅水或高反射承托面，把主体、尺度线索和阴影轻微倒映出来，增强沉浸感。背景保持暗部干净、层次柔化，前后景以浅景深分离，主形体的轮廓和表面颗粒最清晰。色彩从主题自身的材质、情绪与使用语境中提取，保留大面积清洁主色作为视觉主体，深色背景和阴影负责结构，少量高明度强调色集中在尺度线索或信息节点上；整体明亮清透、湿润有生气，色阶清楚、饱和度受控，不做灰脏、陈旧或烟熏处理。若加入文字，只作为简洁的信息层与节奏标记出现，使用白色或主题派生的高对比信息色，字体干净、留白充足，与主形体保持轻微距离，形成摄影主体、微缩尺度和排版信息三层阅读路径。\n\n\n\n\n\n——————\n\n主题：介绍10种夏季蔬果\n\n\n\n\n\n连续生成10张图片，每张都是不同的蔬果介绍，还有金句逻辑、知识逻辑，还有配色和排版逻辑\n\n\n\n类似于ppt，生成10张，确保彼此的排版差异\n\n比例16:9"
+        }
+      ],
+      "import_status": "ready_to_import"
+    },
+    {
+      "n": 3,
+      "status_id": "2072829569363849524",
+      "url": "https://x.com/xiaoxiaodong01/status/2072829569363849524",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T23:47:35.000Z",
+      "title": "GPT2 x 早安 x  前景 x 美学提示词",
+      "source_text": "GPT2 x 早安 x  前景 x 美学提示词\n\n从菊次郎夏天的海报中，获取的这组灵感\n\n同样是一次生成10张逻辑\n\n实践了上次的：\n`具备收藏价值`\n这个补充佐料\n\n提示词见图片最后一张的ALT属性中",
+      "suggested_category_id": "cat-typography-posters",
+      "suggested_category_zh": "字体与海报",
+      "category_reason": "早安海报、前景构图、收藏级日签",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMQp-IuaAAA6Me7",
+          "preview_url": "https://pbs.twimg.com/media/HMQp-IuaAAA6Me7?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMQp-IuaAAA6Me7?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 2,
+          "media_id": "HMQq61EaUAIbhr-",
+          "preview_url": "https://pbs.twimg.com/media/HMQq61EaUAIbhr-?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMQq61EaUAIbhr-?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 3,
+          "media_id": "HMQrF00bUAA8QI_",
+          "preview_url": "https://pbs.twimg.com/media/HMQrF00bUAA8QI_?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMQrF00bUAA8QI_?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 4,
+          "media_id": "HMQreBYaEAA1FMN",
+          "preview_url": "https://pbs.twimg.com/media/HMQreBYaEAA1FMN?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMQreBYaEAA1FMN?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张具有强烈场域沉浸感的画面：让主题派生出的重复层状元素铺满视觉空间，前景元素被明显放大并柔化，形成可进入的遮挡层；中景只露出少量关键主体或表情、符号、物件，使它像从密集环境里突然冒出，第一眼先读到大面积流动场域，随后发现被包围的核心瞬间。空间要有浅景深和压缩感，近处虚、远处轻，局部清晰点控制视线，背景不做空白装饰，而是继续用同一主题元素延展成连续海面般的节奏。色彩从主题自身的材质、季节、情绪和叙事中提取，保留大面积高明度、清透、干净的主色场，辅以更深的结构色建立层次，少量明亮强调色只落在焦点和信息节点上；整体保持明亮轻快、通风感、清晰色阶和柔和自然光，不要变成灰脏、陈旧或沉闷。画面中可加入少量文字信息，文字必须像图形一样参与构图：底部或主要视觉重心处使用粗粝手写质感的大字，边缘带有刷痕和不规则颗粒，形成有重量的记忆点；辅助文字更小、更克制，与焦点保持呼应但不抢走场域的呼吸。整体质感应像真实摄影与海报设计融合，保留自然颗粒、轻微胶片感、湿润明亮的空气和亲近的生活情绪，避免把主体孤立成普通插画或把背景处理成平面纹样。\n\n本次主题：给各省人说，早安，类似：早安，上海\n今日日期 2026-07-03\n一共10个城市\n\n——————\n\n\n\n\n\n连续生成10张图片，每张都是不同的城市主题、插画逻辑，还有金句逻辑，还有配色和排版逻辑\n\n每张都具备收藏级价值\n\n类似于ppt，生成10张，确保彼此的排版差异\n\n比例16:9",
+          "alt_length": 623
+        }
+      ],
+      "prompt_sources": [
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 1",
+          "text": "围绕任意主题对象生成一张具有强烈场域沉浸感的画面：让主题派生出的重复层状元素铺满视觉空间，前景元素被明显放大并柔化，形成可进入的遮挡层；中景只露出少量关键主体或表情、符号、物件，使它像从密集环境里突然冒出，第一眼先读到大面积流动场域，随后发现被包围的核心瞬间。空间要有浅景深和压缩感，近处虚、远处轻，局部清晰点控制视线，背景不做空白装饰，而是继续用同一主题元素延展成连续海面般的节奏。色彩从主题自身的材质、季节、情绪和叙事中提取，保留大面积高明度、清透、干净的主色场，辅以更深的结构色建立层次，少量明亮强调色只落在焦点和信息节点上；整体保持明亮轻快、通风感、清晰色阶和柔和自然光，不要变成灰脏、陈旧或沉闷。画面中可加入少量文字信息，文字必须像图形一样参与构图：底部或主要视觉重心处使用粗粝手写质感的大字，边缘带有刷痕和不规则颗粒，形成有重量的记忆点；辅助文字更小、更克制，与焦点保持呼应但不抢走场域的呼吸。整体质感应像真实摄影与海报设计融合，保留自然颗粒、轻微胶片感、湿润明亮的空气和亲近的生活情绪，避免把主体孤立成普通插画或把背景处理成平面纹样。\n\n本次主题：给各省人说，早安，类似：早安，上海\n今日日期 2026-07-03\n一共10个城市\n\n——————\n\n\n\n\n\n连续生成10张图片，每张都是不同的城市主题、插画逻辑，还有金句逻辑，还有配色和排版逻辑\n\n每张都具备收藏级价值\n\n类似于ppt，生成10张，确保彼此的排版差异\n\n比例16:9"
+        }
+      ],
+      "import_status": "ready_to_import"
+    },
+    {
+      "n": 4,
+      "status_id": "2072720696934117486",
+      "url": "https://x.com/xiaoxiaodong01/status/2072720696934117486",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T16:34:58.000Z",
+      "title": "GPT2 x 票据 x 拓印 x 古籍气质 x 美学提示词",
+      "source_text": "GPT2 x 票据 x 拓印 x 古籍气质 x 美学提示词\n\n本套提示词，适合：\n诗词座右铭系列、国风知识卡、书法金句海报、读书笔记封面、传统文化课程视觉、文学展板、文创明信片、公众号题图、PPT章节页、古籍风品牌物料...\n\n个人感觉：适合银票\n\nAI点评：\n\n它的美感不是“古风滤镜”，而是更像：",
+      "suggested_category_id": "cat-typography-posters",
+      "suggested_category_zh": "字体与海报",
+      "category_reason": "票据拓印、古籍气质、金句海报",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMPHi2ybsAMJQI_",
+          "preview_url": "https://pbs.twimg.com/media/HMPHi2ybsAMJQI_?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPHi2ybsAMJQI_?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 2,
+          "media_id": "HMPHmU8bEAEzEHL",
+          "preview_url": "https://pbs.twimg.com/media/HMPHmU8bEAEzEHL?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPHmU8bEAEzEHL?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 3,
+          "media_id": "HMPHtfCawAAnOIX",
+          "preview_url": "https://pbs.twimg.com/media/HMPHtfCawAAnOIX?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPHtfCawAAnOIX?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 4,
+          "media_id": "HMPHzLvbwAAGk32",
+          "preview_url": "https://pbs.twimg.com/media/HMPHzLvbwAAGk32?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPHzLvbwAAGk32?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        }
+      ],
+      "prompt_sources": [],
+      "import_status": "needs_prompt_review"
+    },
+    {
+      "n": 5,
+      "status_id": "2072714953103122560",
+      "url": "https://x.com/xiaoxiaodong01/status/2072714953103122560",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T16:12:08.000Z",
+      "title": "GPT2 x 节气 x 中式美学 x ppt x 美学提示词",
+      "source_text": "GPT2 x 节气 x 中式美学 x ppt x 美学提示词\n\n这种风格的提示词，我做到了几千套了，一股脑丢星球中了\n\n不得不说，有点东西了\n\n我也变懒了，因为，我现在不喜欢一次只生成一张图\n而是 极限 10张\n\nchatGPT 自带的功能\n\n这组的提示词是在ALT属性中，也在评论区",
+      "suggested_category_id": "cat-ink-chinese",
+      "suggested_category_zh": "水墨与中文风格",
+      "category_reason": "节气、中式美学、清透图文视觉",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMPDP-3awAA3hJt",
+          "preview_url": "https://pbs.twimg.com/media/HMPDP-3awAA3hJt?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPDP-3awAA3hJt?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张清透、有仪式感的图文视觉：画面先以大面积高明度留白建立呼吸感，背景分成上下两个轻微明度差的平静色场，带细腻纸面颗粒但保持干净通风。主题对象不做满铺，而以精细手绘主形体进入画面下方视觉重心，局部被放大、枝蔓式延展或由主题材料自然伸出，让主体像从信息版面里生长出来；再设置一个较小的方向性符号悬停在上方或侧上方，与淡化圆形色块形成轻微压叠，制造从静态信息到轻盈动势的第一眼转折。文字是画面骨架：一组大号中文纵向主标题承担最重视觉重量，另一组较粗的主题名或日期信息在相对空处形成庄重停顿，细小说明文字以窄行距、竖排或紧凑短行穿插其间，底部可放极简索引式信息条，所有文字保持克制、疏朗、可读，不喧宾夺主。色彩从主题自身的季节、材质、情绪与文化信号中提取，映射为明亮底色、柔和主体色、清晰结构深色、低饱和支撑色和少量醒目强调色；保持高明度、清透、温暖有生气的情绪，强调色只用于最关键的视觉节点，深色主要服务文字和细线结构，纹理与阴影轻薄透明，避免脏灰、厚重复古或浑浊滤镜。整体质感是东方节令画册与当代信息排版的结合，插画精细、边缘清楚、层次轻，留白让文字和图形彼此牵引，最终效果应像一张可收藏的主题纪念页，而不是普通插画拼贴。\n\n————\n本次主题： 各种风格的 小暑节气海报，融合不同的小暑元素\n\n连续生成10张图片，每张都是不同的小暑主题、插画逻辑，还有金句逻辑，还有配色和排版逻辑\n\n类似于ppt，生成10张，确保彼此的排版差异\n比例16:9",
+          "alt_length": 631
+        },
+        {
+          "order": 2,
+          "media_id": "HMPCg07bwAEK0-3",
+          "preview_url": "https://pbs.twimg.com/media/HMPCg07bwAEK0-3?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPCg07bwAEK0-3?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 3,
+          "media_id": "HMPCid5acAA2Dyj",
+          "preview_url": "https://pbs.twimg.com/media/HMPCid5acAA2Dyj?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPCid5acAA2Dyj?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 4,
+          "media_id": "HMPCnArbUAA57aN",
+          "preview_url": "https://pbs.twimg.com/media/HMPCnArbUAA57aN?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPCnArbUAA57aN?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        }
+      ],
+      "prompt_sources": [
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 1",
+          "text": "围绕任意主题对象生成一张清透、有仪式感的图文视觉：画面先以大面积高明度留白建立呼吸感，背景分成上下两个轻微明度差的平静色场，带细腻纸面颗粒但保持干净通风。主题对象不做满铺，而以精细手绘主形体进入画面下方视觉重心，局部被放大、枝蔓式延展或由主题材料自然伸出，让主体像从信息版面里生长出来；再设置一个较小的方向性符号悬停在上方或侧上方，与淡化圆形色块形成轻微压叠，制造从静态信息到轻盈动势的第一眼转折。文字是画面骨架：一组大号中文纵向主标题承担最重视觉重量，另一组较粗的主题名或日期信息在相对空处形成庄重停顿，细小说明文字以窄行距、竖排或紧凑短行穿插其间，底部可放极简索引式信息条，所有文字保持克制、疏朗、可读，不喧宾夺主。色彩从主题自身的季节、材质、情绪与文化信号中提取，映射为明亮底色、柔和主体色、清晰结构深色、低饱和支撑色和少量醒目强调色；保持高明度、清透、温暖有生气的情绪，强调色只用于最关键的视觉节点，深色主要服务文字和细线结构，纹理与阴影轻薄透明，避免脏灰、厚重复古或浑浊滤镜。整体质感是东方节令画册与当代信息排版的结合，插画精细、边缘清楚、层次轻，留白让文字和图形彼此牵引，最终效果应像一张可收藏的主题纪念页，而不是普通插画拼贴。\n\n————\n本次主题： 各种风格的 小暑节气海报，融合不同的小暑元素\n\n连续生成10张图片，每张都是不同的小暑主题、插画逻辑，还有金句逻辑，还有配色和排版逻辑\n\n类似于ppt，生成10张，确保彼此的排版差异\n比例16:9"
+        }
+      ],
+      "import_status": "ready_to_import"
+    },
+    {
+      "n": 6,
+      "status_id": "2072715065841873336",
+      "url": "https://x.com/xiaoxiaodong01/status/2072715065841873336",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T16:12:35.000Z",
+      "title": "围绕任意主题对象生成一张清透、有仪式感的图文视觉：画面先以大面积高明度留白建立呼吸感，背景分成上下两个轻微明度差的平静色场，带细腻纸面颗粒但保持干净通风。主题对象不做满铺，而以精细手绘主形体进入画面下方视觉重心，局部被放大、枝蔓式延展或由主题材料自然伸出，让主体像从信息版面里生长",
+      "source_text": "围绕任意主题对象生成一张清透、有仪式感的图文视觉：画面先以大面积高明度留白建立呼吸感，背景分成上下两个轻微明度差的平静色场，带细腻纸面颗粒但保持干净通风。主题对象不做满铺，而以精细手绘主形体进入画面下方视觉重心，局部被放大、枝蔓式延展或由主题材料自然伸出，让主体像从信息版面里生长",
+      "suggested_category_id": "cat-ink-chinese",
+      "suggested_category_zh": "水墨与中文风格",
+      "category_reason": "节气提示词正文补充帖",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMPDVLoakAAnb9z",
+          "preview_url": "https://pbs.twimg.com/media/HMPDVLoakAAnb9z?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMPDVLoakAAnb9z?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        }
+      ],
+      "prompt_sources": [],
+      "import_status": "needs_prompt_review"
+    },
+    {
+      "n": 7,
+      "status_id": "2072700281192915107",
+      "url": "https://x.com/xiaoxiaodong01/status/2072700281192915107",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T15:13:50.000Z",
+      "title": "GPT2 x 包装 x 思路 发散 x 美学提示词",
+      "source_text": "GPT2 x 包装 x 思路 发散 x 美学提示词\n\n一直觉得GPT-image2 做包装\n能起到很好的辅助作用\n\n尤其是垫图 刀版图，然后随便用一个小小东的提示词\n比如这次用的就是关联推文中的\n\n我甚至觉得， 可以在刀版图上标记一些你的想法\n还有提供Markdown文档，说明你的包装的内容",
+      "suggested_category_id": "cat-brand-systems-identity",
+      "suggested_category_zh": "品牌系统与视觉识别",
+      "category_reason": "包装、刀版图、品牌物料思路",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMO1WeCbkAABimK",
+          "preview_url": "https://pbs.twimg.com/media/HMO1WeCbkAABimK?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMO1WeCbkAABimK?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        },
+        {
+          "order": 2,
+          "media_id": "HMO1ZUqaoAEtWIH",
+          "preview_url": "https://pbs.twimg.com/media/HMO1ZUqaoAEtWIH?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMO1ZUqaoAEtWIH?format=jpg&name=orig",
+          "alt": "",
+          "alt_length": 0
+        }
+      ],
+      "prompt_sources": [],
+      "import_status": "needs_prompt_review"
+    },
+    {
+      "n": 8,
+      "status_id": "2072598952407609442",
+      "url": "https://x.com/xiaoxiaodong01/status/2072598952407609442",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T08:31:11.000Z",
+      "title": "GPT2 x 剪影 x 拼贴 x 美学提示词",
+      "source_text": "GPT2 x 剪影 x 拼贴 x 美学提示词\n\n手作质感 + 展览系统 + 信息秩序\n就得到了这组提示词\n\n优点：\n文字主轴很稳。\n材质语言很明确~\n\n很适合做那种有点艺术气质、但又不能太虚的视觉。",
+      "suggested_category_id": "cat-more-illustration-styles",
+      "suggested_category_zh": "更多插画风格",
+      "category_reason": "剪影、拼贴、手作质感、展览系统",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMNZr9eaoAEfChN",
+          "preview_url": "https://pbs.twimg.com/media/HMNZr9eaoAEfChN?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMNZr9eaoAEfChN?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张具有手工拼贴感的信息视觉：画面先读到一条强而安静的文字主轴，字形采用厚重、简洁、留白充足的块面排布，像被精确嵌入背景的白色结构；主题内容被转译为几组粗粝的黑白剪影与主题派生色块，剪影以触碰、托举、悬停、遮挡的关系分布在文字两侧，形成像在搬运、摆放、观察主题的视觉仪式。主体图形使用拓印、木刻、干刷、纸片裁切般的边缘，黑色结构承担重量和方向，白色结构制造呼吸和反差，少量带线纹或纹理的主题色块作为被托起的核心符号，大小错落，彼此留出清晰空隙。背景保持大面积明亮、清透、干净的高明度底场，色彩从主题自身的材质、情绪和语境中提取：底色负责轻快通风感，深色负责骨架和张力，中等饱和的主题色负责情绪，极少量小圆点或短线作为节拍与视线停顿；整体保留明亮清爽、克制但有生命力的色彩关系，避免浑浊、陈旧和灰暗。信息层级要像展览视觉系统一样清楚，主标题最大且最有秩序，日期、说明、署名等次级信息收窄成边缘竖排或小字号模块，形成图像与文字互相牵制的节奏；最终效果应像一张由剪影、纸片、拓印纹理和几何留白共同组织出来的现代艺术宣传视觉，既有手作痕迹，又保持干净、明确、可读。\n\n\n——————\n展览内容：城市自然观察+石块标本+手部剪影+开放日信息\n海报用途：新美馆探索基地春季展览主视觉\n冷感配色：雾蓝+银灰+电光青+明亮高反差\n主视觉重心：中心竖排标题+左右托举石块群+底部活动信息栏，竖版 3:4\n",
+          "alt_length": 603
+        },
+        {
+          "order": 2,
+          "media_id": "HMNZvwPb0AAyP3I",
+          "preview_url": "https://pbs.twimg.com/media/HMNZvwPb0AAyP3I?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMNZvwPb0AAyP3I?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张具有手工拼贴感的信息视觉：画面先读到一条强而安静的文字主轴，字形采用厚重、简洁、留白充足的块面排布，像被精确嵌入背景的白色结构；主题内容被转译为几组粗粝的黑白剪影与主题派生色块，剪影以触碰、托举、悬停、遮挡的关系分布在文字两侧，形成像在搬运、摆放、观察主题的视觉仪式。主体图形使用拓印、木刻、干刷、纸片裁切般的边缘，黑色结构承担重量和方向，白色结构制造呼吸和反差，少量带线纹或纹理的主题色块作为被托起的核心符号，大小错落，彼此留出清晰空隙。背景保持大面积明亮、清透、干净的高明度底场，色彩从主题自身的材质、情绪和语境中提取：底色负责轻快通风感，深色负责骨架和张力，中等饱和的主题色负责情绪，极少量小圆点或短线作为节拍与视线停顿；整体保留明亮清爽、克制但有生命力的色彩关系，避免浑浊、陈旧和灰暗。信息层级要像展览视觉系统一样清楚，主标题最大且最有秩序，日期、说明、署名等次级信息收窄成边缘竖排或小字号模块，形成图像与文字互相牵制的节奏；最终效果应像一张由剪影、纸片、拓印纹理和几何留白共同组织出来的现代艺术宣传视觉，既有手作痕迹，又保持干净、明确、可读。\n\n\n——————\n工作坊主题：自然拼贴课程+纸片标本+触摸动作+报名日期\n活动用途：社区艺术手作工作坊招募海报\n暖调色彩：暖橙+奶白+深棕+柔和中饱和\n画面构图：下方大手托起核心色块+上方悬停小物件+侧边竖排名单，竖版 3:4\n",
+          "alt_length": 603
+        }
+      ],
+      "prompt_sources": [
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 1",
+          "text": "围绕任意主题对象生成一张具有手工拼贴感的信息视觉：画面先读到一条强而安静的文字主轴，字形采用厚重、简洁、留白充足的块面排布，像被精确嵌入背景的白色结构；主题内容被转译为几组粗粝的黑白剪影与主题派生色块，剪影以触碰、托举、悬停、遮挡的关系分布在文字两侧，形成像在搬运、摆放、观察主题的视觉仪式。主体图形使用拓印、木刻、干刷、纸片裁切般的边缘，黑色结构承担重量和方向，白色结构制造呼吸和反差，少量带线纹或纹理的主题色块作为被托起的核心符号，大小错落，彼此留出清晰空隙。背景保持大面积明亮、清透、干净的高明度底场，色彩从主题自身的材质、情绪和语境中提取：底色负责轻快通风感，深色负责骨架和张力，中等饱和的主题色负责情绪，极少量小圆点或短线作为节拍与视线停顿；整体保留明亮清爽、克制但有生命力的色彩关系，避免浑浊、陈旧和灰暗。信息层级要像展览视觉系统一样清楚，主标题最大且最有秩序，日期、说明、署名等次级信息收窄成边缘竖排或小字号模块，形成图像与文字互相牵制的节奏；最终效果应像一张由剪影、纸片、拓印纹理和几何留白共同组织出来的现代艺术宣传视觉，既有手作痕迹，又保持干净、明确、可读。\n\n\n——————\n展览内容：城市自然观察+石块标本+手部剪影+开放日信息\n海报用途：新美馆探索基地春季展览主视觉\n冷感配色：雾蓝+银灰+电光青+明亮高反差\n主视觉重心：中心竖排标题+左右托举石块群+底部活动信息栏，竖版 3:4\n"
+        },
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 2",
+          "text": "围绕任意主题对象生成一张具有手工拼贴感的信息视觉：画面先读到一条强而安静的文字主轴，字形采用厚重、简洁、留白充足的块面排布，像被精确嵌入背景的白色结构；主题内容被转译为几组粗粝的黑白剪影与主题派生色块，剪影以触碰、托举、悬停、遮挡的关系分布在文字两侧，形成像在搬运、摆放、观察主题的视觉仪式。主体图形使用拓印、木刻、干刷、纸片裁切般的边缘，黑色结构承担重量和方向，白色结构制造呼吸和反差，少量带线纹或纹理的主题色块作为被托起的核心符号，大小错落，彼此留出清晰空隙。背景保持大面积明亮、清透、干净的高明度底场，色彩从主题自身的材质、情绪和语境中提取：底色负责轻快通风感，深色负责骨架和张力，中等饱和的主题色负责情绪，极少量小圆点或短线作为节拍与视线停顿；整体保留明亮清爽、克制但有生命力的色彩关系，避免浑浊、陈旧和灰暗。信息层级要像展览视觉系统一样清楚，主标题最大且最有秩序，日期、说明、署名等次级信息收窄成边缘竖排或小字号模块，形成图像与文字互相牵制的节奏；最终效果应像一张由剪影、纸片、拓印纹理和几何留白共同组织出来的现代艺术宣传视觉，既有手作痕迹，又保持干净、明确、可读。\n\n\n——————\n工作坊主题：自然拼贴课程+纸片标本+触摸动作+报名日期\n活动用途：社区艺术手作工作坊招募海报\n暖调色彩：暖橙+奶白+深棕+柔和中饱和\n画面构图：下方大手托起核心色块+上方悬停小物件+侧边竖排名单，竖版 3:4\n"
+        }
+      ],
+      "import_status": "ready_to_import"
+    },
+    {
+      "n": 9,
+      "status_id": "2072596969705677193",
+      "url": "https://x.com/xiaoxiaodong01/status/2072596969705677193",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T08:23:19.000Z",
+      "title": "GPT2 x 摄影 x 人像 x 特写 x 美学提示词",
+      "source_text": "GPT2 x 摄影 x 人像 x 特写 x 美学提示词\n\n最大特点是：细品，能感受到暗部中的情绪。\n\n此提示词适合：人物局部、食物特写、花卉细节、产品情绪图、香氛海报、私密感品牌视觉。\n\n它的核心美感可以概括成一句话：\n\n近，不是为了看清全部，而是为了看见情绪。",
+      "suggested_category_id": "cat-photography",
+      "suggested_category_zh": "摄影",
+      "category_reason": "摄影、人像、暗部情绪、特写",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMNX5MzaIAATKrE",
+          "preview_url": "https://pbs.twimg.com/media/HMNX5MzaIAATKrE?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMNX5MzaIAATKrE?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张强烈近距离的视觉作品，让主题以贴近镜头的局部主形体出现，只揭示最有情绪和识别度的一小块区域，其余部分被阴影、裁切和浅景深压入画外；画面第一眼应读到一处清晰的核心细节，第二眼才发现前景有主题派生的柔软遮挡物贴近镜头形成朦胧色块，遮住部分主形体并制造亲密、安静、被窥见的距离感。光线采用窄幅斜向掠过的自然亮面，只照亮核心细节和附近纹理，边缘迅速沉入深色负空间，形成明暗强对比但不过度戏剧化；表面质感要保留真实细小颗粒、斑点、毛孔、纤维或材质微瑕，使主体带有未修饰的生命感。色彩从主题自身的材质、时间和情绪中提取，保留大面积清晰暗部作为结构场，局部温暖高亮作为情绪焦点，前景遮挡物使用更饱和但面积受控的主题强调色，信息文字使用极小、低调、干净的浅色层级；整体保持温暖有生气、明暗干净、色阶透明，不做浑浊灰化或复古脏色。若需要文字，只放置一小块细密微型排版，贴在安静的中部阴影或半亮区域，字号克制、行距紧、存在感像私密注释而非广告标题。最终效果应像一个被光短暂捕捉的主题瞬间，近得有压迫感，却因为遮挡、暗部和微型信息层而保持克制、私密、耐看。\n\n\n——————\n侧脸封面方向: 女性近距离侧脸+眉眼轮廓+蓝紫花影+细密肌理\n摄影发布用途: 用作人像摄影系列社交预告图\n冷感主色: 冷蓝+银灰+淡紫高光+清透低饱和\n画面构图: 眉眼斜向穿过亮面+前景花影压在边缘+微型文字贴近半暗脸颊+竖版 9:10\n",
+          "alt_length": 608
+        },
+        {
+          "order": 2,
+          "media_id": "HMNX8YtaAAA_l_A",
+          "preview_url": "https://pbs.twimg.com/media/HMNX8YtaAAA_l_A?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMNX8YtaAAA_l_A?format=jpg&name=orig",
+          "alt": "围绕任意主题对象生成一张强烈近距离的视觉作品，让主题以贴近镜头的局部主形体出现，只揭示最有情绪和识别度的一小块区域，其余部分被阴影、裁切和浅景深压入画外；画面第一眼应读到一处清晰的核心细节，第二眼才发现前景有主题派生的柔软遮挡物贴近镜头形成朦胧色块，遮住部分主形体并制造亲密、安静、被窥见的距离感。光线采用窄幅斜向掠过的自然亮面，只照亮核心细节和附近纹理，边缘迅速沉入深色负空间，形成明暗强对比但不过度戏剧化；表面质感要保留真实细小颗粒、斑点、毛孔、纤维或材质微瑕，使主体带有未修饰的生命感。色彩从主题自身的材质、时间和情绪中提取，保留大面积清晰暗部作为结构场，局部温暖高亮作为情绪焦点，前景遮挡物使用更饱和但面积受控的主题强调色，信息文字使用极小、低调、干净的浅色层级；整体保持温暖有生气、明暗干净、色阶透明，不做浑浊灰化或复古脏色。若需要文字，只放置一小块细密微型排版，贴在安静的中部阴影或半亮区域，字号克制、行距紧、存在感像私密注释而非广告标题。最终效果应像一个被光短暂捕捉的主题瞬间，近得有压迫感，却因为遮挡、暗部和微型信息层而保持克制、私密、耐看。\n\n\n——————\n花影人像内容: 年轻女性半脸+眼部细节+橙色花瓣前景+皮肤微瑕\n个人写真用途: 用作私密感人像作品集封面\n暖调配色: 蜂蜜金+焦橙+墨黑暗部+低饱和肤色\n主视觉重心: 单眼靠上焦点+花瓣贴近镜头遮挡+右侧深色留白+竖版 9:10\n",
+          "alt_length": 604
+        }
+      ],
+      "prompt_sources": [
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 1",
+          "text": "围绕任意主题对象生成一张强烈近距离的视觉作品，让主题以贴近镜头的局部主形体出现，只揭示最有情绪和识别度的一小块区域，其余部分被阴影、裁切和浅景深压入画外；画面第一眼应读到一处清晰的核心细节，第二眼才发现前景有主题派生的柔软遮挡物贴近镜头形成朦胧色块，遮住部分主形体并制造亲密、安静、被窥见的距离感。光线采用窄幅斜向掠过的自然亮面，只照亮核心细节和附近纹理，边缘迅速沉入深色负空间，形成明暗强对比但不过度戏剧化；表面质感要保留真实细小颗粒、斑点、毛孔、纤维或材质微瑕，使主体带有未修饰的生命感。色彩从主题自身的材质、时间和情绪中提取，保留大面积清晰暗部作为结构场，局部温暖高亮作为情绪焦点，前景遮挡物使用更饱和但面积受控的主题强调色，信息文字使用极小、低调、干净的浅色层级；整体保持温暖有生气、明暗干净、色阶透明，不做浑浊灰化或复古脏色。若需要文字，只放置一小块细密微型排版，贴在安静的中部阴影或半亮区域，字号克制、行距紧、存在感像私密注释而非广告标题。最终效果应像一个被光短暂捕捉的主题瞬间，近得有压迫感，却因为遮挡、暗部和微型信息层而保持克制、私密、耐看。\n\n\n——————\n侧脸封面方向: 女性近距离侧脸+眉眼轮廓+蓝紫花影+细密肌理\n摄影发布用途: 用作人像摄影系列社交预告图\n冷感主色: 冷蓝+银灰+淡紫高光+清透低饱和\n画面构图: 眉眼斜向穿过亮面+前景花影压在边缘+微型文字贴近半暗脸颊+竖版 9:10\n"
+        },
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 2",
+          "text": "围绕任意主题对象生成一张强烈近距离的视觉作品，让主题以贴近镜头的局部主形体出现，只揭示最有情绪和识别度的一小块区域，其余部分被阴影、裁切和浅景深压入画外；画面第一眼应读到一处清晰的核心细节，第二眼才发现前景有主题派生的柔软遮挡物贴近镜头形成朦胧色块，遮住部分主形体并制造亲密、安静、被窥见的距离感。光线采用窄幅斜向掠过的自然亮面，只照亮核心细节和附近纹理，边缘迅速沉入深色负空间，形成明暗强对比但不过度戏剧化；表面质感要保留真实细小颗粒、斑点、毛孔、纤维或材质微瑕，使主体带有未修饰的生命感。色彩从主题自身的材质、时间和情绪中提取，保留大面积清晰暗部作为结构场，局部温暖高亮作为情绪焦点，前景遮挡物使用更饱和但面积受控的主题强调色，信息文字使用极小、低调、干净的浅色层级；整体保持温暖有生气、明暗干净、色阶透明，不做浑浊灰化或复古脏色。若需要文字，只放置一小块细密微型排版，贴在安静的中部阴影或半亮区域，字号克制、行距紧、存在感像私密注释而非广告标题。最终效果应像一个被光短暂捕捉的主题瞬间，近得有压迫感，却因为遮挡、暗部和微型信息层而保持克制、私密、耐看。\n\n\n——————\n花影人像内容: 年轻女性半脸+眼部细节+橙色花瓣前景+皮肤微瑕\n个人写真用途: 用作私密感人像作品集封面\n暖调配色: 蜂蜜金+焦橙+墨黑暗部+低饱和肤色\n主视觉重心: 单眼靠上焦点+花瓣贴近镜头遮挡+右侧深色留白+竖版 9:10\n"
+        }
+      ],
+      "import_status": "ready_to_import"
+    },
+    {
+      "n": 10,
+      "status_id": "2072585405317443591",
+      "url": "https://x.com/xiaoxiaodong01/status/2072585405317443591",
+      "author_name": "小小东",
+      "author_handle": "@xiaoxiaodong01",
+      "published_at": "2026-07-02T07:37:22.000Z",
+      "title": "GPT2 x 小暑 x 二十四节气 x 海报 x 美学提示词",
+      "source_text": "GPT2 x 小暑 x 二十四节气 x 海报 x 美学提示词\n\n想做清透、安静、微缩叙事风的图\n直接用这套提示词，基本不会跑偏。\n\n不光只适应小暑这个主题\n\n画面拆成三层：上方的垂直线阵、下方的微型叙事、背景的清透留白。\n\n第一眼有节奏压力，第二眼有生活细节，第三眼还能读到时间感和空间感。",
+      "suggested_category_id": "cat-typography-posters",
+      "suggested_category_zh": "字体与海报",
+      "category_reason": "小暑、二十四节气、微缩叙事海报",
+      "main_photos": [
+        {
+          "order": 1,
+          "media_id": "HMNNWn_bgAAt2NB",
+          "preview_url": "https://pbs.twimg.com/media/HMNNWn_bgAAt2NB?format=webp&name=medium",
+          "original_url": "https://pbs.twimg.com/media/HMNNWn_bgAAt2NB?format=jpg&name=orig",
+          "alt": "用推文接地气的言简意赅的逻辑，夸如下我写的提示词，吸引人去使用：\n\n如下是我要你夸的提示词，而不是生图的\n————\n围绕任意主题对象生成一张清透微缩叙事画面：让主题转化为一个安静开阔的浅色空间，画面上方悬下大量纤细、真实、有轻微粗细变化的垂直线性元素，像被放大的时间刻度或柔软雨幕，线条从顶部进入并在不同深度停落，前后虚实分层明显，形成第一眼的节奏压力和通风感。下方安排少量微型主题角色、符号或物件在空旷地面上活动，尺度明显小于垂线，动作克制但有生活细节，使宏大的线阵与微小叙事产生温柔对比；近处可有局部运动模糊的掠过元素，中景保持清晰，远景轻雾化，制造景深和时间流动。背景以大面积明亮干净的高明度底色承托，地面带细密织物、纸纤维或柔软颗粒质感，反光和阴影都要轻，不能变脏。色彩从主题自身的材质、季节、情绪或文化语义中提取，映射为大面积清透底色、低饱和支撑色、少量清晰强调色和深色信息色，保持明亮轻快、温和安静、色阶干净的关系，不照搬固定色号；强调色只落在最小但最先被注意的主题焦点上。若需要文字，将其作为右上或边缘的冷静信息层处理，使用细长现代字体与少量粗细对比，排列紧凑、留白充足，与线阵方向呼应，只承担节气、日期或标题式层级，不抢走微缩叙事。",
+          "alt_length": 524
+        }
+      ],
+      "prompt_sources": [
+        {
+          "type": "image_alt",
+          "label": "ALT prompt 1",
+          "text": "用推文接地气的言简意赅的逻辑，夸如下我写的提示词，吸引人去使用：\n\n如下是我要你夸的提示词，而不是生图的\n————\n围绕任意主题对象生成一张清透微缩叙事画面：让主题转化为一个安静开阔的浅色空间，画面上方悬下大量纤细、真实、有轻微粗细变化的垂直线性元素，像被放大的时间刻度或柔软雨幕，线条从顶部进入并在不同深度停落，前后虚实分层明显，形成第一眼的节奏压力和通风感。下方安排少量微型主题角色、符号或物件在空旷地面上活动，尺度明显小于垂线，动作克制但有生活细节，使宏大的线阵与微小叙事产生温柔对比；近处可有局部运动模糊的掠过元素，中景保持清晰，远景轻雾化，制造景深和时间流动。背景以大面积明亮干净的高明度底色承托，地面带细密织物、纸纤维或柔软颗粒质感，反光和阴影都要轻，不能变脏。色彩从主题自身的材质、季节、情绪或文化语义中提取，映射为大面积清透底色、低饱和支撑色、少量清晰强调色和深色信息色，保持明亮轻快、温和安静、色阶干净的关系，不照搬固定色号；强调色只落在最小但最先被注意的主题焦点上。若需要文字，将其作为右上或边缘的冷静信息层处理，使用细长现代字体与少量粗细对比，排列紧凑、留白充足，与线阵方向呼应，只承担节气、日期或标题式层级，不抢走微缩叙事。"
+        }
+      ],
+      "import_status": "ready_to_import"
+    }
+  ]
+}
