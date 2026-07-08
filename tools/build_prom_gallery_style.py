@@ -274,11 +274,12 @@ button {{ cursor: pointer; }}
 }}
 .tagline {{
   margin: 0 auto;
-  max-width: 760px;
+  max-width: none;
   color: #374151;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(17px, 1.45vw, 21px);
+  font-size: clamp(16px, 1.35vw, 20px);
   line-height: 1.5;
+  white-space: nowrap;
 }}
 .info-grid {{
   margin-top: 26px;
@@ -303,11 +304,14 @@ button {{ cursor: pointer; }}
   height: 38px;
   border-radius: 10px;
   background: var(--cyan);
-  display: grid;
-  place-items: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--ink);
   font-size: 12px;
   font-weight: 800;
+  line-height: 1;
+  text-align: center;
   flex: 0 0 auto;
 }}
 .info-card strong {{
@@ -316,7 +320,7 @@ button {{ cursor: pointer; }}
   font-size: 16px;
   line-height: 1.4;
 }}
-.info-card span {{
+.info-copy {{
   display: block;
   margin-top: 4px;
   font-size: 14px;
@@ -581,7 +585,7 @@ button {{ cursor: pointer; }}
   }}
   .intro {{ padding: 18px 0 24px; }}
   .intro-inner {{ width: calc(100% - 28px); }}
-  .tagline {{ font-size: 13px; line-height: 1.45; }}
+  .tagline {{ font-size: 13px; line-height: 1.45; white-space: normal; }}
   .info-grid {{ grid-template-columns: 1fr; gap: 8px; margin-top: 14px; }}
   .info-card {{ min-height: 62px; border-radius: 12px; padding: 10px 12px; gap: 10px; }}
   .info-icon {{ width: 30px; height: 30px; border-radius: 8px; font-size: 10px; }}
@@ -633,13 +637,12 @@ button {{ cursor: pointer; }}
     <div class="intro-inner">
       <p class="tagline">Turn visual references into reusable prompts. 浏览图片，打开细节，复制完整提示词。</p>
       <div class="info-grid">
-        <div class="info-card"><span class="info-icon">REF</span><span><strong>{data["stats"]["tiles"]} 张图片参考</strong><span>来自主站素材库，保留原图、分类、来源与 prompt。</span></span></div>
-        <div class="info-card"><span class="info-icon">CAT</span><span><strong>{data["stats"]["categories"]} 个分类</strong><span>{data["stats"]["entries"]} 个条目，其中 {data["stats"]["prompts"]} 个包含完整提示词。</span></span></div>
+        <div class="info-card"><span class="info-icon">REF</span><span><strong>{data["stats"]["tiles"]} 张图片参考</strong><span class="info-copy">来自主站素材库，保留原图、分类、来源与 prompt。</span></span></div>
+        <div class="info-card"><span class="info-icon">CAT</span><span><strong>{data["stats"]["categories"]} 个分类</strong><span class="info-copy">{data["stats"]["entries"]} 个条目，其中 {data["stats"]["prompts"]} 个包含完整提示词。</span></span></div>
       </div>
       <div class="controls" aria-label="筛选">
         <div class="mode-row">
           <button class="mode-pill is-active" type="button">Images</button>
-          <button class="mode-pill" type="button" data-open-first>Prompts</button>
         </div>
         <div class="chip-row">{chips}</div>
       </div>
@@ -768,10 +771,6 @@ button {{ cursor: pointer; }}
       selection.addRange(range);
       copyButton.textContent = '已选中';
     }}
-  }});
-  document.querySelector('[data-open-first]')?.addEventListener('click', () => {{
-    const firstVisible = tiles.find(tile => !tile.hidden);
-    if (firstVisible) openTile(Number(firstVisible.dataset.tileIndex));
   }});
 }})();
 </script>
