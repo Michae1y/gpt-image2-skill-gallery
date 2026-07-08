@@ -200,6 +200,7 @@ def build_html(entries: list[dict], categories: list[str]) -> str:
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Prompt Gallery - BLANC Style Copy</title>
+<link rel="icon" href="data:,">
 <style>
 :root {{
   --sky: #b5e4ea;
