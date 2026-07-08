@@ -128,6 +128,9 @@ def parse_entries(source: str) -> tuple[list[dict], list[str]]:
 
         tags = [one_line(t) for t in re.findall(r'<span class="tag">(.*?)</span>', block, re.S)]
         kvs = [one_line(p) for p in re.findall(r'<p class="kv">(.*?)</p>', block, re.S)]
+        summary_match = re.search(r'<details[^>]*class="[^"]*prompt-details[^"]*"[^>]*>\s*<summary>(.*?)</summary>', block, re.S)
+        prompt_label = one_line(summary_match.group(1)) if summary_match else "完整提示词 / Original Prompt"
+        prompt_is_complete = bool(prompt_label and "Source Text" not in prompt_label and "摘要" not in prompt_label)
         prompt_match = re.search(r'<pre[^>]*class="[^"]*prompt[^"]*"[^>]*>\s*<code>(.*?)</code>\s*</pre>', block, re.S)
         prompt = text_from(prompt_match.group(1)) if prompt_match else ""
 
@@ -173,6 +176,8 @@ def parse_entries(source: str) -> tuple[list[dict], list[str]]:
                 "tags": tags[:8],
                 "kvs": kvs,
                 "prompt": prompt,
+                "promptLabel": prompt_label,
+                "promptIsComplete": prompt_is_complete,
                 "sourceUrl": source_url,
                 "images": images,
             }
@@ -223,7 +228,7 @@ def make_tiles(entries: list[dict]) -> list[dict]:
 
 def build_html(entries: list[dict], categories: list[str]) -> str:
     tiles = make_tiles(entries)
-    prompts = sum(1 for entry in entries if entry["prompt"])
+    prompts = sum(1 for entry in entries if entry["prompt"] and entry.get("promptIsComplete"))
     data = {
         "entries": entries,
         "tiles": tiles,
@@ -746,6 +751,7 @@ button {{ cursor: pointer; }}
   const modalEn = document.querySelector('.modal-en');
   const modalTags = document.querySelector('.modal-tags');
   const modalMeta = document.querySelector('.modal-meta');
+  const promptLabel = document.querySelector('.prompt-head strong');
   const promptText = document.querySelector('.prompt-text');
   const copyButton = document.querySelector('.copy-button');
   const closeButton = document.querySelector('.modal-close');
@@ -780,8 +786,9 @@ button {{ cursor: pointer; }}
     const meta = (entry.kvs || []).slice(0, 2).join(' ');
     modalMeta.innerHTML = [source, escapeHtml(meta)].filter(Boolean).join(' · ');
     activePrompt = entry.prompt || '这条素材暂未收录完整提示词。';
+    promptLabel.textContent = entry.promptLabel || '完整提示词 / Original Prompt';
     promptText.textContent = activePrompt;
-    copyButton.textContent = entry.prompt ? '复制' : '暂无 prompt';
+    copyButton.textContent = entry.prompt ? (entry.promptIsComplete ? '复制' : '复制正文') : '暂无 prompt';
     copyButton.disabled = !entry.prompt;
     modal.classList.add('is-open');
     document.body.style.overflow = 'hidden';
