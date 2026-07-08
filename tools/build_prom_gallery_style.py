@@ -2,15 +2,19 @@
 from __future__ import annotations
 
 import bisect
+from datetime import datetime, timezone
 import html
 import json
 import re
+import subprocess
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "index.html"
 OUTPUT = ROOT / "prom-gallery-style.html"
+_IMAGE_ADDED_AT_CACHE: dict[str, str] = {}
+_GIT_ADDED_AT_BY_PATH: dict[str, str] | None = None
 
 
 def attrs_from(tag: str) -> dict[str, str]:
@@ -30,6 +34,62 @@ def one_line(fragment: str) -> str:
 def first_match(pattern: str, text: str, default: str = "") -> str:
     match = re.search(pattern, text, re.S)
     return one_line(match.group(1)) if match else default
+
+
+def image_added_at(path: str) -> str:
+    if path in _IMAGE_ADDED_AT_CACHE:
+        return _IMAGE_ADDED_AT_CACHE[path]
+    added_at = ""
+    if path and not path.startswith(("http://", "https://", "data:")):
+        added_at = git_added_at_by_path().get(path, "")
+        if not added_at:
+            local_path = ROOT / path
+            if local_path.exists():
+                mtime = datetime.fromtimestamp(local_path.stat().st_mtime, timezone.utc)
+                added_at = mtime.isoformat()
+    _IMAGE_ADDED_AT_CACHE[path] = added_at
+    return added_at
+
+
+def git_added_at_by_path() -> dict[str, str]:
+    global _GIT_ADDED_AT_BY_PATH
+    if _GIT_ADDED_AT_BY_PATH is not None:
+        return _GIT_ADDED_AT_BY_PATH
+    added: dict[str, str] = {}
+    result = subprocess.run(
+        ["git", "log", "--diff-filter=A", "--name-only", "--format=commit:%cI", "--", "assets"],
+        cwd=ROOT,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+    current_date = ""
+    for raw_line in result.stdout.splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        if line.startswith("commit:"):
+            current_date = line.removeprefix("commit:")
+            continue
+        if current_date and line not in added:
+            added[line] = current_date
+    _GIT_ADDED_AT_BY_PATH = added
+    return added
+
+
+def timestamp_for_sort(value: str) -> float:
+    if not value:
+        return 0.0
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00")).timestamp()
+    except ValueError:
+        return 0.0
+
+
+def entry_number_for_sort(entry_no: str) -> int:
+    match = re.search(r"\d+", entry_no or "")
+    return int(match.group(0)) if match else 0
 
 
 def parse_entries(source: str) -> tuple[list[dict], list[str]]:
@@ -146,15 +206,16 @@ def make_tiles(entries: list[dict]) -> list[dict]:
                     "category": entry["category"],
                     "title": entry["title"],
                     "entryNo": entry["entryNo"],
+                    "imageAddedAt": image_added_at(image["src"]),
                     "localAvailable": (ROOT / local_src).exists() if not local_src.startswith(("http://", "https://", "data:")) else True,
                 }
             )
     return sorted(
         tiles,
         key=lambda tile: (
-            0 if tile["localAvailable"] else 1,
-            0 if "/supplements/" in tile["src"] else 1,
-            tile["entryIndex"],
+            -timestamp_for_sort(tile["imageAddedAt"]),
+            -entry_number_for_sort(tile["entryNo"]),
+            -tile["entryIndex"],
             tile["imageIndex"],
         ),
     )
