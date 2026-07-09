@@ -1,0 +1,30 @@
+services:
+  gallery-control:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    command: ["sh", "-c", "python -m gallery_control.cli init && exec uvicorn gallery_control.app:app --host 0.0.0.0 --port 8787 --proxy-headers"]
+    ports:
+      - "127.0.0.1:8787:8787"
+    volumes:
+      - ..:/workspace/gallery
+      - ./data:/data
+      - ./spool:/spool
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8787/api/health', timeout=5)"]
+      interval: 30s
+      timeout: 8s
+      retries: 3
+
+  gallery-scheduler:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    command: ["python", "-m", "gallery_control.cli", "schedule"]
+    volumes:
+      - ..:/workspace/gallery
+      - ./data:/data
+      - ./spool:/spool
+    depends_on:
+      gallery-control:
+        condition: service_healthy

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Prompt Gallery Control</title>
+  <link rel="stylesheet" href="/admin/assets/styles.css">
+</head>
+<body>
+  <section id="login-screen" class="login-screen">
+    <form id="login-form" class="login-panel">
+      <span class="brand-mark">PG</span>
+      <p class="kicker">PROMPT GALLERY CONTROL</p>
+      <h1>管理入口</h1>
+      <label for="login-password">管理员密码</label>
+      <div class="password-row">
+        <input id="login-password" name="password" type="password" autocomplete="current-password" required autofocus>
+        <button type="submit">进入</button>
+      </div>
+      <p id="login-error" class="form-error" role="alert"></p>
+    </form>
+  </section>
+
+  <div id="app-shell" class="app-shell" hidden>
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <span class="brand-mark">PG</span>
+        <div><strong>CONTROL</strong><small>素材与发布管理</small></div>
+      </div>
+      <nav class="app-nav" aria-label="后台导航">
+        <button class="nav-item is-active" type="button" data-view="review"><span>01</span>审核队列<em id="nav-review-count">0</em></button>
+        <button class="nav-item" type="button" data-view="published"><span>02</span>已发布内容</button>
+        <button class="nav-item" type="button" data-view="sources"><span>03</span>采集源</button>
+        <button class="nav-item" type="button" data-view="jobs"><span>04</span>运行记录</button>
+      </nav>
+      <div class="sidebar-foot">
+        <a href="https://michae1y.github.io/gpt-image2-skill-gallery/" target="_blank" rel="noopener">主站 ↗</a>
+        <a href="https://michae1y.github.io/gpt-image2-skill-gallery/prom-gallery-style.html" target="_blank" rel="noopener">BLANC 副站 ↗</a>
+        <button id="logout-button" type="button">退出登录</button>
+      </div>
+    </aside>
+
+    <main class="workspace">
+      <header class="topbar">
+        <div>
+          <p class="kicker">CURATION WORKSPACE</p>
+          <h1 id="view-title">审核队列</h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="import-button" class="secondary-action" type="button"><span>＋</span>导入链接</button>
+          <button id="collect-button" class="secondary-action" type="button"><span>↻</span>立即采集</button>
+          <button id="publish-button" class="primary-action" type="button"><span>↑</span>发布选中项</button>
+        </div>
+      </header>
+
+      <section id="summary-strip" class="summary-strip" aria-label="状态统计">
+        <div><span>REVIEW</span><strong id="summary-pending">0</strong><small>待审核</small></div>
+        <div><span>READY</span><strong id="summary-approved">0</strong><small>已批准</small></div>
+        <div><span>LIVE</span><strong id="summary-published">0</strong><small>已发布</small></div>
+        <div><span>SOURCE</span><strong id="summary-sources">0</strong><small>启用采集源</small></div>
+      </section>
+
+      <section id="view-review" class="view is-active">
+        <div class="filterbar">
+          <div class="segmented" role="group" aria-label="队列筛选">
+            <button class="is-active" type="button" data-status="review">待处理</button>
+            <button type="button" data-status="approved">已批准</button>
+            <button type="button" data-status="failed">异常</button>
+            <button type="button" data-status="all">全部</button>
+          </div>
+          <label class="search-field"><span>⌕</span><input id="candidate-search" type="search" placeholder="搜索标题、作者、来源或 prompt"></label>
+        </div>
+        <div id="candidate-list" class="candidate-list"></div>
+        <div id="candidate-empty" class="empty-state" hidden><strong>队列已经处理完</strong><span>新的采集结果会先进入这里。</span></div>
+      </section>
+
+      <section id="view-published" class="view">
+        <div class="filterbar">
+          <label class="search-field wide"><span>⌕</span><input id="published-search" type="search" placeholder="搜索 285 个线上条目"></label>
+          <label class="toggle-row"><input id="show-hidden" type="checkbox" checked><span>显示已隐藏</span></label>
+        </div>
+        <div id="published-list" class="published-list"></div>
+      </section>
+
+      <section id="view-sources" class="view">
+        <div class="section-toolbar">
+          <p>启用的来源每天按设定频率进入审核队列。</p>
+          <button id="add-source-button" class="secondary-action" type="button"><span>＋</span>新增采集源</button>
+        </div>
+        <div id="source-list" class="source-list"></div>
+        <div class="policy-band">
+          <strong>平台策略</strong>
+          <span>Wallhaven 可走公开 API；Unsplash 必须热链并署名；ArtStation 与 Behance 默认仅接受人工链接和权利确认，不做自动抓取。</span>
+        </div>
+      </section>
+
+      <section id="view-jobs" class="view">
+        <div class="job-head"><span>时间</span><span>任务</span><span>结果</span><span>摘要</span></div>
+        <div id="job-list" class="job-list"></div>
+      </section>
+    </main>
+  </div>
+
+  <button id="drawer-backdrop" class="drawer-backdrop" type="button" aria-label="关闭编辑器"></button>
+  <aside id="editor-drawer" class="editor-drawer" aria-label="素材编辑器" aria-hidden="true">
+    <header class="drawer-head">
+      <div><span id="editor-status" class="status-badge">REVIEW</span><h2 id="editor-heading">素材详情</h2></div>
+      <button id="drawer-close" class="icon-button" type="button" title="关闭" aria-label="关闭">×</button>
+    </header>
+    <div id="editor-media" class="editor-media"></div>
+    <form id="editor-form" class="editor-form">
+      <input id="editor-kind" type="hidden">
+      <input id="editor-id" type="hidden">
+      <label>标题<input id="editor-title" name="title" type="text" required></label>
+      <label>分类<select id="editor-category" name="category_id"></select></label>
+      <label>提示词<textarea id="editor-prompt" name="prompt" rows="12"></textarea></label>
+      <div class="prompt-meta">
+        <span id="editor-prompt-kind">来源待核验</span>
+        <span id="editor-quality">未评分</span>
+      </div>
+      <a id="editor-source" class="source-link" href="#" target="_blank" rel="noopener">打开原始来源 ↗</a>
+      <div class="drawer-actions">
+        <button id="editor-delete" class="danger-action" type="button">删除</button>
+        <button id="editor-hide" class="secondary-action" type="button">隐藏</button>
+        <button id="editor-save" class="secondary-action" type="submit">保存修改</button>
+        <button id="editor-approve" class="primary-action" type="button">批准</button>
+      </div>
+    </form>
+  </aside>
+
+  <dialog id="import-dialog" class="modal">
+    <form id="import-form" method="dialog">
+      <header><div><p class="kicker">NEW REFERENCE</p><h2>导入素材</h2></div><button class="icon-button" type="button" data-dialog-close="import-dialog" aria-label="关闭">×</button></header>
+      <div class="form-grid">
+        <label>平台<select name="platform" required><option value="x">X</option><option value="wallhaven">Wallhaven</option><option value="unsplash">Unsplash</option><option value="design-milk">Design Milk</option><option value="abduzeedo">Abduzeedo</option><option value="behance">Behance</option><option value="artstation">ArtStation</option><option value="other">其他</option></select></label>
+        <label>作者<input name="author" type="text"></label>
+        <label class="full">原始页面 URL<input name="canonical_url" type="url" required></label>
+        <label class="full">标题<input name="title" type="text" required></label>
+        <label class="full">图片 URL（可选，每行一个）<textarea name="media_urls" rows="4" placeholder="只贴原始页面时，系统会自动解析页面图片"></textarea></label>
+        <label class="full">或直接上传图片<input name="images" type="file" accept="image/*" multiple></label>
+        <label class="full">原帖正文<textarea name="source_text" rows="4"></textarea></label>
+        <label class="full">已有提示词（没有则自动反推）<textarea name="prompt" rows="7"></textarea></label>
+        <label class="check-line full"><input name="rights_confirmed" type="checkbox"><span>我已确认可用于提示词分析，并检查平台的版权或 NoAI 标记。</span></label>
+      </div>
+      <footer><button class="secondary-action" type="button" data-dialog-close="import-dialog">取消</button><button class="primary-action" type="submit">导入审核队列</button></footer>
+    </form>
+  </dialog>
+
+  <dialog id="source-dialog" class="modal small-modal">
+    <form id="source-form" method="dialog">
+      <header><div><p class="kicker">COLLECTION SOURCE</p><h2>新增采集源</h2></div><button class="icon-button" type="button" data-dialog-close="source-dialog" aria-label="关闭">×</button></header>
+      <div class="form-grid">
+        <label>平台<select name="platform"><option value="x">X</option><option value="wallhaven">Wallhaven</option><option value="unsplash">Unsplash</option><option value="design-milk">Design Milk RSS</option><option value="abduzeedo">Abduzeedo RSS</option></select></label>
+        <label>显示名称<input name="label" type="text" required></label>
+        <label class="full">账号、关键词或 RSS 地址<input name="locator" type="text" required></label>
+        <label>采集频率<select name="frequency_hours"><option value="24">每天</option><option value="12">每 12 小时</option><option value="168">每周</option></select></label>
+        <label class="check-line"><input name="enabled" type="checkbox" checked><span>立即启用</span></label>
+      </div>
+      <footer><button class="secondary-action" type="button" data-dialog-close="source-dialog">取消</button><button class="primary-action" type="submit">保存来源</button></footer>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="/admin/assets/app.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+.env
+.venv/
+data/*.db
+data/*.db-*
+data/deleted-entries/
+spool/*
+!data/.gitkeep
+!spool/.gitkeep
+__pycache__/
+.pytest_cache/

@@ -107,6 +107,8 @@ def parse_entries(source: str) -> tuple[list[dict], list[str]]:
         block = match.group(4)
         if "submission-preview" in classes or "lightbox-card" in classes:
             continue
+        if re.search(r"(?:^|\s)hidden(?:\s|=|$)", attrs_raw, re.I):
+            continue
         image_tags = list(re.finditer(r"<img\b([^>]*)>", block, re.S))
         if not image_tags:
             continue
@@ -138,6 +140,9 @@ def parse_entries(source: str) -> tuple[list[dict], list[str]]:
         source_match = re.search(r'<a href="(https?://[^"]+)"[^>]*>', block)
         if source_match:
             source_url = html.unescape(source_match.group(1))
+        source_url = article_attrs.get("data-source-url") or source_url
+        source_platform = article_attrs.get("data-source-platform", "")
+        added_at = article_attrs.get("data-added-at", "")
 
         images = []
         for image_match in image_tags:
@@ -179,6 +184,8 @@ def parse_entries(source: str) -> tuple[list[dict], list[str]]:
                 "promptLabel": prompt_label,
                 "promptIsComplete": prompt_is_complete,
                 "sourceUrl": source_url,
+                "sourcePlatform": source_platform,
+                "addedAt": added_at,
                 "images": images,
             }
         )
@@ -211,7 +218,7 @@ def make_tiles(entries: list[dict]) -> list[dict]:
                     "category": entry["category"],
                     "title": entry["title"],
                     "entryNo": entry["entryNo"],
-                    "imageAddedAt": image_added_at(image["src"]),
+                    "imageAddedAt": entry.get("addedAt") or image_added_at(image["src"]),
                     "localAvailable": (ROOT / local_src).exists() if not local_src.startswith(("http://", "https://", "data:")) else True,
                 }
             )
@@ -782,7 +789,8 @@ button {{ cursor: pointer; }}
     modalTitle.textContent = entry.title || '未命名素材';
     modalEn.textContent = entry.titleEn || image.caption || '';
     modalTags.innerHTML = (entry.tags || []).slice(0, 8).map(tag => `<span>${{escapeHtml(tag)}}</span>`).join('');
-    const source = entry.sourceUrl ? `<a class="source-link" href="${{escapeAttr(entry.sourceUrl)}}" target="_blank" rel="noopener">查看来源</a>` : '';
+    const platform = entry.sourcePlatform || platformFromUrl(entry.sourceUrl);
+    const source = entry.sourceUrl ? `<a class="source-link" href="${{escapeAttr(entry.sourceUrl)}}" target="_blank" rel="noopener">${{escapeHtml(platform)}} 来源追溯</a>` : '';
     const meta = (entry.kvs || []).slice(0, 2).join(' ');
     modalMeta.innerHTML = [source, escapeHtml(meta)].filter(Boolean).join(' · ');
     activePrompt = entry.prompt || '这条素材暂未收录完整提示词。';
@@ -806,6 +814,20 @@ button {{ cursor: pointer; }}
     return String(value).replace(/[&<>"']/g, char => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[char]));
   }}
   function escapeAttr(value) {{ return escapeHtml(value).replace(/`/g, '&#96;'); }}
+  function platformFromUrl(value) {{
+    if (!value) return '原始';
+    try {{
+      const host = new URL(value).hostname.replace(/^www\./, '');
+      if (host === 'x.com' || host === 'twitter.com') return 'X';
+      if (host.includes('unsplash.com')) return 'Unsplash';
+      if (host.includes('wallhaven.cc')) return 'Wallhaven';
+      if (host.includes('behance.net')) return 'Behance';
+      if (host.includes('artstation.com')) return 'ArtStation';
+      return host;
+    }} catch {{
+      return '原始';
+    }}
+  }}
 
   tiles.forEach(tile => {{
     const img = tile.querySelector('img');
