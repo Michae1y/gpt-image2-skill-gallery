@@ -11,7 +11,7 @@ import httpx
 from PIL import Image, ImageOps
 
 from .categories import classify_by_keywords
-from .collectors import collector_for
+from .collectors import collector_for, unavailable_reason
 from .collectors.base import CollectedItem, CollectedMedia
 from .collectors.link import LinkCollector
 from .config import Settings
@@ -47,12 +47,16 @@ class CollectionPipeline:
 
     def collect_all(self) -> dict[str, Any]:
         job_id = self.database.create_job("daily_collect")
-        report = {"sources": 0, "new": 0, "duplicates": 0, "failed": []}
+        report = {"sources": 0, "new": 0, "duplicates": 0, "skipped": [], "failed": []}
         try:
             for source in self.database.list_sources():
                 if not source.get("enabled") or source.get("collection_mode") in {"manual", "blocked"}:
                     continue
                 report["sources"] += 1
+                reason = unavailable_reason(source["platform"], self.settings)
+                if reason:
+                    report["skipped"].append(f"{source.get('label')}: {reason}")
+                    continue
                 try:
                     result = self.collect_source(source)
                     report["new"] += result["new"]
@@ -62,7 +66,10 @@ class CollectionPipeline:
                     report["failed"].append(message)
                     self.database.update_source_state(source["id"], error=str(error))
             status = "completed" if not report["failed"] else "partial"
-            summary = f"新增 {report['new']} 条，重复 {report['duplicates']} 条"
+            summary = (
+                f"新增 {report['new']} 条，重复 {report['duplicates']} 条，"
+                f"跳过 {len(report['skipped'])} 个源"
+            )
             self.database.finish_job(job_id, status=status, summary=summary, detail=report)
             return report
         except Exception as error:

@@ -6,6 +6,15 @@ from .wallhaven import WallhavenCollector
 from .x_api import XApiCollector
 
 
+def unavailable_reason(platform: str, settings) -> str | None:
+    platform = platform.lower()
+    if platform == "x" and not settings.x_bearer_token:
+        return "未配置 X_BEARER_TOKEN"
+    if platform == "unsplash" and not settings.unsplash_access_key:
+        return "未配置 UNSPLASH_ACCESS_KEY"
+    return None
+
+
 def collector_for(platform: str, settings):
     platform = platform.lower()
     if platform == "x":
