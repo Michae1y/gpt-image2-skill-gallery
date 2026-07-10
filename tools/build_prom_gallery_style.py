@@ -79,6 +79,22 @@ RELATED_VISUAL_FAMILIES = {
         ("screen", "photo-scene"),
     )
 }
+VISUAL_MEDIUM_BY_FAMILY = {
+    "portrait": "photo",
+    "beauty": "photo",
+    "lifestyle": "photo",
+    "photo-scene": "photo",
+    "graphic": "design",
+    "diagram": "design",
+    "product": "design",
+    "anime": "art",
+    "illustration": "art",
+    "cinematic": "scene",
+    "game": "scene",
+    "space": "scene",
+    "screen": "scene",
+    "other": "other",
+}
 
 
 def attrs_from(tag: str) -> dict[str, str]:
@@ -341,12 +357,15 @@ def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]
             pool.remove(anchor)
             group = [anchor]
             while len(group) < columns:
+                used_entries = {member["entryIndex"] for member in group}
+                candidates = [
+                    tile for tile in pool if tile["entryIndex"] not in used_entries
+                ] or pool
                 candidate = min(
-                    pool,
+                    candidates,
                     key=lambda tile: (
                         sum(
                             visual_distance(member["_visual"], tile["_visual"], 0.0)
-                            - (1.6 if member["entryIndex"] == tile["entryIndex"] else 0.0)
                             for member in group
                         )
                         / len(group),
@@ -369,11 +388,14 @@ def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]
         leftovers.remove(anchor)
         group = [anchor]
         while leftovers and len(group) < columns:
+            used_entries = {member["entryIndex"] for member in group}
+            candidates = [
+                tile for tile in leftovers if tile["entryIndex"] not in used_entries
+            ] or leftovers
             candidate = min(
-                leftovers,
+                candidates,
                 key=lambda tile: (
-                    visual_distance(anchor["_visual"], tile["_visual"], 2.6)
-                    - (1.6 if anchor["entryIndex"] == tile["entryIndex"] else 0.0),
+                    visual_distance(anchor["_visual"], tile["_visual"], 2.6),
                     tile["_visual"]["jitter"],
                 ),
             )
@@ -388,22 +410,34 @@ def order_visual_groups(groups: list[list[dict]], newest: dict) -> list[list[dic
     ordered = [first]
     remaining = [group for group in groups if group is not first]
     family_run = 1
+    medium_run = 1
 
     while remaining:
         previous = group_centroid(ordered[-1])
+        previous_medium = VISUAL_MEDIUM_BY_FAMILY.get(previous["family"], "other")
+        previous_entries = {tile["entryIndex"] for tile in ordered[-1]}
 
         def transition_cost(group: list[dict]) -> float:
             current = group_centroid(group)
             cost = visual_distance(previous, current, 0.95)
             if current["family"] == previous["family"] and family_run >= 2:
                 cost += 2.3
+            current_medium = VISUAL_MEDIUM_BY_FAMILY.get(current["family"], "other")
+            if current_medium == previous_medium and medium_run >= 4:
+                cost += 2.8
+            repeated_entries = previous_entries.intersection(
+                tile["entryIndex"] for tile in group
+            )
+            cost += len(repeated_entries) * 1.4
             group_key = "|".join(tile["tileId"] for tile in group)
             return cost + stable_fraction(group_key) * 0.04
 
         selected = min(remaining, key=transition_cost)
         remaining.remove(selected)
         selected_family = group_centroid(selected)["family"]
+        selected_medium = VISUAL_MEDIUM_BY_FAMILY.get(selected_family, "other")
         family_run = family_run + 1 if selected_family == previous["family"] else 1
+        medium_run = medium_run + 1 if selected_medium == previous_medium else 1
         ordered.append(selected)
     return ordered
 
