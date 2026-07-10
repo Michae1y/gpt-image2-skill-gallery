@@ -2,12 +2,21 @@
 from __future__ import annotations
 
 import bisect
+import colorsys
+from collections import defaultdict
 from datetime import datetime, timezone
+import hashlib
 import html
 import json
+import math
 import re
 import subprocess
 from pathlib import Path
+
+try:
+    from PIL import Image
+except ImportError:  # The control-plane runtime includes Pillow; keep a deterministic fallback.
+    Image = None
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -15,6 +24,61 @@ SOURCE = ROOT / "index.html"
 OUTPUT = ROOT / "prom-gallery-style.html"
 _IMAGE_ADDED_AT_CACHE: dict[str, str] = {}
 _GIT_ADDED_AT_BY_PATH: dict[str, str] | None = None
+_IMAGE_COLOR_CACHE: dict[str, dict[str, float]] = {}
+
+DESKTOP_GALLERY_COLUMNS = 4
+HARD_VISUAL_FAMILIES = {
+    "字体与海报": "graphic",
+    "品牌系统与视觉识别": "graphic",
+    "UI/UX 界面样机": "graphic",
+    "活动与体验设计": "graphic",
+    "信息图与图鉴": "diagram",
+    "论文配图": "diagram",
+    "数据可视化": "diagram",
+    "技术插图": "diagram",
+    "科学与教育": "diagram",
+    "OpenAI Cookbook 官方示例": "diagram",
+    "图片编辑接口示例": "graphic",
+    "产品与食物": "product",
+    "建筑与室内": "space",
+    "等距视角": "space",
+    "游戏与 HUD": "game",
+    "复古与赛博朋克": "game",
+    "电影感与动画": "cinematic",
+    "电影风格参考": "cinematic",
+    "动漫与漫画": "anime",
+    "角色设计": "anime",
+    "插画": "illustration",
+    "水彩": "illustration",
+    "水墨与中文风格": "illustration",
+    "像素艺术": "illustration",
+    "美术绘画": "illustration",
+    "更多插画风格": "illustration",
+    "纹身设计": "illustration",
+    "屏幕摄影": "screen",
+}
+RELATED_VISUAL_FAMILIES = {
+    frozenset(pair)
+    for pair in (
+        ("portrait", "beauty"),
+        ("portrait", "lifestyle"),
+        ("portrait", "cinematic"),
+        ("beauty", "product"),
+        ("illustration", "anime"),
+        ("illustration", "graphic"),
+        ("graphic", "diagram"),
+        ("graphic", "product"),
+        ("diagram", "space"),
+        ("space", "product"),
+        ("space", "cinematic"),
+        ("game", "cinematic"),
+        ("game", "anime"),
+        ("photo-scene", "cinematic"),
+        ("photo-scene", "space"),
+        ("screen", "graphic"),
+        ("screen", "photo-scene"),
+    )
+}
 
 
 def attrs_from(tag: str) -> dict[str, str]:
@@ -90,6 +154,273 @@ def timestamp_for_sort(value: str) -> float:
 def entry_number_for_sort(entry_no: str) -> int:
     match = re.search(r"\d+", entry_no or "")
     return int(match.group(0)) if match else 0
+
+
+def stable_fraction(value: str) -> float:
+    digest = hashlib.sha256(value.encode("utf-8")).hexdigest()[:12]
+    return int(digest, 16) / float(0xFFFFFFFFFFFF)
+
+
+def visual_family(tile: dict) -> str:
+    category = tile["category"]
+    if category in HARD_VISUAL_FAMILIES:
+        return HARD_VISUAL_FAMILIES[category]
+
+    text = " ".join(
+        [category, tile["title"], tile["alt"], *tile.get("_tags", [])]
+    ).lower()
+    if category == "时尚大片":
+        if re.search(r"字体|视觉系统|typography|海报", text, re.I):
+            return "graphic"
+        return "portrait"
+    if category == "美妆与生活方式":
+        product = re.search(r"产品|护肤品|香氛|包装|product|skincare|fragrance", text, re.I)
+        person = re.search(r"人像|肖像|自拍|portrait|面孔|贴脸", text, re.I)
+        return "product" if product and not person else "beauty"
+    if category == "摄影":
+        if re.search(r"幼儿|儿童|宝宝|家庭|生活方式|生活感|日常|抓拍|candid|lifestyle", text, re.I):
+            return "lifestyle"
+        if re.search(r"美妆|beauty|makeup", text, re.I):
+            return "beauty"
+        if re.search(
+            r"人像|肖像|写真|自拍|模特|portrait|selfie|女孩|女性|少女|比基尼|泳装|婚礼|白裙|服装|影棚",
+            text,
+            re.I,
+        ):
+            return "portrait"
+        if re.search(r"电影感|全景|场景|landscape|cinematic", text, re.I):
+            return "cinematic"
+        return "photo-scene"
+    return "other"
+
+
+def image_color_features(path: str) -> dict[str, float]:
+    if path in _IMAGE_COLOR_CACHE:
+        return _IMAGE_COLOR_CACHE[path]
+
+    fallback = {
+        "hue": stable_fraction(path),
+        "lum": 0.5,
+        "sat": 0.2,
+        "contrast": 0.2,
+    }
+    local_path = ROOT / path
+    if Image is None or not local_path.exists():
+        _IMAGE_COLOR_CACHE[path] = fallback
+        return fallback
+
+    try:
+        with Image.open(local_path) as source:
+            sample = source.convert("RGB")
+            sample.thumbnail((48, 48))
+            pixels = list(sample.getdata())
+    except OSError:
+        _IMAGE_COLOR_CACHE[path] = fallback
+        return fallback
+
+    hue_x = 0.0
+    hue_y = 0.0
+    hue_weight = 0.0
+    luminances = []
+    saturations = []
+    for red, green, blue in pixels:
+        red_f, green_f, blue_f = red / 255, green / 255, blue / 255
+        hue, saturation, _ = colorsys.rgb_to_hsv(red_f, green_f, blue_f)
+        luminance = 0.2126 * red_f + 0.7152 * green_f + 0.0722 * blue_f
+        luminances.append(luminance)
+        saturations.append(saturation)
+        if saturation > 0.06 and 0.03 < luminance < 0.97:
+            weight = saturation * (0.45 + 0.55 * (1 - abs(luminance - 0.5) * 2))
+            hue_x += math.cos(hue * math.tau) * weight
+            hue_y += math.sin(hue * math.tau) * weight
+            hue_weight += weight
+
+    luminance = sum(luminances) / len(luminances)
+    features = {
+        "hue": (math.atan2(hue_y, hue_x) / math.tau) % 1 if hue_weight else 0.0,
+        "lum": luminance,
+        "sat": sum(saturations) / len(saturations),
+        "contrast": math.sqrt(
+            sum((value - luminance) ** 2 for value in luminances) / len(luminances)
+        ),
+    }
+    _IMAGE_COLOR_CACHE[path] = features
+    return features
+
+
+def tile_visual_features(tile: dict) -> dict:
+    try:
+        width = max(float(tile["width"]), 1.0)
+        height = max(float(tile["height"]), 1.0)
+    except (TypeError, ValueError):
+        width = height = 1.0
+    return {
+        **image_color_features(tile["src"]),
+        "aspect": height / width,
+        "family": visual_family(tile),
+        "entry": tile["entryIndex"],
+        "jitter": stable_fraction(tile["tileId"]),
+    }
+
+
+def visual_distance(first: dict, second: dict, family_weight: float = 1.0) -> float:
+    hue_distance = abs(first["hue"] - second["hue"])
+    hue_distance = min(hue_distance, 1 - hue_distance) * 2
+    hue_distance *= 0.3 + math.sqrt(first["sat"] * second["sat"])
+
+    if first["family"] == second["family"]:
+        family_distance = 0.0
+    elif frozenset((first["family"], second["family"])) in RELATED_VISUAL_FAMILIES:
+        family_distance = 0.5
+    else:
+        family_distance = 1.1
+
+    return (
+        hue_distance * 1.1
+        + abs(first["lum"] - second["lum"]) * 1.8
+        + abs(first["sat"] - second["sat"]) * 0.7
+        + abs(first["contrast"] - second["contrast"]) * 0.45
+        + abs(math.log(max(first["aspect"], 0.1) / max(second["aspect"], 0.1))) * 0.4
+        + family_distance * family_weight
+    )
+
+
+def group_centroid(group: list[dict]) -> dict:
+    features = [tile["_visual"] for tile in group]
+    hue_x = sum(
+        math.cos(item["hue"] * math.tau) * max(item["sat"], 0.05)
+        for item in features
+    )
+    hue_y = sum(
+        math.sin(item["hue"] * math.tau) * max(item["sat"], 0.05)
+        for item in features
+    )
+    families = {item["family"] for item in features}
+    family = max(
+        sorted(families),
+        key=lambda candidate: (
+            sum(item["family"] == candidate for item in features),
+            candidate,
+        ),
+    )
+    return {
+        "hue": (math.atan2(hue_y, hue_x) / math.tau) % 1,
+        "lum": sum(item["lum"] for item in features) / len(features),
+        "sat": sum(item["sat"] for item in features) / len(features),
+        "contrast": sum(item["contrast"] for item in features) / len(features),
+        "aspect": sum(item["aspect"] for item in features) / len(features),
+        "family": family,
+    }
+
+
+def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]], dict]:
+    """Build cohesive visual rows before weaving those rows through the gallery."""
+    newest = max(
+        tiles,
+        key=lambda tile: (
+            timestamp_for_sort(tile["imageAddedAt"]),
+            entry_number_for_sort(tile["entryNo"]),
+        ),
+    )
+    family_pools: dict[str, list[dict]] = defaultdict(list)
+    for tile in tiles:
+        family_pools[tile["_visual"]["family"]].append(tile)
+
+    groups = []
+    leftovers = []
+    for family in sorted(family_pools):
+        pool = family_pools[family][:]
+        preferred_anchor = newest if newest in pool else None
+        while len(pool) >= columns:
+            anchor = (
+                preferred_anchor
+                if preferred_anchor in pool
+                else min(pool, key=lambda tile: tile["_visual"]["jitter"])
+            )
+            preferred_anchor = None
+            pool.remove(anchor)
+            group = [anchor]
+            while len(group) < columns:
+                candidate = min(
+                    pool,
+                    key=lambda tile: (
+                        sum(
+                            visual_distance(member["_visual"], tile["_visual"], 0.0)
+                            - (1.6 if member["entryIndex"] == tile["entryIndex"] else 0.0)
+                            for member in group
+                        )
+                        / len(group),
+                        tile["_visual"]["jitter"],
+                    ),
+                )
+                pool.remove(candidate)
+                group.append(candidate)
+            groups.append(group)
+        leftovers.extend(pool)
+
+    while leftovers:
+        anchor = min(
+            leftovers,
+            key=lambda tile: (
+                0 if tile is newest else 1,
+                tile["_visual"]["jitter"],
+            ),
+        )
+        leftovers.remove(anchor)
+        group = [anchor]
+        while leftovers and len(group) < columns:
+            candidate = min(
+                leftovers,
+                key=lambda tile: (
+                    visual_distance(anchor["_visual"], tile["_visual"], 2.6)
+                    - (1.6 if anchor["entryIndex"] == tile["entryIndex"] else 0.0),
+                    tile["_visual"]["jitter"],
+                ),
+            )
+            leftovers.remove(candidate)
+            group.append(candidate)
+        groups.append(group)
+    return groups, newest
+
+
+def order_visual_groups(groups: list[list[dict]], newest: dict) -> list[list[dict]]:
+    first = next(group for group in groups if newest in group)
+    ordered = [first]
+    remaining = [group for group in groups if group is not first]
+    family_run = 1
+
+    while remaining:
+        previous = group_centroid(ordered[-1])
+
+        def transition_cost(group: list[dict]) -> float:
+            current = group_centroid(group)
+            cost = visual_distance(previous, current, 0.95)
+            if current["family"] == previous["family"] and family_run >= 2:
+                cost += 2.3
+            group_key = "|".join(tile["tileId"] for tile in group)
+            return cost + stable_fraction(group_key) * 0.04
+
+        selected = min(remaining, key=transition_cost)
+        remaining.remove(selected)
+        selected_family = group_centroid(selected)["family"]
+        family_run = family_run + 1 if selected_family == previous["family"] else 1
+        ordered.append(selected)
+    return ordered
+
+
+def visual_weave_tiles(tiles: list[dict], columns: int = DESKTOP_GALLERY_COLUMNS) -> list[dict]:
+    """Return a stable row-major order based on subject family, palette, and aspect ratio."""
+    if not tiles:
+        return []
+    for tile in tiles:
+        tile["_visual"] = tile_visual_features(tile)
+    groups, newest = make_visual_groups(tiles, columns)
+    groups = order_visual_groups(groups, newest)
+    ordered = [tile for group in groups for tile in group]
+    return [
+        {key: value for key, value in tile.items() if not key.startswith("_")}
+        for tile in ordered
+    ]
 
 
 def parse_entries(source: str) -> tuple[list[dict], list[str]]:
@@ -218,19 +549,12 @@ def make_tiles(entries: list[dict]) -> list[dict]:
                     "category": entry["category"],
                     "title": entry["title"],
                     "entryNo": entry["entryNo"],
+                    "_tags": entry["tags"],
                     "imageAddedAt": entry.get("addedAt") or image_added_at(image["src"]),
                     "localAvailable": (ROOT / local_src).exists() if not local_src.startswith(("http://", "https://", "data:")) else True,
                 }
             )
-    return sorted(
-        tiles,
-        key=lambda tile: (
-            -timestamp_for_sort(tile["imageAddedAt"]),
-            -entry_number_for_sort(tile["entryNo"]),
-            -tile["entryIndex"],
-            tile["imageIndex"],
-        ),
-    )
+    return visual_weave_tiles(tiles)
 
 
 def build_html(entries: list[dict], categories: list[str]) -> str:
@@ -750,6 +1074,7 @@ button {{ cursor: pointer; }}
   const data = JSON.parse(document.getElementById('gallery-data').textContent);
   const tiles = Array.from(document.querySelectorAll('.tile'));
   const chips = Array.from(document.querySelectorAll('.chip'));
+  const gallery = document.querySelector('.gallery');
   const empty = document.querySelector('.empty-state');
   const modal = document.querySelector('.modal');
   const modalImage = document.querySelector('.modal-image');
@@ -763,16 +1088,56 @@ button {{ cursor: pointer; }}
   const copyButton = document.querySelector('.copy-button');
   const closeButton = document.querySelector('.modal-close');
   let activePrompt = '';
+  let activeCategory = 'all';
   let lastFocus = null;
+  let lastColumnCount = 0;
+  let layoutFrame = 0;
+
+  function currentColumnCount() {{
+    return Math.max(1, Number.parseInt(getComputedStyle(gallery).columnCount, 10) || 1);
+  }}
+
+  function tileRatio(tile) {{
+    const image = tile.querySelector('img');
+    const width = Number(image?.getAttribute('width')) || image?.naturalWidth || 1;
+    const height = Number(image?.getAttribute('height')) || image?.naturalHeight || 1;
+    return height / Math.max(width, 1);
+  }}
+
+  function arrangeVisibleTiles(visibleTiles) {{
+    const columns = currentColumnCount();
+    lastColumnCount = columns;
+    if (columns === 1) {{
+      visibleTiles.forEach(tile => gallery.append(tile));
+    }} else {{
+      const lanes = Array.from({{ length: columns }}, () => []);
+      const heights = Array(columns).fill(0);
+      for (let offset = 0; offset < visibleTiles.length; offset += columns) {{
+        const row = visibleTiles.slice(offset, offset + columns)
+          .sort((first, second) => tileRatio(second) - tileRatio(first));
+        const laneOrder = Array.from({{ length: columns }}, (_, index) => index)
+          .sort((first, second) => heights[first] - heights[second] || first - second);
+        row.forEach((tile, index) => {{
+          const lane = laneOrder[index];
+          lanes[lane].push(tile);
+          heights[lane] += tileRatio(tile);
+        }});
+      }}
+      lanes.flat().forEach(tile => gallery.append(tile));
+    }}
+    tiles.filter(tile => tile.hidden).forEach(tile => gallery.append(tile));
+  }}
 
   function applyFilter(category) {{
-    let visible = 0;
+    activeCategory = category;
+    const visibleTiles = [];
     tiles.forEach(tile => {{
       const show = tile.dataset.broken !== 'true' && (category === 'all' || tile.dataset.category === category);
       tile.hidden = !show;
-      if (show) visible += 1;
+      if (show) visibleTiles.push(tile);
     }});
-    empty.classList.toggle('is-visible', visible === 0);
+    arrangeVisibleTiles(visibleTiles);
+    empty.classList.toggle('is-visible', visibleTiles.length === 0);
     chips.forEach(chip => chip.classList.toggle('is-active', chip.dataset.filter === category));
   }}
 
@@ -834,6 +1199,7 @@ button {{ cursor: pointer; }}
     img?.addEventListener('error', () => {{
       tile.dataset.broken = 'true';
       tile.hidden = true;
+      requestAnimationFrame(() => applyFilter(activeCategory));
     }}, {{ once: true }});
   }});
   modalImage.addEventListener('error', () => {{
@@ -847,6 +1213,12 @@ button {{ cursor: pointer; }}
   closeButton.addEventListener('click', closeModal);
   modal.addEventListener('click', event => {{ if (event.target === modal) closeModal(); }});
   document.addEventListener('keydown', event => {{ if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); }});
+  window.addEventListener('resize', () => {{
+    cancelAnimationFrame(layoutFrame);
+    layoutFrame = requestAnimationFrame(() => {{
+      if (currentColumnCount() !== lastColumnCount) applyFilter(activeCategory);
+    }});
+  }});
   copyButton.addEventListener('click', async () => {{
     if (!activePrompt) return;
     try {{
@@ -862,6 +1234,7 @@ button {{ cursor: pointer; }}
       copyButton.textContent = '已选中';
     }}
   }});
+  applyFilter('all');
 }})();
 </script>
 </body>
