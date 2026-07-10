@@ -27,6 +27,8 @@ _GIT_ADDED_AT_BY_PATH: dict[str, str] | None = None
 _IMAGE_COLOR_CACHE: dict[str, dict[str, float]] = {}
 
 DESKTOP_GALLERY_COLUMNS = 4
+RECENT_GROUP_WINDOW = 16
+RECENT_TILE_WEIGHT = 0.35
 HARD_VISUAL_FAMILIES = {
     "字体与海报": "graphic",
     "品牌系统与视觉识别": "graphic",
@@ -342,6 +344,15 @@ def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]
             entry_number_for_sort(tile["entryNo"]),
         ),
     )
+    added_timestamps = [timestamp_for_sort(tile["imageAddedAt"]) for tile in tiles]
+    oldest_timestamp = min(added_timestamps)
+    recency_span = max(max(added_timestamps) - oldest_timestamp, 1.0)
+
+    def recency(tile: dict) -> float:
+        return (
+            timestamp_for_sort(tile["imageAddedAt"]) - oldest_timestamp
+        ) / recency_span
+
     pool = tiles[:]
     groups = []
     preferred_anchor = newest
@@ -356,9 +367,13 @@ def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]
                 sorted(pool_mediums),
                 key=lambda medium: (pool_mediums[medium], medium),
             )
-            anchor = min(
+            anchor = max(
                 (tile for tile in pool if visual_medium(tile) == target_medium),
-                key=lambda tile: tile["_visual"]["jitter"],
+                key=lambda tile: (
+                    timestamp_for_sort(tile["imageAddedAt"]),
+                    entry_number_for_sort(tile["entryNo"]),
+                    -tile["_visual"]["jitter"],
+                ),
             )
 
         pool.remove(anchor)
@@ -391,6 +406,7 @@ def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]
                     + group_families[tile["_visual"]["family"]] * 0.2
                     + group_categories[tile["category"]] * 0.08
                     - pressure * 0.75
+                    - recency(tile) * RECENT_TILE_WEIGHT
                     + tile["_visual"]["jitter"] * 0.02
                 )
 
@@ -406,7 +422,20 @@ def order_visual_groups(groups: list[list[dict]], newest: dict) -> list[list[dic
     ordered = [first]
     remaining = [group for group in groups if group is not first]
 
+    def group_added_at(group: list[dict]) -> float:
+        return max(timestamp_for_sort(tile["imageAddedAt"]) for tile in group)
+
     while remaining:
+        recent_candidates = sorted(
+            remaining,
+            key=lambda group: (
+                -group_added_at(group),
+                -max(entry_number_for_sort(tile["entryNo"]) for tile in group),
+            ),
+        )[:RECENT_GROUP_WINDOW]
+        recency_rank = {
+            id(group): rank for rank, group in enumerate(recent_candidates)
+        }
         previous = group_centroid(ordered[-1])
         previous_entries = {tile["entryIndex"] for tile in ordered[-1]}
         previous_media = {visual_medium(tile) for tile in ordered[-1]}
@@ -424,10 +453,11 @@ def order_visual_groups(groups: list[list[dict]], newest: dict) -> list[list[dic
                 visual_distance(previous, current, 0.06)
                 + len(previous_entries & current_entries) * 1.4
                 + media_similarity * 0.05
-                + stable_fraction(group_key) * 0.025
+                + recency_rank[id(group)] * 0.025
+                + stable_fraction(group_key) * 0.015
             )
 
-        selected = min(remaining, key=transition_cost)
+        selected = min(recent_candidates, key=transition_cost)
         remaining.remove(selected)
         ordered.append(selected)
     return ordered
