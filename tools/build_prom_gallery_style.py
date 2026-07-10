@@ -3,7 +3,7 @@ from __future__ import annotations
 
 import bisect
 import colorsys
-from collections import defaultdict
+from collections import Counter
 from datetime import datetime, timezone
 import hashlib
 import html
@@ -329,8 +329,12 @@ def group_centroid(group: list[dict]) -> dict:
     }
 
 
+def visual_medium(tile: dict) -> str:
+    return VISUAL_MEDIUM_BY_FAMILY.get(tile["_visual"]["family"], "other")
+
+
 def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]], dict]:
-    """Build cohesive visual rows before weaving those rows through the gallery."""
+    """Build palette-matched rows with no more than two tiles from one medium."""
     newest = max(
         tiles,
         key=lambda tile: (
@@ -338,69 +342,61 @@ def make_visual_groups(tiles: list[dict], columns: int) -> tuple[list[list[dict]
             entry_number_for_sort(tile["entryNo"]),
         ),
     )
-    family_pools: dict[str, list[dict]] = defaultdict(list)
-    for tile in tiles:
-        family_pools[tile["_visual"]["family"]].append(tile)
-
+    pool = tiles[:]
     groups = []
-    leftovers = []
-    for family in sorted(family_pools):
-        pool = family_pools[family][:]
-        preferred_anchor = newest if newest in pool else None
-        while len(pool) >= columns:
-            anchor = (
-                preferred_anchor
-                if preferred_anchor in pool
-                else min(pool, key=lambda tile: tile["_visual"]["jitter"])
-            )
-            preferred_anchor = None
-            pool.remove(anchor)
-            group = [anchor]
-            while len(group) < columns:
-                used_entries = {member["entryIndex"] for member in group}
-                candidates = [
-                    tile for tile in pool if tile["entryIndex"] not in used_entries
-                ] or pool
-                candidate = min(
-                    candidates,
-                    key=lambda tile: (
-                        sum(
-                            visual_distance(member["_visual"], tile["_visual"], 0.0)
-                            for member in group
-                        )
-                        / len(group),
-                        tile["_visual"]["jitter"],
-                    ),
-                )
-                pool.remove(candidate)
-                group.append(candidate)
-            groups.append(group)
-        leftovers.extend(pool)
+    preferred_anchor = newest
 
-    while leftovers:
-        anchor = min(
-            leftovers,
-            key=lambda tile: (
-                0 if tile is newest else 1,
-                tile["_visual"]["jitter"],
-            ),
-        )
-        leftovers.remove(anchor)
-        group = [anchor]
-        while leftovers and len(group) < columns:
-            used_entries = {member["entryIndex"] for member in group}
-            candidates = [
-                tile for tile in leftovers if tile["entryIndex"] not in used_entries
-            ] or leftovers
-            candidate = min(
-                candidates,
-                key=lambda tile: (
-                    visual_distance(anchor["_visual"], tile["_visual"], 2.6),
-                    tile["_visual"]["jitter"],
-                ),
+    while pool:
+        pool_mediums = Counter(visual_medium(tile) for tile in pool)
+        if preferred_anchor in pool:
+            anchor = preferred_anchor
+            preferred_anchor = None
+        else:
+            target_medium = max(
+                sorted(pool_mediums),
+                key=lambda medium: (pool_mediums[medium], medium),
             )
-            leftovers.remove(candidate)
-            group.append(candidate)
+            anchor = min(
+                (tile for tile in pool if visual_medium(tile) == target_medium),
+                key=lambda tile: tile["_visual"]["jitter"],
+            )
+
+        pool.remove(anchor)
+        group = [anchor]
+        while pool and len(group) < columns:
+            used_entries = {member["entryIndex"] for member in group}
+            entry_candidates = [
+                tile for tile in pool if tile["entryIndex"] not in used_entries
+            ] or pool
+            group_mediums = Counter(visual_medium(tile) for tile in group)
+            group_families = Counter(tile["_visual"]["family"] for tile in group)
+            group_categories = Counter(tile["category"] for tile in group)
+            pool_mediums = Counter(visual_medium(tile) for tile in pool)
+            candidates = [
+                tile
+                for tile in entry_candidates
+                if group_mediums[visual_medium(tile)] < 2
+            ] or entry_candidates
+
+            def candidate_cost(tile: dict) -> float:
+                palette = sum(
+                    visual_distance(member["_visual"], tile["_visual"], 0.1)
+                    for member in group
+                ) / len(group)
+                medium = visual_medium(tile)
+                pressure = pool_mediums[medium] / max(len(pool), 1)
+                return (
+                    palette
+                    + group_mediums[medium] * 0.52
+                    + group_families[tile["_visual"]["family"]] * 0.2
+                    + group_categories[tile["category"]] * 0.08
+                    - pressure * 0.75
+                    + tile["_visual"]["jitter"] * 0.02
+                )
+
+            selected = min(candidates, key=candidate_cost)
+            pool.remove(selected)
+            group.append(selected)
         groups.append(group)
     return groups, newest
 
@@ -409,41 +405,36 @@ def order_visual_groups(groups: list[list[dict]], newest: dict) -> list[list[dic
     first = next(group for group in groups if newest in group)
     ordered = [first]
     remaining = [group for group in groups if group is not first]
-    family_run = 1
-    medium_run = 1
 
     while remaining:
         previous = group_centroid(ordered[-1])
-        previous_medium = VISUAL_MEDIUM_BY_FAMILY.get(previous["family"], "other")
         previous_entries = {tile["entryIndex"] for tile in ordered[-1]}
+        previous_media = {visual_medium(tile) for tile in ordered[-1]}
 
         def transition_cost(group: list[dict]) -> float:
             current = group_centroid(group)
-            cost = visual_distance(previous, current, 0.95)
-            if current["family"] == previous["family"] and family_run >= 2:
-                cost += 2.3
-            current_medium = VISUAL_MEDIUM_BY_FAMILY.get(current["family"], "other")
-            if current_medium == previous_medium and medium_run >= 4:
-                cost += 2.8
-            repeated_entries = previous_entries.intersection(
-                tile["entryIndex"] for tile in group
+            current_entries = {tile["entryIndex"] for tile in group}
+            current_media = {visual_medium(tile) for tile in group}
+            media_union = previous_media | current_media
+            media_similarity = len(previous_media & current_media) / max(
+                len(media_union), 1
             )
-            cost += len(repeated_entries) * 1.4
             group_key = "|".join(tile["tileId"] for tile in group)
-            return cost + stable_fraction(group_key) * 0.04
+            return (
+                visual_distance(previous, current, 0.06)
+                + len(previous_entries & current_entries) * 1.4
+                + media_similarity * 0.05
+                + stable_fraction(group_key) * 0.025
+            )
 
         selected = min(remaining, key=transition_cost)
         remaining.remove(selected)
-        selected_family = group_centroid(selected)["family"]
-        selected_medium = VISUAL_MEDIUM_BY_FAMILY.get(selected_family, "other")
-        family_run = family_run + 1 if selected_family == previous["family"] else 1
-        medium_run = medium_run + 1 if selected_medium == previous_medium else 1
         ordered.append(selected)
     return ordered
 
 
 def visual_weave_tiles(tiles: list[dict], columns: int = DESKTOP_GALLERY_COLUMNS) -> list[dict]:
-    """Return a stable row-major order based on subject family, palette, and aspect ratio."""
+    """Return a stable palette-led order with a balanced mix of visual media."""
     if not tiles:
         return []
     for tile in tiles:
