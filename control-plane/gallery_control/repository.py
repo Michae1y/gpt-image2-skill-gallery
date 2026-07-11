@@ -272,9 +272,12 @@ class GalleryRepository:
 
             entry_no = f"S{next_number}"
             next_number += 1
-            author_slug = safe_slug(candidate.get("author", "source"), "source")
-            title_slug = safe_slug(candidate.get("title", "reference"), "reference")
-            slug = f"{author_slug}-{title_slug}"[:110].strip("-")
+            metadata = candidate.get("metadata") or {}
+            slug = safe_slug(metadata.get("asset_slug", ""), "")
+            if not slug:
+                author_slug = safe_slug(candidate.get("author", "source"), "source")
+                title_slug = safe_slug(candidate.get("title", "reference"), "reference")
+                slug = f"{author_slug}-{title_slug}"[:110].strip("-")
             entry_id = f"supplement-{slug}"
             suffix = 2
             while f'id="{entry_id}"' in source:
@@ -344,7 +347,8 @@ class GalleryRepository:
             "reverse": "图片反推，经人工审核",
         }.get(candidate.get("prompt_kind"), "人工审核")
         title = candidate.get("title") or "未命名提示词参考"
-        title_en = f"{platform.upper()} visual prompt reference"
+        metadata = candidate.get("metadata") or {}
+        title_en = metadata.get("title_en") or f"{platform.upper()} visual prompt reference"
         source_date = candidate.get("source_published_at") or "日期未提供"
         return f'''<article id="{html.escape(entry_id, quote=True)}" class="entry supplement-entry" data-entry-no="{entry_no}" data-source-platform="{html.escape(platform, quote=True)}" data-source-url="{html.escape(source_url, quote=True)}" data-added-at="{added_at}" data-prompt-kind="{html.escape(candidate.get("prompt_kind", ""), quote=True)}">
 <div class="entry-head">
