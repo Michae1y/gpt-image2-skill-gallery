@@ -651,7 +651,7 @@ def build_html(entries: list[dict], categories: list[str]) -> str:
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Prompt Gallery - BLANC Style Copy</title>
+<title>Prompt Gallery · 图片精选</title>
 <link rel="icon" href="data:,">
 <style>
 :root {{
@@ -1075,6 +1075,7 @@ button {{ cursor: pointer; }}
   }}
 }}
 </style>
+<link rel="stylesheet" href="assets/prom-gallery.css?v=20261015">
 </head>
 <body>
 <header class="brand-header">
@@ -1087,19 +1088,25 @@ button {{ cursor: pointer; }}
 <main id="top">
   <section class="intro" aria-label="图库介绍">
     <div class="intro-inner">
-      <p class="tagline">Turn visual references into reusable prompts. 浏览图片，打开细节，复制完整提示词。</p>
+      <p class="tagline">Turn visual references into reusable prompts. 浏览灵感，收藏精选，让下一次创作从这里开始。</p>
       <div class="info-grid">
         <div class="info-card"><span class="info-icon">REF</span><span><strong>{data["stats"]["tiles"]} 张图片参考</strong><span class="info-copy">来自主站素材库，保留原图、分类、来源与 prompt。</span></span></div>
         <div class="info-card"><span class="info-icon">CAT</span><span><strong>{data["stats"]["categories"]} 个分类</strong><span class="info-copy">{data["stats"]["entries"]} 个条目，其中 {data["stats"]["prompts"]} 个包含完整提示词。</span></span></div>
       </div>
       <div class="controls" aria-label="筛选">
         <div class="mode-row">
-          <button class="mode-pill is-active" type="button">Images</button>
+          <button class="mode-pill is-active" type="button" data-mode="all" aria-pressed="true">全部图片</button>
+          <button class="mode-pill" type="button" data-mode="favorites" aria-pressed="false">★ 我的收藏 <span class="favorite-count">0</span></button>
+          <button class="mode-pill missing-toggle" type="button" aria-pressed="false">待补提示词 <span class="missing-count">0</span></button>
+          <button class="mode-pill export-favorites" type="button" disabled>导出精选清单 ↓</button>
         </div>
+        <p class="audit-summary"></p>
+        <p class="storage-note" role="status">无需登录，收藏保存在当前浏览器；清除浏览器数据会移除收藏，可导出清单备份。</p>
         <div class="chip-row">{chips}</div>
       </div>
     </div>
   </section>
+  <div class="results-bar"><span class="result-count" role="status"></span><button class="reset-filters" type="button">重置筛选</button></div>
   <section class="gallery" aria-label="图片瀑布流">
 {tiles_html}
   </section>
@@ -1116,6 +1123,8 @@ button {{ cursor: pointer; }}
         <p class="modal-en"></p>
         <div class="modal-tags"></div>
         <p class="modal-meta"></p>
+        <button class="modal-favorite" type="button" aria-pressed="false">☆ 收藏这张图片</button>
+        <p class="prompt-notice" hidden></p>
         <div class="prompt-head"><strong>完整提示词 / Original Prompt</strong><button class="copy-button" type="button">复制</button></div>
         <pre class="prompt-text"></pre>
       </div>
@@ -1124,174 +1133,7 @@ button {{ cursor: pointer; }}
 </div>
 <footer class="page-footer" aria-hidden="true"></footer>
 <script id="gallery-data" type="application/json">{payload}</script>
-<script>
-(() => {{
-  const data = JSON.parse(document.getElementById('gallery-data').textContent);
-  const tiles = Array.from(document.querySelectorAll('.tile'));
-  const chips = Array.from(document.querySelectorAll('.chip'));
-  const gallery = document.querySelector('.gallery');
-  const empty = document.querySelector('.empty-state');
-  const modal = document.querySelector('.modal');
-  const modalImage = document.querySelector('.modal-image');
-  const modalKicker = document.querySelector('.modal-kicker');
-  const modalTitle = document.querySelector('.modal-title');
-  const modalEn = document.querySelector('.modal-en');
-  const modalTags = document.querySelector('.modal-tags');
-  const modalMeta = document.querySelector('.modal-meta');
-  const promptLabel = document.querySelector('.prompt-head strong');
-  const promptText = document.querySelector('.prompt-text');
-  const copyButton = document.querySelector('.copy-button');
-  const closeButton = document.querySelector('.modal-close');
-  let activePrompt = '';
-  let activeCategory = 'all';
-  let lastFocus = null;
-  let lastColumnCount = 0;
-  let layoutFrame = 0;
-
-  function currentColumnCount() {{
-    return Math.max(1, Number.parseInt(getComputedStyle(gallery).columnCount, 10) || 1);
-  }}
-
-  function tileRatio(tile) {{
-    const image = tile.querySelector('img');
-    const width = Number(image?.getAttribute('width')) || image?.naturalWidth || 1;
-    const height = Number(image?.getAttribute('height')) || image?.naturalHeight || 1;
-    return height / Math.max(width, 1);
-  }}
-
-  function arrangeVisibleTiles(visibleTiles) {{
-    const columns = currentColumnCount();
-    lastColumnCount = columns;
-    if (columns === 1) {{
-      visibleTiles.forEach(tile => gallery.append(tile));
-    }} else {{
-      const lanes = Array.from({{ length: columns }}, () => []);
-      const heights = Array(columns).fill(0);
-      for (let offset = 0; offset < visibleTiles.length; offset += columns) {{
-        const row = visibleTiles.slice(offset, offset + columns)
-          .sort((first, second) => tileRatio(second) - tileRatio(first));
-        const laneOrder = Array.from({{ length: columns }}, (_, index) => index)
-          .sort((first, second) => heights[first] - heights[second] || first - second);
-        row.forEach((tile, index) => {{
-          const lane = laneOrder[index];
-          lanes[lane].push(tile);
-          heights[lane] += tileRatio(tile);
-        }});
-      }}
-      lanes.flat().forEach(tile => gallery.append(tile));
-    }}
-    tiles.filter(tile => tile.hidden).forEach(tile => gallery.append(tile));
-  }}
-
-  function applyFilter(category) {{
-    activeCategory = category;
-    const visibleTiles = [];
-    tiles.forEach(tile => {{
-      const show = tile.dataset.broken !== 'true' && (category === 'all' || tile.dataset.category === category);
-      tile.hidden = !show;
-      if (show) visibleTiles.push(tile);
-    }});
-    arrangeVisibleTiles(visibleTiles);
-    empty.classList.toggle('is-visible', visibleTiles.length === 0);
-    chips.forEach(chip => chip.classList.toggle('is-active', chip.dataset.filter === category));
-  }}
-
-  function openTile(index) {{
-    const tile = data.tiles[index];
-    if (!tile) return;
-    const entry = data.entries[tile.entryIndex];
-    const image = entry.images[tile.imageIndex] || entry.images[0];
-    lastFocus = document.activeElement;
-    modalImage.dataset.fallback = image.src || '';
-    modalImage.src = image.full || image.src;
-    modalImage.alt = image.alt || entry.title;
-    modalKicker.textContent = `${{entry.entryNo || 'Reference'}} | ${{entry.category}}`;
-    modalTitle.textContent = entry.title || '未命名素材';
-    modalEn.textContent = entry.titleEn || image.caption || '';
-    modalTags.innerHTML = (entry.tags || []).slice(0, 8).map(tag => `<span>${{escapeHtml(tag)}}</span>`).join('');
-    const platform = entry.sourcePlatform || platformFromUrl(entry.sourceUrl);
-    const source = entry.sourceUrl ? `<a class="source-link" href="${{escapeAttr(entry.sourceUrl)}}" target="_blank" rel="noopener">${{escapeHtml(platform)}} 来源追溯</a>` : '';
-    const meta = (entry.kvs || []).slice(0, 2).join(' ');
-    modalMeta.innerHTML = [source, escapeHtml(meta)].filter(Boolean).join(' · ');
-    activePrompt = entry.prompt || '这条素材暂未收录完整提示词。';
-    promptLabel.textContent = entry.promptLabel || '完整提示词 / Original Prompt';
-    promptText.textContent = activePrompt;
-    copyButton.textContent = entry.prompt ? (entry.promptIsComplete ? '复制' : '复制正文') : '暂无 prompt';
-    copyButton.disabled = !entry.prompt;
-    modal.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
-    closeButton.focus();
-  }}
-
-  function closeModal() {{
-    modal.classList.remove('is-open');
-    document.body.style.overflow = '';
-    modalImage.removeAttribute('src');
-    if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
-  }}
-
-  function escapeHtml(value) {{
-    return String(value).replace(/[&<>"']/g, char => ({{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}}[char]));
-  }}
-  function escapeAttr(value) {{ return escapeHtml(value).replace(/`/g, '&#96;'); }}
-  function platformFromUrl(value) {{
-    if (!value) return '原始';
-    try {{
-      const host = new URL(value).hostname.replace(/^www\./, '');
-      if (host === 'x.com' || host === 'twitter.com') return 'X';
-      if (host.includes('unsplash.com')) return 'Unsplash';
-      if (host.includes('wallhaven.cc')) return 'Wallhaven';
-      if (host.includes('behance.net')) return 'Behance';
-      if (host.includes('artstation.com')) return 'ArtStation';
-      return host;
-    }} catch {{
-      return '原始';
-    }}
-  }}
-
-  tiles.forEach(tile => {{
-    const img = tile.querySelector('img');
-    img?.addEventListener('error', () => {{
-      tile.dataset.broken = 'true';
-      tile.hidden = true;
-      requestAnimationFrame(() => applyFilter(activeCategory));
-    }}, {{ once: true }});
-  }});
-  modalImage.addEventListener('error', () => {{
-    const fallback = modalImage.dataset.fallback;
-    if (fallback && modalImage.src !== new URL(fallback, window.location.href).href) {{
-      modalImage.src = fallback;
-    }}
-  }});
-  chips.forEach(chip => chip.addEventListener('click', () => applyFilter(chip.dataset.filter)));
-  tiles.forEach(tile => tile.addEventListener('click', () => openTile(Number(tile.dataset.tileIndex))));
-  closeButton.addEventListener('click', closeModal);
-  modal.addEventListener('click', event => {{ if (event.target === modal) closeModal(); }});
-  document.addEventListener('keydown', event => {{ if (event.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); }});
-  window.addEventListener('resize', () => {{
-    cancelAnimationFrame(layoutFrame);
-    layoutFrame = requestAnimationFrame(() => {{
-      if (currentColumnCount() !== lastColumnCount) applyFilter(activeCategory);
-    }});
-  }});
-  copyButton.addEventListener('click', async () => {{
-    if (!activePrompt) return;
-    try {{
-      await navigator.clipboard.writeText(activePrompt);
-      copyButton.textContent = '已复制';
-      setTimeout(() => copyButton.textContent = '复制', 1200);
-    }} catch {{
-      const range = document.createRange();
-      range.selectNodeContents(promptText);
-      const selection = window.getSelection();
-      selection.removeAllRanges();
-      selection.addRange(range);
-      copyButton.textContent = '已选中';
-    }}
-  }});
-  applyFilter('all');
-}})();
-</script>
+<script src="assets/prom-gallery.js?v=20261015"></script>
 </body>
 </html>
 """

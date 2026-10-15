@@ -1,0 +1,30 @@
+/* Personal curation uses the gallery's existing cream and cyan palette. */
+.tile { position: relative; }
+.tile-open { display:block; width:100%; padding:0; border:0; background:transparent; text-align:left; }
+.favorite-button { position:absolute; right:12px; top:12px; z-index:2; min-height:40px; display:flex; align-items:center; gap:5px; padding:7px 12px; border:1px solid rgba(255,255,255,.5); border-radius:99px; background:rgba(255,255,255,.94); color:#25323b; box-shadow:0 2px 12px #0002; font-size:12px; font-weight:700; }
+.favorite-button span:first-child { font-size:20px; line-height:1; }
+.favorite-button[aria-pressed="true"], .modal-favorite[aria-pressed="true"] { background:#fff1c3; color:#654500; border-color:#e4c66e; }
+.prompt-badge { position:absolute; left:12px; bottom:12px; padding:7px 10px; border-radius:8px; background:#fff0d9; color:#813e08; font-size:12px; font-weight:750; box-shadow:0 2px 10px #0001; pointer-events:none; }
+.mode-pill { min-height:44px; }
+.mode-pill.is-active { background:#253b3f; color:#fff; }
+.missing-toggle.is-active { background:#fbe1b9; color:#813e08; }
+.favorite-count, .missing-count { display:inline-block; margin-left:4px; font-variant-numeric:tabular-nums; }
+.export-favorites { border:1px solid #d4c7ad; color:#35454a; }
+button:disabled { opacity:.45; cursor:default; }
+.audit-summary { color:#813e08; font-size:14px; margin:12px 0 8px; }
+.storage-note { color:#616568; font-size:12px; line-height:1.7; margin:0 0 24px; }
+.results-bar { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:16px 24px; border-block:1px solid var(--line); color:#42545a; font-size:13px; }
+.reset-filters { border:0; background:transparent; color:#42545a; padding:8px; text-decoration:underline; text-underline-offset:4px; }
+.modal-favorite { padding:10px 18px; border:1px solid #bfced0; background:var(--cyan); border-radius:99px; color:#253b3f; font-weight:700; margin:0 0 18px; }
+.prompt-notice { background:#fff0d9; color:#813e08; padding:12px 14px; border:1px solid #efce9f; border-radius:10px; font-size:13px; line-height:1.6; }
+button:focus-visible, a:focus-visible { outline:3px solid #147782; outline-offset:-3px; }
+.tile:focus-within .tile-shade { opacity:1; }
+.tile[data-broken="true"] .tile-open { min-height:180px; }
+@media(max-width:600px) {
+  .favorite-button { right:8px; top:8px; padding:5px 9px; min-height:36px; }
+  .prompt-badge { left:8px; bottom:8px; font-size:11px; padding:6px 8px; }
+  .mode-row { gap:6px; }
+  .mode-pill { padding:8px 12px; font-size:13px; }
+  .results-bar { padding:10px 14px; }
+  .tagline { white-space:normal; }
+}
